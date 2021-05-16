@@ -1,4 +1,4 @@
-package com.clovertech.autolib
+package com.example.agent_app
 
 import org.junit.Test
 
