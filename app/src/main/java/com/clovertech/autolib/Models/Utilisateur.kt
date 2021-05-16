@@ -1,4 +1,4 @@
-package com.example.agent_app.Models
+package com.clovertech.autolib.Models
 
 data class Utilisateur (
     val idUtilisateur: Int? = null,
