@@ -3,6 +3,9 @@ package com.clovertech.autolib
 import androidx.lifecycle.MutableLiveData
 import com.clovertech.autolib.Clients.AuthApiClient
 import com.clovertech.autolib.Models.Auth_utilisateur
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AgentRepository {
     val thisUser = MutableLiveData<Auth_utilisateur>()

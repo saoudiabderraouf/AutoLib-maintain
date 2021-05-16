@@ -1,10 +1,10 @@
 package com.clovertech.autolib.Models
 
 data class Agent(
-    val idUtilisateur: Int? = null,
-    val refPermis: Int? = null,
-    val nom: String? = null,
-    val prenom: String? = null,
-    val adresse : String? = null,
-    val photoPersonnelle: String? = null
+    val idUtilisateur: Int = 0,
+    val refPermis: Int = 0,
+    val nom: String = "",
+    val prenom: String = "",
+    val adresse : String = "",
+    val photoPersonnelle: String = ""
 )

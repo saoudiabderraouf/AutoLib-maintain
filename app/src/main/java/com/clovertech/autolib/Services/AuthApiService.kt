@@ -7,5 +7,5 @@ import retrofit2.http.*
 
 interface AuthApiService {
     @GET("user/{email}")
-   fun getUserByEmail(@Path("email") email : String): Response<Auth_utilisateur>
+    fun getUserByEmail(@Path("email") email : String): Response<Auth_utilisateur>
 }
