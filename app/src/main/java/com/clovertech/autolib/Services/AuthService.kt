@@ -5,6 +5,9 @@ import com.clovertech.autolib.Models.Auth_utilisateur
 
 class AuthService {
     fun getUserByEmail(email:String): Auth_utilisateur? {
-        return AuthApiClient.authApiService.getUserByEmail(email).body()
+        var authUtilisateur:Auth_utilisateur= Auth_utilisateur(1,"agent", "agent@autolib.dz", "admin")
+
+        //return AuthApiClient.authApiService.getUserByEmail(email).body()
+        return authUtilisateur
     }
 }

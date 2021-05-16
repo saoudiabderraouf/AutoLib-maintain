@@ -55,20 +55,21 @@ class loginAgent : AppCompatActivity() {
                     Toast.makeText(this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    if ((Email=="admin@gmail.com") && (Mdp == "admin")){
-                        val settings = getSharedPreferences(
-                            "mysettings",
-                            Context.MODE_PRIVATE
-                        )
+                    if (agentTest != null) {
+                        if ((Email== agentTest.adresseEmail) && (Mdp == agentTest.motDePasse)){
+                            val settings = getSharedPreferences(
+                                    "mysettings",
+                                    Context.MODE_PRIVATE
+                            )
 
-                        val editor = settings.edit()
-                        editor.putString("email", Email)
-                        editor.commit()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else{
-                        Toast.makeText(this, "Mot de passe ou Email incorrect", Toast.LENGTH_SHORT).show()
+                            val editor = settings.edit()
+                            editor.putString("email", Email)
+                            editor.commit()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        } else{
+                            Toast.makeText(this, "Mot de passe ou Email incorrect", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                 }
