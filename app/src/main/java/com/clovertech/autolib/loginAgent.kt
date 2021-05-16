@@ -14,6 +14,9 @@ import com.clovertech.autolib.Injections.AuthInjection
 import com.clovertech.autolib.Models.Auth_utilisateur
 import com.clovertech.autolib.ViewModels.AgentViewModel
 import androidx.fragment.app.Fragment
+import androidx.room.Room
+import com.clovertech.autolib.BDD.AutolibDatabase
+
 class loginAgent : AppCompatActivity() {
 
     val MIN_PASSWD_LENGTH: Int=3
@@ -23,6 +26,13 @@ class loginAgent : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_agent)
+        /*test
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AutolibDatabase::class.java, "database-name"
+        ).build()
+        val agentDao = db.authDao()
+        val agents: List<Auth_utilisateur> = agentDao.loadAll()*/
 
         var button = findViewById<Button>(R.id.login_button)
         var Email = findViewById<EditText>(R.id.email)
