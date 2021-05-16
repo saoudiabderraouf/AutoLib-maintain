@@ -1,6 +1,6 @@
-package com.example.agent_app.Clients
+package com.clovertech.autolib.Clients
 
-import com.example.agent_app.Services.AuthApiService
+import com.clovertech.autolib.Services.AuthApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

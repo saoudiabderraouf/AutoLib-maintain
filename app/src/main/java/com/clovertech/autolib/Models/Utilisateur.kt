@@ -1,10 +1,10 @@
-package com.example.agent_app.Models
+package com.clovertech.autolib.Models
 
 data class Utilisateur (
-    val idUtilisateur: Int? = null,
-    val idTypeUtilisateur: Int? = null,
-    val nomUtilisateur: String? = null,
-    val numeroTelephone: Int? = null,
-    val nom: String? = null,
-    val prenom: String? = null
+    val idUtilisateur: Int,
+    val idTypeUtilisateur: Int,
+    val nomUtilisateur: String,
+    val numeroTelephone: Int,
+    val nom: String,
+    val prenom: String
 )

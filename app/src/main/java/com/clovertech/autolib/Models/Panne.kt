@@ -1,15 +1,15 @@
-package com.example.agent_app.Models
+package com.clovertech.autolib.Models
 
 import java.util.*
 
 data class Panne (
-     val idPanne : Int? = null,
-     val dateNotification: Date? = null,
-     val dateReparationPanne: Date? = null,
-     val etat: String? = null,
-     val Description : String? = null,
-     val numChassis: Int? = null,
-     val idAgentEnvoyeNotif: Int? = null,
-     val idAgentTraitePanne: Int? = null,
-     val niveauSecurity: String? = null
+     val idPanne : Int,
+     val dateNotification: Date,
+     val dateReparationPanne: Date,
+     val etat: String,
+     val Description : String,
+     val numChassis: Int,
+     val idAgentEnvoyeNotif: Int,
+     val idAgentTraitePanne: Int,
+     val niveauSecurity: String
  )

@@ -1,16 +1,16 @@
-package com.example.agent_app.Models
+package com.clovertech.autolib.Models
 
 data class Vehicule (
-    val idVehicule : Int ? = null,
-    val matricule: Int ? = null,
-    val categorieVehicule: String? = null,
-    val marqueVehicule : String ? = null,
-    val modeleVehicule: String ? = null,
-    val typeCarburant: String ? = null,
-    val prixUnitaireHeure: Float ? = null,
-    val prixUnitaireJour:   Float ? = null,
-    val idBorne: Int ? = null,
-    val couleurVehicule: Float? = null,
-    val longitude: Float? = null,
-    val lattitude: Float? = null
+    val idVehicule : Int ,
+    val matricule: Int ,
+    val categorieVehicule: String,
+    val marqueVehicule : String ,
+    val modeleVehicule: String ,
+    val typeCarburant: String ,
+    val prixUnitaireHeure: Float ,
+    val prixUnitaireJour:   Float ,
+    val idBorne: Int ,
+    val couleurVehicule: Float,
+    val longitude: Float,
+    val lattitude: Float
 )

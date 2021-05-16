@@ -1,4 +1,4 @@
-package com.example.agent_app
+package com.clovertech.autolib
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.agent_app.R
 
 class loginAgent : AppCompatActivity() {
     val MIN_PASSWD_LENGTH: Int=3

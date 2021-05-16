@@ -1,11 +1,11 @@
-package com.example.agent_app.Models
+package com.clovertech.autolib.Models
 
 data class Materiel(
-    val idMateriel: Int? = null,
-    val nomMateriel: String? = null,
-    val quantite: Int? = null,
-    val prixUnitaire: Float? = null,
-    val description: String? = null,
-    val idTache: Int? = null,
-    val parentIdMateriel: Int ? = null
+    val idMateriel: Int,
+    val nomMateriel: String,
+    val quantite: Int,
+    val prixUnitaire: Float,
+    val description: String,
+    val idTache: Int,
+    val parentIdMateriel: Int
 )

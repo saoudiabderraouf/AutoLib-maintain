@@ -1,4 +1,4 @@
-package com.example.agent_app
+package com.clovertech.autolib
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
