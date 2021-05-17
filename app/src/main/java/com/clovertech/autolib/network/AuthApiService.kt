@@ -1,6 +1,6 @@
-package com.clovertech.autolib.Services
+package com.clovertech.autolib.network
 
-import com.clovertech.autolib.Models.Auth_utilisateur
+import com.clovertech.autolib.model.Auth_utilisateur
 import retrofit2.Response
 import retrofit2.http.*
 

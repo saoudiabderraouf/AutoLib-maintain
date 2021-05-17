@@ -1,4 +1,4 @@
-package com.clovertech.autolib.Models
+package com.clovertech.autolib.model
 
 import java.util.*
 

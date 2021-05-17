@@ -1,4 +1,4 @@
-package com.clovertech.autolib.Clients
+package com.clovertech.autolib.client
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

@@ -9,15 +9,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import com.clovertech.autolib.Injections.AuthInjection
-import com.clovertech.autolib.Models.Auth_utilisateur
-import com.clovertech.autolib.ViewModels.AgentViewModel
-import androidx.fragment.app.Fragment
-import androidx.room.Room
-import com.clovertech.autolib.BDD.AutolibDatabase
+import com.clovertech.autolib.model.Auth_utilisateur
+import com.clovertech.autolib.ui.MainActivity
+import com.clovertech.autolib.viewmodel.AgentViewModel
 
-class loginAgent : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     val MIN_PASSWD_LENGTH: Int=3
 
@@ -26,13 +22,8 @@ class loginAgent : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_agent)
-        /*test
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AutolibDatabase::class.java, "database-name"
-        ).build()
-        val agentDao = db.authDao()
-        val agents: List<Auth_utilisateur> = agentDao.loadAll()*/
+
+
 
         var button = findViewById<Button>(R.id.login_button)
         var Email = findViewById<EditText>(R.id.email)
@@ -44,9 +35,7 @@ class loginAgent : AppCompatActivity() {
         }
     }
     fun Validation(Email: String, Mdp: String){
-        val agent: AgentViewModel by viewModels{
-            AuthInjection.agentViewModelFactory
-        }
+        val agent: AgentViewModel = AgentViewModel()
         agent.thisAgent.observe(this, Observer<Auth_utilisateur>{result ->
             println(result)
         })

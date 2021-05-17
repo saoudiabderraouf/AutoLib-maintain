@@ -1,6 +1,6 @@
-package com.clovertech.autolib.Clients
+package com.clovertech.autolib.client
 
-import com.clovertech.autolib.Services.AuthApiService
+import com.clovertech.autolib.network.AuthApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

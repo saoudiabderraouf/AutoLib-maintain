@@ -1,7 +1,6 @@
-package com.clovertech.autolib.Services
+package com.clovertech.autolib.network
 
-import com.clovertech.autolib.Clients.AuthApiClient
-import com.clovertech.autolib.Models.Auth_utilisateur
+import com.clovertech.autolib.model.Auth_utilisateur
 
 class AuthService {
     fun getUserByEmail(email:String): Auth_utilisateur? {
