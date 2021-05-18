@@ -7,60 +7,42 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.clovertech.autolib.R
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.viewmodel.TacheViewModel
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-     var  test : String = ""
-    private val TAG = "MyActivity"
+    lateinit var tacheViewModel: TacheViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tacheViewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
         var text = findViewById<TextView>(R.id.text)
         val settings = getSharedPreferences(
             "mysettings",
             Context.MODE_PRIVATE
         )
-        val mail = settings.getString("email", "defaultvalue")
-        Toast.makeText(this, mail, Toast.LENGTH_SHORT).show()
-
-
-
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AutolibDatabase::class.java, "database-name"
-        ).build()
-
-
-        AsyncTask.execute {
-            var tacheList= mutableListOf<Tache>()
-            var tache1 : Tache= Tache(0,1,2,"test1",2,2)
-            var tache2 : Tache= Tache(0,3,2,"test2",2,2)
-
-            tacheList.add(tache1)
-            tacheList.add(tache2)
-            val tacheDao=db.tacheDao()
-            tacheDao.insertAllTaches(tacheList)
-            var testList = mutableListOf<Tache>()
-            testList= tacheDao.getAllTaches() as MutableList<Tache>
-            println(testList.get(0).description)
-            test= testList.get(0).description
-            Log.d(TAG, "MyClass.getView() — get item number $test")
-
-
-
-
-
-
+        val mail = settings.getString("email", "")
+        if (mail == "") {
+            //return to login page
+            //Not now
         }
+
+
+        val tache1 = Tache(1, 1, "this task", 2, 5)
+        val tache2 = Tache(2, 5, "this task2", 7, 5)
+        tacheViewModel.insertTache(this, tache1)
+        tacheViewModel.insertTache(this, tache2)
+        tacheViewModel.getAllTaches(this)?.observe(this, Observer {
+            text.text = it.toString()
+        })
 
 
     }

@@ -1,4 +1,4 @@
-package com.clovertech.autolib
+package com.clovertech.autolib.ui
 
 import  android.content.Context
 import android.content.Intent
@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Auth_utilisateur
-import com.clovertech.autolib.ui.MainActivity
 import com.clovertech.autolib.viewmodel.AgentViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -63,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
 
                             val editor = settings.edit()
                             editor.putString("email", Email)
+
                             editor.commit()
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)

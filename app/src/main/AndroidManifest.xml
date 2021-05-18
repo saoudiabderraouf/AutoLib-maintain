@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Agent_APP">
 
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

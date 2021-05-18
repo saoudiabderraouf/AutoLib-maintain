@@ -1,12 +1,13 @@
-package com.clovertech.autolib.client
+package com.clovertech.autolib.network.client
 
+import com.clovertech.autolib.network.service.AuthApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object AgentApiClient {
+object AuthApiClient {
     private const val BASE_URL: String = "https://jsonplaceholder.typicode.com/"
     private val gson : Gson by lazy {
         GsonBuilder().setLenient().create()
@@ -24,8 +25,8 @@ object AgentApiClient {
             .build()
     }
 
-    val agentApiService : AgentApiClient by lazy {
-        retrofit.create(AgentApiClient::class.java)
+    val authApiService : AuthApiService by lazy {
+        retrofit.create(AuthApiService::class.java)
 
     }
 
