@@ -1,69 +1,51 @@
 package com.clovertech.autolib.ui
 
+import android.app.SearchManager
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
+import android.view.Menu
+import android.widget.SearchView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.clovertech.autolib.R
-import com.clovertech.autolib.cache.db.AutolibDatabase
-import com.clovertech.autolib.model.Tache
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-     var  test : String = ""
-    private val TAG = "MyActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var text = findViewById<TextView>(R.id.text)
-        val settings = getSharedPreferences(
-            "mysettings",
-            Context.MODE_PRIVATE
-        )
-        val mail = settings.getString("email", "defaultvalue")
-        Toast.makeText(this, mail, Toast.LENGTH_SHORT).show()
+        initBottomBar()
 
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        this.setSupportActionBar(toolbar);
+        toolbar.setTitle("")
+        toolbar.setBackgroundColor( getResources().getColor(R.color.dirtyWhite))
 
-
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AutolibDatabase::class.java, "database-name"
-        ).build()
-
-
-        AsyncTask.execute {
-            var tacheList= mutableListOf<Tache>()
-            var tache1 : Tache= Tache(0,1,2,"test1",2,2)
-            var tache2 : Tache= Tache(0,3,2,"test2",2,2)
-
-            tacheList.add(tache1)
-            tacheList.add(tache2)
-            val tacheDao=db.tacheDao()
-            tacheDao.insertAllTaches(tacheList)
-            var testList = mutableListOf<Tache>()
-            testList= tacheDao.getAllTaches() as MutableList<Tache>
-            println(testList.get(0).description)
-            test= testList.get(0).description
-            Log.d(TAG, "MyClass.getView() — get item number $test")
-
-
-
-
-
-
-        }
-
-
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.navigation_home,R.id.navigation_notifications, R.id.navigation_calendar, R.id.navigation_userProfil))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.top_nav_menu, menu)
 
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        }
+        return true
+    }
+    private fun initBottomBar() {
+        nav_view.enableItemShiftingMode(false)
+        nav_view.enableAnimation(true)
+    }
 }

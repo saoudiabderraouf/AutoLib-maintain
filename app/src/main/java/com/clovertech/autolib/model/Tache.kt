@@ -9,6 +9,7 @@ data class Tache (
     @PrimaryKey (autoGenerate = true) val idTache: Int,
     @ColumnInfo (name = "idAgent") val idAgent : Int,
     @ColumnInfo val idVehicule: Int,
+    @ColumnInfo val titre:String,
     @ColumnInfo val description: String,
     @ColumnInfo val idEtat: Int,
     @ColumnInfo val idMateriel: Int
