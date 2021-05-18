@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.autolibdz_ui.ui.home.HomeFragment"
+        android:name="com.clovertech.autolib.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,22 +16,22 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_userProfil"
-        android:name="com.example.autolibdz_ui.ui.userProfil.UserProfilFragment"
+        android:name="com.clovertech.autolib.ui.userProfil.UserProfilFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.autolibdz_ui.ui.notifications.NotificationsFragment"
+        android:name="com.clovertech.autolib.ui.notifications.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="com.example.autolibdz_ui.ui.dashboard.DashboardFragment"
+        android:name="com.clovertech.autolib.ui.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/detailTache"
-        android:name="com.example.autolibdz_ui.DetailTache"
+        android:name="com.clovertech.autolib.ui.DetailTache"
         android:label="fragment_detail_tache"
         tools:layout="@layout/fragment_detail_tache" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/ajouterMateriel"
-        android:name="com.example.autolibdz_ui.AjouterMateriel"
+        android:name="com.clovertech.autolib.ui.AjouterMateriel"
         android:label="fragment_ajouter_materiel"
         tools:layout="@layout/fragment_ajouter_materiel" />
 </navigation>
