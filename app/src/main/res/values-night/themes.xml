@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Agent_APP" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Agent_APP" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/purple_200</item>

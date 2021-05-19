@@ -6,10 +6,21 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="app_black">#333333</color>
     <color name="app_honey">#F9C31A</color>
     <color name="app_grey">#F7F6FB</color>
     <color name="app_blue">#6090FF</color>
-
+    <color name="colorPrimary">#F9C31A</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#F9C31A</color>
+    <color name="colorBottomBar">#F2F2F2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="deep_gray">#ff657786</color>
+    <color name="tab_selector">@color/deep_gray</color>
+    <color name="tab_selected">#F9C31A</color>
+    <color name="green">#4DD4AF</color>
+    <color name="dirtyWhite">#f2f2f2</color>
+    <color name="blue">#4086F4</color>
+    <color name="gris">#e5e5e5</color>
+    <color name="noir">#333333</color>
 </resources>

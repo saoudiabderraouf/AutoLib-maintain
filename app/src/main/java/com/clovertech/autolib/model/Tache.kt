@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
+
+
 @Entity(tableName = "taches")
 data class Tache(
     var idAgent: Int,
@@ -17,3 +19,4 @@ data class Tache(
     @PrimaryKey(autoGenerate = true)
     var idTache: Int? = null
 }
+

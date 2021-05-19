@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AutoLib maintain</string>
+    <string name="home_title">Accueil</string>
+    <string name="moments_title">Notifications</string>
+    <string name="notifications_title">Tâches</string>
+    <string name="messages_title">Profil</string>
+    <string name="search_title">Recherche</string>
+    <string name="search_hint">Recherche</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
