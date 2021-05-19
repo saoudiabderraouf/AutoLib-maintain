@@ -15,7 +15,7 @@ class TacheRepo {
 
         var taches: LiveData<List<Tache>>? = null
 
-        fun initializeDB(context: Context) : AutolibDatabase {
+        fun initializeDB(context: Context): AutolibDatabase {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
@@ -28,6 +28,7 @@ class TacheRepo {
             }
 
         }
+
         fun insertTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
@@ -38,7 +39,23 @@ class TacheRepo {
 
         }
 
-        fun getAllTaches(context: Context) : LiveData<List<Tache>>? {
+        fun deleteTache(context: Context, tache: Tache) {
+            appDb = initializeDB(context)
+            appDb!!.tacheDao().deleteTcahe(tache)
+
+        }
+
+        fun getTacheById(context: Context, id: Int): Tache {
+            appDb = initializeDB(context)
+            return appDb!!.tacheDao().getTacheById(id)
+        }
+
+        fun updateTache(context: Context, tache: Tache){
+            appDb = initializeDB(context)
+            return appDb!!.tacheDao().updateTache(tache)
+        }
+
+        fun getAllTaches(context: Context): LiveData<List<Tache>>? {
 
             appDb = initializeDB(context)
 
