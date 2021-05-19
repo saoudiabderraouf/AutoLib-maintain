@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.clovertech.autolib.R
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

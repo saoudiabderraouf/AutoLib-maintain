@@ -1,4 +1,4 @@
-package com.clovertech.autolib.network
+package com.clovertech.autolib.network.service
 
 import com.clovertech.autolib.model.Auth_utilisateur
 
