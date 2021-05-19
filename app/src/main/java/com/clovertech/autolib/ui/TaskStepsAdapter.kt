@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 
-class TaskStepsAdapter  (val context: Context, var data:List<Step>):RecyclerView.Adapter<MyViewHolder>()
-{
+class TaskStepsAdapter(val context: Context, var data: List<Step>) :
+    RecyclerView.Adapter<MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context)
@@ -22,8 +22,8 @@ class TaskStepsAdapter  (val context: Context, var data:List<Step>):RecyclerView
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.titreStep.text = data[position].titre
         holder.titreStep.setChecked(!data[position].status)
-        holder.itemView.setOnClickListener(View.OnClickListener{
-            data[position].status=!data[position].status
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            data[position].status = !data[position].status
             holder.titreStep.setChecked(data[position].status)
         })
 

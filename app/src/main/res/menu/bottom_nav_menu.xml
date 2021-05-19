@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/navigation_home"
-    android:checked="true"
-    android:icon="@drawable/ic_home_selector"
-    android:title="@string/home_title"/>
-<item
-    android:id="@+id/navigation_notifications"
-    android:icon="@drawable/ic_notifications_selector"
-    android:title="@string/notifications_title"/>
-<item
-    android:id="@+id/navigation_calendar"
-    android:icon="@drawable/ic_calendar_selector"
-    android:title="@string/moments_title"/>
+    <item
+        android:id="@+id/navigation_home"
+        android:checked="true"
+        android:icon="@drawable/ic_home_selector"
+        android:title="@string/home_title" />
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_notifications_selector"
+        android:title="@string/notifications_title" />
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_calendar_selector"
+        android:title="@string/moments_title" />
 
-<item
-    android:id="@+id/navigation_userProfil"
-    android:icon="@drawable/ic_user_selector"
-    android:title="@string/messages_title"/>
+    <item
+        android:id="@+id/navigation_userProfil"
+        android:icon="@drawable/ic_user_selector"
+        android:title="@string/messages_title" />
 </menu>

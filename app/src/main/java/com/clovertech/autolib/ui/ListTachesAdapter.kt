@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.home.HomeViewModel
 
-class ListTachesAdapter (val context: Context, var data:List<Tache>, val vm: HomeViewModel):RecyclerView.Adapter<MyViewHolder>()
-{
+class ListTachesAdapter (val context: Context, val vm: HomeViewModel):RecyclerView.Adapter<MyViewHolder>()
+{   var data = listOf<Tache>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context)
@@ -24,7 +24,7 @@ class ListTachesAdapter (val context: Context, var data:List<Tache>, val vm: Hom
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.titreTache.text = data[position].titre
+        //holder.titreTache.text = data[position].titre
         holder.descript.text = data[position].description
         holder.idVoiture.text = data[position].idVehicule.toString()
         holder.progres.text = data[position].idEtat.toString()+"%"
@@ -37,8 +37,14 @@ class ListTachesAdapter (val context: Context, var data:List<Tache>, val vm: Hom
         })
 
     }
+    fun setListTache(list: List<Tache>){
+        data = list
+        notifyDataSetChanged()
+
+    }
 
 }
+
 
 class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val titreTache = view.findViewById<TextView>(R.id.Titre)
@@ -47,4 +53,5 @@ class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val progres = view.findViewById<TextView>(R.id.avancement)
 
 }
+
 

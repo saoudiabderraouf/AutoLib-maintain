@@ -1,12 +1,14 @@
 package com.clovertech.autolib.ui.userProfil
 
-import androidx.lifecycle.ViewModelProviders
+//import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
+import com.clovertech.autolib.viewmodel.TacheViewModel
 
 class UserProfilFragment : Fragment() {
 
@@ -21,7 +23,8 @@ class UserProfilFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(UserProfilViewModel::class.java)
+        viewModel= ViewModelProvider(this).get(UserProfilViewModel::class.java)
+
         // TODO: Use the ViewModel
     }
 

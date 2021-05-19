@@ -22,8 +22,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_agent)
 
-
-
         var button = findViewById<Button>(R.id.login_button)
         var Email = findViewById<EditText>(R.id.email)
         var Password = findViewById<EditText>(R.id.password)
@@ -46,11 +44,13 @@ class LoginActivity : AppCompatActivity() {
         }
         else {
             if(Mdp==""){
-                Toast.makeText(this, "Entrer le mot de passe", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Entrer le mot de passe",
+                    Toast.LENGTH_SHORT).show()
             }
             else{
                 if(Mdp.length< MIN_PASSWD_LENGTH){
-                    Toast.makeText(this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Mot de passe incorrect",
+                        Toast.LENGTH_SHORT).show()
                 }
                 else{
                     if (agentTest != null) {

@@ -7,6 +7,7 @@ import com.clovertech.autolib.network.service.AuthService
 class AgentRepository (private val authService: AuthService){
     val thisUser = MutableLiveData<Auth_utilisateur>()
    fun getAgent(email:String){
+       
        thisUser.value= authService.getUserByEmail(email)
    }
 
