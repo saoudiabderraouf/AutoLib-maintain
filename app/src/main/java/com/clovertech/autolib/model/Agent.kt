@@ -1,10 +1,15 @@
 package com.clovertech.autolib.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "agent")
 data class Agent(
-    val idUtilisateur: Int = 0,
-    val refPermis: Int = 0,
-    val nom: String = "",
-    val prenom: String = "",
-    val adresse : String = "",
-    val photoPersonnelle: String = ""
-)
+    var refPermis: Int = 0,
+    var nom: String = "",
+    var prenom: String = "",
+    var adresse : String = "",
+    var photoPersonnelle: String = ""
+){
+    @PrimaryKey(autoGenerate = true) var idUtilisateur: Int = 0
+}

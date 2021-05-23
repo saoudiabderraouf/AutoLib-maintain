@@ -1,9 +1,15 @@
 package com.clovertech.autolib.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "etatTache")
 data class EtatTache (
-    val idEtat: Int,
-    val description: String,
-    val avancement: String
-)
+
+    var description: String,
+    var avancement: String
+){
+    @PrimaryKey(autoGenerate = true) var idEtat: Int = 0
+}
 
 

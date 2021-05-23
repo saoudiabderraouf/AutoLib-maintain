@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "auth_users")
 data class Auth_utilisateur (
-    @PrimaryKey (autoGenerate = true) var idUtilisateur: Int,
-    @ColumnInfo (name = "type") var type: String,
-    @ColumnInfo (name = "adresseEmail")var adresseEmail: String,
-    @ColumnInfo (name = "motDePasse")var motDePasse: String
+    @PrimaryKey (autoGenerate = true) var idAuthUser: Int,
+    @ColumnInfo (name = "type") var idUser: Int,
+    @ColumnInfo (name = "adresseEmail")var email: String,
+    @ColumnInfo (name = "motDePasse")var password: String
 )
