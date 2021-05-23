@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
             "mysettings",
             Context.MODE_PRIVATE
         )
-        val mail = settings.getString("email", "")
-        if (mail == "") {
+        val token = settings.getString("token", "")
+        if (token == "") {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         } else {
