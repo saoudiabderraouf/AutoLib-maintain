@@ -44,14 +44,14 @@ class HomeFragment : Fragment() {
         tacheViewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
         val tache1 = Tache(1, 1, "this task", 2, 5)
         val tache2 = Tache(2, 5, "this task2", 7, 5)
-        this.context?.let { tacheViewModel.insertTache(it, tache1) }
+        /*this.context?.let { tacheViewModel.insertTache(it, tache1) }
         this.context?.let { tacheViewModel.insertTache(it, tache2) }
         this.context?.let {
             tacheViewModel.getAllTaches(it)?.observe(viewLifecycleOwner, Observer {
                 adapter.setListTache(it)
                 // text.text = it.toString()
             })
-        }
+        }*/
 
 
     }

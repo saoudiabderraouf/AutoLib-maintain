@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()
                             val content = response.body()
                             if (content != null) {
-                                shareToken(content.token)
+                                shareToken(content.token, content.id)
                                 startActivity(Intent(this, MainActivity::class.java))
                             }
 
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    fun shareToken(token: String) {
+    fun shareToken(token: String, idUser: Int) {
 
         val settings = getSharedPreferences(
             "mysettings",
@@ -89,6 +89,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         val editor = settings.edit()
         editor.putString("token", token)
+        editor.putInt("idUser", idUser)
 
         editor.commit()
 
