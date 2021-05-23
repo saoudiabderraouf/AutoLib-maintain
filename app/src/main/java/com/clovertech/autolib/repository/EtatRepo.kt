@@ -16,7 +16,7 @@ class EtatRepo {
         }
 
 
-        fun getEtatById(context: Context, id: Int): EtatTache {
+        /*fun getEtatById(context: Context, id: Int): EtatTache {
             appDb = initializeDB(context)
             return appDb!!.etatDao().getEtatById(id)
         }
@@ -24,7 +24,7 @@ class EtatRepo {
         fun getAllEtat(context: Context):List<EtatTache>{
             appDb = initializeDB(context)
             return appDb!!.etatDao().getAllEtats()
-        }
+        }*/
 
 
     }

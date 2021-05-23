@@ -6,8 +6,8 @@ import com.clovertech.autolib.model.EtatTache
 
 @Dao
 interface EtatDAO {
-    @Query("SELECT * from etatTache")
-    fun getAllEtats(): List<EtatTache>
-    @Query("SELECT * FROM etatTache WHERE idEtat LIKE :idEtat")
-    fun getEtatById(idEtat: Int): EtatTache
+   /* @Query("SELECT * from etatTache")
+    fun getAllEtats(): List<EtatTache>*/
+   /* @Query("SELECT * FROM etatTache WHERE idEtat =:idEtat")
+    fun getEtatById(idEtat: Int): EtatTache*/
 }

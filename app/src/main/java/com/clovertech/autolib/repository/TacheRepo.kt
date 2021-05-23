@@ -39,11 +39,11 @@ class TacheRepo {
 
         }
 
-        fun deleteTache(context: Context, tache: Tache) {
+       /* fun deleteTache(context: Context, tache: Tache) {
             appDb = initializeDB(context)
             appDb!!.tacheDao().deleteTcahe(tache)
 
-        }
+        }*/
 
         fun getTacheById(context: Context, id: Int): Tache {
             appDb = initializeDB(context)

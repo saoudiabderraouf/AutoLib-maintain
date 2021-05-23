@@ -6,28 +6,28 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object AuthApiClient {
-    private const val BASE_URL: String = "https://jsonplaceholder.typicode.com/"
-    private val gson : Gson by lazy {
-        GsonBuilder().setLenient().create()
-    }
+    private val retrofit by lazy {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .build()
 
-    private val httpClient: OkHttpClient by lazy {
-        OkHttpClient.Builder().build()
-    }
-
-    private val retrofit : Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl("http://192.168.1.6:8005")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build()
     }
+
 
     val authApiService : AuthApiService by lazy {
         retrofit.create(AuthApiService::class.java)
 
     }
+
 
 }

@@ -22,8 +22,8 @@ interface TacheDAO {
     @Query("SELECT * FROM taches WHERE idTache LIKE :idT")
     fun getTacheById(idT: Int): Tache
 
-    @DELETE
-    fun deleteTcahe(tache: Tache)
+    /*@DELETE
+    fun deleteTcahe(tache: Tache)*/
 
     @Update
     fun updateTache(tache: Tache)
