@@ -41,10 +41,10 @@ class TacheRepo {
 
         }
 
-        fun getTacheById(context: Context, id: Int): Tache {
+        /*fun getTacheById(context: Context, id: Int): Tache {
             appDb = initializeDB(context)
             return appDb!!.tacheDao().getTacheById(id)
-        }
+        }*/
 
         fun updateTache(context: Context, tache: Tache){
             appDb = initializeDB(context)
@@ -60,7 +60,7 @@ class TacheRepo {
             return taches
         }
         suspend fun getTacheIdAgent(id: Int):Response<List<Tache>>{
-            return TacheApiClient.tacheApiService.getTasksById(id)
+            return TacheApiClient.tacheApiService.getTasksById()
         }
 
     }

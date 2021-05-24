@@ -9,14 +9,15 @@ import java.util.*
 
 @Entity(tableName = "taches")
 data class Tache(
+    @PrimaryKey(autoGenerate = true)
+    var idTask: Int,
     var idAgent: Int,
     var idVehicule: Int,
     var description: String,
-    var idEtat: Int,
-    var idMateriel: Int,
+    var idTaskState: Int,
+    var idEquipment: Int,
 
     ) {
-    @PrimaryKey(autoGenerate = true)
-    var idTache: Int? = null
+
 }
 

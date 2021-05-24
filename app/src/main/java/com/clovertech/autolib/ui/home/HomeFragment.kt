@@ -14,6 +14,7 @@ import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.ListTachesAdapter
+import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -42,16 +43,30 @@ class HomeFragment : Fragment() {
         tasksRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
         tasksRecyclerView.adapter = TaskStepsAdapter(requireActivity(), loadSteps())
         tacheViewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
-        val tache1 = Tache(1, 1, "this task", 2, 5)
-        val tache2 = Tache(2, 5, "this task2", 7, 5)
-        /*this.context?.let { tacheViewModel.insertTache(it, tache1) }
-        this.context?.let { tacheViewModel.insertTache(it, tache2) }
-        this.context?.let {
-            tacheViewModel.getAllTaches(it)?.observe(viewLifecycleOwner, Observer {
-                adapter.setListTache(it)
-                // text.text = it.toString()
+
+        var id= PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID,0)
+        if (id != 0) {
+            tacheViewModel.getTacheIdAgent(id)
+            tacheViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
+                if(it.isSuccessful){
+                    it.body()?.let { it1 -> adapter.setListTache(it1) }
+                }
+                else{
+                    val tache1 = Tache(1, 1, 2, "je teste", 5,5)
+                    val tache2 = Tache(2, 5, 2, "je teste", 5,5)
+                    this.context?.let { tacheViewModel.insertTache(it, tache1) }
+                    this.context?.let { tacheViewModel.insertTache(it, tache2) }
+                    this.context?.let {
+                        tacheViewModel.getAllTaches(it)?.observe(viewLifecycleOwner, Observer {
+                            adapter.setListTache(it)
+
+                        })
+                    }
+
+                }
             })
-        }*/
+        }
+
 
 
     }

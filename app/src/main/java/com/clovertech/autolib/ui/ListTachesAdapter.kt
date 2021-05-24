@@ -27,7 +27,7 @@ class ListTachesAdapter (val context: Context, val vm: HomeViewModel):RecyclerVi
         //holder.titreTache.text = data[position].titre
         holder.descript.text = data[position].description
         holder.idVoiture.text = data[position].idVehicule.toString()
-        holder.progres.text = data[position].idEtat.toString()+"%"
+        holder.progres.text = data[position].idTaskState.toString()+"%"
 
 
         holder.itemView.setOnClickListener(View.OnClickListener{
