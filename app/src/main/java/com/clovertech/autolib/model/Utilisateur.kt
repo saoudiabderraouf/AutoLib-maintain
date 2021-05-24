@@ -1,10 +1,11 @@
 package com.clovertech.autolib.model
 
 data class Utilisateur (
-    val idUtilisateur: Int,
-    val idTypeUtilisateur: Int,
-    val nomUtilisateur: String,
-    val numeroTelephone: Int,
-    val nom: String,
-    val prenom: String
+    var idUser: Int,
+    var userName: String,
+    var lastName: String,
+    var userType: Int,
+    var firstName: String,
+    var address: String,
+    var phoneNumber: Long
 )
