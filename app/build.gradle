@@ -119,4 +119,8 @@ dependencies {
     // SingleRowCalendar
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
 
+    // ViewPager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
+
 }

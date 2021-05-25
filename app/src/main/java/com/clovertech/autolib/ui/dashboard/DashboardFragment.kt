@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
 import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
@@ -22,6 +27,8 @@ import java.util.*
 class DashboardFragment : Fragment() {
 
     private lateinit var taskViewModel: TacheViewModel
+    private lateinit var pagerAdapter: TaskFragmentAdapter
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,14 +43,35 @@ class DashboardFragment : Fragment() {
         )
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        PrefUtils.with(requireContext()).clear()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCalendar(view)
+        initPager(view)
+        attachObservers()
+    }
+
+    private fun attachObservers() {
+        taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner,
+            {
+                pagerAdapter.updateTasksUI(it)
+            })
+    }
+
+    private fun initPager(view: View) {
+        pagerAdapter = TaskFragmentAdapter(this)
+        viewPager = view.findViewById(R.id.pagerDashboard)
+        viewPager.adapter = pagerAdapter
+        viewPager.offscreenPageLimit = 2
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabDashboard)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position){
+                0 -> tab.text = "Terminée"
+                else -> tab.text = "En cours"
+            }
+        }.attach()
+
+
     }
 
     private fun initCalendar(view: View) {
@@ -55,10 +83,10 @@ class DashboardFragment : Fragment() {
                 isSelected: Boolean
             ): Int {
                 // return item layout files, which you have created
-                if (!isSelected) {
-                    return R.layout.calendar_item_layout
+                return if (!isSelected) {
+                    R.layout.calendar_item_layout
                 } else {
-                    return R.layout.calendar_item_selected_layout
+                    R.layout.calendar_item_selected_layout
                 }
             }
 
@@ -124,4 +152,37 @@ class DashboardFragment : Fragment() {
             init()
         }
         }
+
+    class TaskFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+        private lateinit var doneTasksFragment: TaskPagerFragment
+        private lateinit var ongoingTasksFragment: TaskPagerFragment
+        private val allTasks = mutableListOf<Tache>()
+
+        override fun getItemCount(): Int = 2
+
+        override fun createFragment(position: Int): Fragment {
+            // Return a NEW fragment instance in createFragment(int)
+            doneTasksFragment = TaskPagerFragment()
+            ongoingTasksFragment = TaskPagerFragment()
+            //fragment.arguments = Bundle().apply {
+                // Our object is just an integer :-P
+                //putInt(ARG_OBJECT, position + 1)
+            //}
+            return when (position){
+                0 -> doneTasksFragment
+                else -> ongoingTasksFragment
+            }
+        }
+
+        fun updateTasksUI(tasks: List<Tache>) {
+            allTasks.clear()
+            allTasks.addAll(tasks)
+            //temp
+            doneTasksFragment.updateTasks(tasks)
+            ongoingTasksFragment.updateTasks(tasks)
+        }
     }
+}
+
+
