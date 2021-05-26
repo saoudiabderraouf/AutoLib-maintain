@@ -46,14 +46,14 @@ class HomeFragment : Fragment() {
 
         var id= PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID,0)
         if (id != 0) {
-            tacheViewModel.getTacheIdAgent(id)
+            tacheViewModel.getTacheIdAgent(100)
             tacheViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
                 if(it.isSuccessful){
                     it.body()?.let { it1 -> adapter.setListTache(it1) }
                 }
                 else{
-                    val tache1 = Tache(1, 1, 2, "je teste", 5,5)
-                    val tache2 = Tache(2, 5, 2, "je teste", 5,5)
+                    val tache1 = Tache(1, 1, "test", "je teste", 5,"12/12/14","","")
+                    val tache2 = Tache(2, 5, "test", "je teste", 5,"12/12/12","","")
                     this.context?.let { tacheViewModel.insertTache(it, tache1) }
                     this.context?.let { tacheViewModel.insertTache(it, tache2) }
                     this.context?.let {

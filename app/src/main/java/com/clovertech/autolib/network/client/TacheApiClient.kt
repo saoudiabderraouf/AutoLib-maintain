@@ -16,7 +16,7 @@ object TacheApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://0c5dcb43aba5.ngrok.io")
+            .baseUrl("https://service-tasks.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

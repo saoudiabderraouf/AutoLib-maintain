@@ -60,7 +60,7 @@ class TacheRepo {
             return taches
         }
         suspend fun getTacheIdAgent(id: Int):Response<List<Tache>>{
-            return TacheApiClient.tacheApiService.getTasksById()
+            return TacheApiClient.tacheApiService.getTasksById(id)
         }
 
     }
