@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ld_activityScreenTitles">
+        <item>Accueil</item>
+        <item>Notifications</item>
+        <item>Agenda</item>
+        <item>Pannes</item>
+        <item>Paramètres</item>
+        <item>Profil</item>
+        <item />
+        <item>Se déconnecter</item>
+    </string-array>
+
+    <array name="ld_activityScreenIcons">
+        <item>@drawable/ic_home_selector</item>
+        <item>@drawable/ic_notifications</item>
+        <item>@drawable/ic_calendar</item>
+        <item>@drawable/ic_panne</item>
+        <item>@drawable/ic_settings</item>
+        <item>@drawable/ic_user</item>
+        <item>0</item>
+        <item>@drawable/ic_logout</item>
+    </array>
+
+</resources>

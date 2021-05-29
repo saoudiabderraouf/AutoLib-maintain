@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.adapters
 
 import com.clovertech.autolib.R
 import android.content.Context
