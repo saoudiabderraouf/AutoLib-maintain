@@ -8,4 +8,5 @@ import retrofit2.http.Path
 interface TacheApiService {
     @GET("task/agent/{idAgent}")
     suspend fun getTasksById(@Path("idAgent") id: Int): Response<List<Tache>>
+
 }
