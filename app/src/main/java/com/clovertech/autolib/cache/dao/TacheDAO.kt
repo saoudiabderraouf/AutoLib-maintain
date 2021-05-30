@@ -19,8 +19,8 @@ interface TacheDAO {
     @Insert
     suspend fun insertTache(tache: Tache)
 
-    @Query("SELECT * FROM taches WHERE idTache LIKE :idT")
-    fun getTacheById(idT: Int): Tache
+  /*  @Query("SELECT * FROM taches WHERE idTache LIKE :idT")
+    fun getTacheById(idT: Int): Tache*/
 
     /*@DELETE
     fun deleteTcahe(tache: Tache)*/

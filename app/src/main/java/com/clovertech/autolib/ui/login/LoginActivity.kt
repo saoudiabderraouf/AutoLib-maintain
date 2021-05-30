@@ -1,6 +1,5 @@
 package com.clovertech.autolib.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Login
 import com.clovertech.autolib.ui.MainActivity
+import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*
 
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()
                             val content = response.body()
                             if (content != null) {
-                                shareToken(content.token)
+                                shareToken(content.token, content.id)
                                 startActivity(Intent(this, MainActivity::class.java))
                             }
 
@@ -80,18 +80,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    fun shareToken(token: String) {
-
-        val settings = getSharedPreferences(
-            "mysettings",
-            Context.MODE_PRIVATE
-        )
-
-        val editor = settings.edit()
-        editor.putString("token", token)
-
-        editor.commit()
-
+    fun shareToken(token: String, idUser: Int) {
+        PrefUtils.with(this).save(PrefUtils.Keys.token, token)
+        PrefUtils.with(this).save(PrefUtils.Keys.ID, idUser)
 
     }
 

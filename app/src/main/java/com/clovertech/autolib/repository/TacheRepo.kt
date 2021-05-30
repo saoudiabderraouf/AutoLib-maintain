@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class TacheRepo {
     companion object {
@@ -39,16 +41,10 @@ class TacheRepo {
 
         }
 
-       /* fun deleteTache(context: Context, tache: Tache) {
-            appDb = initializeDB(context)
-            appDb!!.tacheDao().deleteTcahe(tache)
-
-        }*/
-
-        fun getTacheById(context: Context, id: Int): Tache {
+        /*fun getTacheById(context: Context, id: Int): Tache {
             appDb = initializeDB(context)
             return appDb!!.tacheDao().getTacheById(id)
-        }
+        }*/
 
         fun updateTache(context: Context, tache: Tache){
             appDb = initializeDB(context)
@@ -62,6 +58,9 @@ class TacheRepo {
             taches = appDb!!.tacheDao().getAllTaches()
 
             return taches
+        }
+        suspend fun getTacheIdAgent(id: Int):Response<List<Tache>>{
+            return TacheApiClient.tacheApiService.getTasksById(id)
         }
 
     }

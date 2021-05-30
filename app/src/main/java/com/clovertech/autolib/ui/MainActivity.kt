@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.clovertech.autolib.R
 import com.clovertech.autolib.ui.login.LoginActivity
+import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,11 +23,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val settings = getSharedPreferences(
-            "mysettings",
-            Context.MODE_PRIVATE
-        )
-        val token = settings.getString("token", "")
+
+        val token = PrefUtils.with(this).getString(PrefUtils.Keys.token,"")
         if (token == "") {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
