@@ -56,11 +56,12 @@
         android:layout_width="92dp"
         android:layout_height="92dp"
         android:layout_marginTop="76dp"
+        android:backgroundTint="#FFC107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logojaune" />
+        app:srcCompat="@drawable/app_logo_jaune" />
 
     <TextView
         android:id="@+id/logo"

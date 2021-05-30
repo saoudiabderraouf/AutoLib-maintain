@@ -23,4 +23,6 @@
     <color name="blue">#4086F4</color>
     <color name="gris">#e5e5e5</color>
     <color name="noir">#333333</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#a8a8a8</color>
 </resources>
