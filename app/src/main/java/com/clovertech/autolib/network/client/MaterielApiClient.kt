@@ -15,7 +15,7 @@ object MaterielApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://a16bf17074fd.ngrok.io")
+            .baseUrl("https://service-equipment.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
