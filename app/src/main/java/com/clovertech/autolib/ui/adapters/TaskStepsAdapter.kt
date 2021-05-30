@@ -1,3 +1,5 @@
+package com.clovertech.autolib.ui.adapters
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +10,9 @@ import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 
 class TaskStepsAdapter(val context: Context, var data: List<Step>) :
-    RecyclerView.Adapter<MyViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
+    RecyclerView.Adapter<ViewHolderTask>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTask {
+        return ViewHolderTask(
             LayoutInflater.from(context)
                 .inflate(R.layout.task_layout, parent, false)
         )
@@ -19,7 +21,7 @@ class TaskStepsAdapter(val context: Context, var data: List<Step>) :
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderTask, position: Int) {
         holder.titreStep.text = data[position].titre
         holder.titreStep.setChecked(!data[position].status)
         holder.itemView.setOnClickListener(View.OnClickListener {
@@ -32,7 +34,7 @@ class TaskStepsAdapter(val context: Context, var data: List<Step>) :
 
 }
 
-class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolderTask(view: View) : RecyclerView.ViewHolder(view) {
     val titreStep = view.findViewById<CheckBox>(R.id.todoCheckBox)
 }
 

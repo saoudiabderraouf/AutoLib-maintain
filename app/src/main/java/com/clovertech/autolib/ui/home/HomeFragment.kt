@@ -1,6 +1,6 @@
 package com.clovertech.autolib.ui.home
 
-import TaskStepsAdapter
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.ui.ListTachesAdapter
+import com.clovertech.autolib.ui.adapters.ListTachesAdapter
+import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
