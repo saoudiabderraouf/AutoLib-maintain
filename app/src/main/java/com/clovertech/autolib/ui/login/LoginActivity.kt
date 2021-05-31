@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     fun validateLogin() {
 
         var viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        var Email: String = email.text.toString()
+        var Email: String = numChasis.text.toString()
         var Mdp: String = password.text.toString()
         viewModel.onLoginButtonClick(Login(Email, Mdp))
 
