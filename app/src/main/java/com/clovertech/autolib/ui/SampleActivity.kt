@@ -53,7 +53,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
         toolbar.setTitle("")
         toolbar.setBackgroundColor( getResources().getColor(R.color.dirtyWhite))
 
-        screenIcons = loadScreenIcons()
+        screenIcons = this.loadScreenIcons()
         screenTitles = loadScreenTitles()
         menuItems =arrayOf(R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_calendar,-1,-1, R.id.navigation_userProfil)
 
@@ -183,7 +183,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             .commit()
     }
 
-    private fun createItemFor(position: Int): DrawerItem<SimpleItem.ViewHolder> {
+    private fun createItemFor(position: Int): SimpleItem {
 
         return SimpleItem(screenIcons[position], screenTitles[position])
             .withIconTint(color(R.color.textColorSecondary))

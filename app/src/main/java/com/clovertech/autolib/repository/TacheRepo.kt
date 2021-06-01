@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ class TacheRepo {
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                appDb!!.tacheDao().insertAllTaches(taches)
+                // appDb!!.tacheDao().insertAllTaches(taches)
             }
 
         }
@@ -36,7 +37,7 @@ class TacheRepo {
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                appDb!!.tacheDao().insertTache(tache)
+                // appDb!!.tacheDao().insertTache(tache)
             }
 
         }
@@ -46,21 +47,27 @@ class TacheRepo {
             return appDb!!.tacheDao().getTacheById(id)
         }*/
 
-        fun updateTache(context: Context, tache: Tache){
+        fun updateTache(context: Context, tache: Tache) {
             appDb = initializeDB(context)
-            return appDb!!.tacheDao().updateTache(tache)
+            //return appDb!!.tacheDao().updateTache(tache)
+
         }
 
         fun getAllTaches(context: Context): LiveData<List<Tache>>? {
 
             appDb = initializeDB(context)
 
-            taches = appDb!!.tacheDao().getAllTaches()
+            //taches = appDb!!.tacheDao().getAllTaches()
 
-            return taches
+            return null
         }
-        suspend fun getTacheIdAgent(id: Int):Response<List<Tache>>{
+
+        suspend fun getTacheIdAgent(id: Int): Response<List<Tache>> {
             return TacheApiClient.tacheApiService.getTasksById(id)
+        }
+
+        suspend fun getTacheModelById(id: Int): Response<TacheModel> {
+            return TacheApiClient.tacheModelApiService.getTacheModelById(id)
         }
 
     }

@@ -35,6 +35,8 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="TextView"
             android:textColor="@color/noir"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="16sp" />
 
         <TextView

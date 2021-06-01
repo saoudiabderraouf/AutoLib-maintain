@@ -14,10 +14,11 @@ import androidx.preference.PreferenceManager
 class PrefUtils {
 
     // enum to store keys
-    enum class Keys{
+    enum class Keys {
         KEY1,
         ID,
-        token
+        token,
+        idModel
     }
 
     companion object {
@@ -25,13 +26,13 @@ class PrefUtils {
         private lateinit var preferences: SharedPreferences
         private lateinit var editor: SharedPreferences.Editor
 
-        fun with(context: Context) : PrefUtils {
+        fun with(context: Context): PrefUtils {
             if (null == singleton)
                 singleton = Builder(context, null, -1).build()
             return singleton as PrefUtils
         }
 
-        fun with(context: Context, name: String, mode: Int) : PrefUtils {
+        fun with(context: Context, name: String, mode: Int): PrefUtils {
             if (null == singleton)
                 singleton = Builder(context, name, mode).build()
             return singleton as PrefUtils
@@ -77,11 +78,11 @@ class PrefUtils {
         editor.putStringSet(key.name, value).apply()
     }
 
-    fun getBoolean(key: Keys, defValue: Boolean) : Boolean {
+    fun getBoolean(key: Keys, defValue: Boolean): Boolean {
         return preferences.getBoolean(key.name, defValue)
     }
 
-    fun getFloat(key: Keys, defValue: Float) : Float {
+    fun getFloat(key: Keys, defValue: Float): Float {
         return try {
             preferences.getFloat(key.name, defValue)
         } catch (ex: ClassCastException) {
@@ -89,7 +90,7 @@ class PrefUtils {
         }
     }
 
-    fun getInt(key: Keys, defValue: Int) : Int {
+    fun getInt(key: Keys, defValue: Int): Int {
         return try {
             preferences.getInt(key.name, defValue)
         } catch (ex: ClassCastException) {
@@ -97,7 +98,7 @@ class PrefUtils {
         }
     }
 
-    fun getLong(key: Keys, defValue: Long) : Long {
+    fun getLong(key: Keys, defValue: Long): Long {
         return try {
             preferences.getLong(key.name, defValue)
         } catch (ex: ClassCastException) {
@@ -105,11 +106,11 @@ class PrefUtils {
         }
     }
 
-    fun getString(key: Keys, defValue: String) : String? {
+    fun getString(key: Keys, defValue: String): String? {
         return preferences.getString(key.name, defValue)
     }
 
-    fun getStringSet(key: Keys, defValue: Set<String>) : Set<String>? {
+    fun getStringSet(key: Keys, defValue: Set<String>): Set<String>? {
         return preferences.getStringSet(key.name, defValue)
     }
 
@@ -127,7 +128,7 @@ class PrefUtils {
 
     private class Builder(val context: Context, val name: String?, val mode: Int) {
 
-        fun build() : PrefUtils {
+        fun build(): PrefUtils {
             if (mode == -1 || name == null) {
                 return PrefUtils(context)
             }

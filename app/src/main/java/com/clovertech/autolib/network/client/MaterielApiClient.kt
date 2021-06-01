@@ -1,14 +1,12 @@
 package com.clovertech.autolib.network.client
 
-import com.clovertech.autolib.network.service.AuthApiService
-import com.clovertech.autolib.network.service.TacheApiService
-import com.clovertech.autolib.network.service.TacheModelApiService
+import com.clovertech.autolib.network.service.MaterielApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object TacheApiClient {
+object MaterielApiClient {
     private val retrofit by lazy {
         val client = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -17,20 +15,15 @@ object TacheApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://service-tasks.herokuapp.com")
+            .baseUrl("https://service-equipment.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
 
 
-    val tacheApiService : TacheApiService by lazy {
-        retrofit.create(TacheApiService::class.java)
+    val materielApiService: MaterielApiService by lazy {
+        retrofit.create(MaterielApiService::class.java)
 
     }
-    val tacheModelApiService : TacheModelApiService by lazy {
-        retrofit.create(TacheModelApiService::class.java)
-
-    }
-
 }
