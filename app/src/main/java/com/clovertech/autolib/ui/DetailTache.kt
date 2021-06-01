@@ -40,7 +40,7 @@ class DetailTache : Fragment() {
         descriptTask.text=viewModel.task.description
         idVoiture.text=viewModel.task.idVehicule.toString()
 
-        
+
         adapterSteps = TaskStepsAdapter(requireActivity())
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)

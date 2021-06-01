@@ -13,6 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.clovertech.autolib.R
 import com.clovertech.autolib.ui.adapters.OnboardingAdapter
+import com.clovertech.autolib.ui.login.LoginActivity
+import com.clovertech.autolib.utils.PrefUtils
 
 
 class OnBoardingScreens : AppCompatActivity() {
@@ -23,9 +25,18 @@ class OnBoardingScreens : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (restorePrefData()) {
-            val mainActivity = Intent(applicationContext, MainActivity::class.java)
-            startActivity(mainActivity)
-            finish()
+            val token = PrefUtils.with(this).getString(PrefUtils.Keys.token,"")
+            if (token == "") {
+                val loginActivity = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(loginActivity)
+                finish()
+            } else {
+                val loginActivity = Intent(applicationContext, SampleActivity::class.java)
+                startActivity(loginActivity)
+                finish()
+
+            }
+
         }
 
         setContentView(R.layout.activity_on_boarding_screens)
@@ -47,7 +58,7 @@ class OnBoardingScreens : AppCompatActivity() {
             if (onboardingViewPager.currentItem + 1 < onboardingAdapter!!.itemCount) {
                 onboardingViewPager.currentItem = onboardingViewPager.currentItem + 1
             } else {
-                startActivity(Intent(applicationContext, MainActivity::class.java))
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
                 savePrefsData()
                 finish()
             }
