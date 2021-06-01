@@ -15,5 +15,5 @@ interface EquipmentApiService {
     suspend fun getAllEquipment(): Response<List<Equipement>>
 
     @POST("usedEquipment")
-    suspend fun addNewUsedEquipment(@Body newEquipement: NewEquipement): Response<EquipementToken>
+    suspend fun addNewUsedEquipment(@Body newequipement: NewEquipement): Response<EquipementToken>
 }

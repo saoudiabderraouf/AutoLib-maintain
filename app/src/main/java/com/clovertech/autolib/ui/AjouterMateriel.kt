@@ -39,19 +39,26 @@ class AjouterMateriel : Fragment() {
                     it1
                 )
             }*/
-            var newEquipement= NewEquipement("test", 12,"282d4458-aaeb-4e92-a674-12320b1de46a","969f0417-0611-4f7c-9fc3-1f4b3ca22573" )
+            var newEquipement = NewEquipement(
+                "test",
+                12,
+                "282d4458-aaeb-4e92-a674-12320b1de46a",
+                "969f0417-0611-4f7c-9fc3-1f4b3ca22573"
+            )
             if (newEquipement != null) {
                 equipmentViewModel.addMateriel(newEquipement)
 
-            equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Login success", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), it.body()?.token, Toast.LENGTH_SHORT).show()
-                }
+                equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
+                    if (it.code()==200) {
+                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
 
-            })
-        }}
+                })
+            }
+        }
 
 
     }
