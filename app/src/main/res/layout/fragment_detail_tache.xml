@@ -59,25 +59,6 @@
             app:layout_constraintStart_toStartOf="@+id/descriptTask"
             app:layout_constraintTop_toBottomOf="@+id/descriptTask" />
 
-        <TextView
-            android:id="@+id/importance"
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="8dp"
-            android:background="#FFE0E7"
-            android:color="#222222"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:paddingBottom="2dp"
-            android:text="Critique"
-            android:textColor="#DC2D6A"
-            android:textColorHighlight="#FFE8C8"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/descriptTask"
-            app:layout_constraintTop_toBottomOf="@+id/descriptTask" />
-
         <View
             android:id="@+id/view"
             style="@style/Divider"
@@ -96,13 +77,12 @@
             android:id="@+id/view2"
             style="@style/Divider"
             android:layout_marginStart="22dp"
-            android:layout_marginTop="76dp"
             android:layout_marginEnd="22dp"
             android:background="#DBD9F3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/matrialRecyclerView" />
 
         <TextView
             android:id="@+id/textView14"
@@ -131,7 +111,7 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat"
             android:text="Etapes de la tache"
             android:textColor="@color/noir"
@@ -162,5 +142,16 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/matrialRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

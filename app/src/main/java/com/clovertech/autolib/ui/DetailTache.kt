@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
+import com.clovertech.autolib.ui.adapters.MaterialAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class DetailTache : Fragment() {
     lateinit var adapterSteps: TaskStepsAdapter
+    lateinit var adapterMateriels:MaterialAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,18 +40,25 @@ class DetailTache : Fragment() {
         descriptTask.text=viewModel.task.description
         idVoiture.text=viewModel.task.idVehicule.toString()
 
-
+        
         adapterSteps = TaskStepsAdapter(requireActivity())
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         tasksRecyclerView.adapter = adapterSteps
         adapterSteps.setListSteps(viewModel.taskModel.steps)
+
+        adapterMateriels = MaterialAdapter(requireActivity(),viewModel)
+        matrialRecyclerView.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        matrialRecyclerView.adapter = adapterMateriels
+        adapterMateriels.setListMaterial(viewModel.task.usedEquipements)
+
         addMaterial.setOnClickListener() {
             it.findNavController()?.navigate(R.id.action_detailTache_to_ajouterMateriel)
         }
 
-
     }
+
 
 
 }
