@@ -15,7 +15,7 @@ class MaterielViewModel : ViewModel() {
     val ResponseListMateriel: MutableLiveData<Response<List<Materiel>>> = MutableLiveData()
     fun getListMateriel(id: Int) {
         viewModelScope.launch {
-            val response: Response<List<Materiel>> = MaterielRepo.getAllEquipement()
+            val response: Response<List<Materiel>> = MaterielRepo.getAllEquipments()
             ResponseListMateriel.value = response
 
         }

@@ -7,5 +7,5 @@ data class Utilisateur (
     var userType: Int,
     var firstName: String,
     var address: String,
-    var phoneNumber: Long
+    var phoneNumber: String
 )
