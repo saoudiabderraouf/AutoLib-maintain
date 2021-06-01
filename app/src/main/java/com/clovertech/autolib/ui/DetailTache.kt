@@ -5,17 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
 import kotlinx.android.synthetic.main.fragment_detail_tache.*
-import kotlinx.android.synthetic.main.fragment_detail_tache.tasksRecyclerView
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class DetailTache : Fragment() {
@@ -34,9 +30,9 @@ class DetailTache : Fragment() {
         super.onActivityCreated(savedInstanceState)
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
 
-        titreTask.text=viewModel.task.taskTitle
-        descriptTask.text=viewModel.task.description
-        idVoiture.text=viewModel.task.idVehicule.toString()
+        titreTask.text = viewModel.task.taskTitle
+        descriptTask.text = viewModel.task.description
+        idVoiture.text = viewModel.task.idVehicule.toString()
 
 
         adapterSteps = TaskStepsAdapter(requireActivity())

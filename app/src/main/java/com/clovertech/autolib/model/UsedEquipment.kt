@@ -6,5 +6,5 @@ data class UsedEquipment(
     var updatedAt: String,
     var description: String,
     var quantity: String
-) {
-}
+) {}
+
