@@ -1,35 +1,23 @@
 package com.clovertech.autolib.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.NewEquipement
+import com.clovertech.autolib.utils.PrefUtils
+import com.clovertech.autolib.viewmodel.EquipmentViewModel
+import com.clovertech.autolib.viewmodel.MaterielViewModel
+import kotlinx.android.synthetic.main.fragment_ajouter_materiel.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AjouterMateriel.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AjouterMateriel : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    lateinit var equipmentViewModel: EquipmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,23 +26,42 @@ class AjouterMateriel : Fragment() {
         return inflater.inflate(R.layout.fragment_ajouter_materiel, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AjouterMateriel.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AjouterMateriel().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        var viewModel = ViewModelProvider(requireActivity()).get(MaterielViewModel::class.java)
+        equipmentViewModel =
+            ViewModelProvider(requireActivity()).get(EquipmentViewModel::class.java)
+        ajouter_materiel.setOnClickListener {
+            val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.taskUuid, "")
+            /*var newEquipement = token?.let { it1 ->
+                NewEquipement(
+                    materielDescript.text.toString(), materielQuantite.text.toString(), "",
+                    it1
+                )
+            }*/
+            var newEquipement = NewEquipement(
+                "test",
+                12,
+                "282d4458-aaeb-4e92-a674-12320b1de46a",
+                "969f0417-0611-4f7c-9fc3-1f4b3ca22573"
+            )
+            if (newEquipement != null) {
+                equipmentViewModel.addMateriel(newEquipement)
+
+                equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
+                    if (it.code()==200) {
+                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+                })
             }
+        }
+
+
     }
+
+
 }

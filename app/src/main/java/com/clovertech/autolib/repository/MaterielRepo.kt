@@ -1,13 +1,15 @@
 package com.clovertech.autolib.repository
 
+import com.clovertech.autolib.model.Equipement
 import com.clovertech.autolib.model.Materiel
 import com.clovertech.autolib.model.Token
+import com.clovertech.autolib.network.client.EquipmentApiClient
 import com.clovertech.autolib.network.client.MaterielApiClient
 import retrofit2.Response
 
 class MaterielRepo {
     companion object {
-        suspend fun getAllEquipement(): Response<List<Materiel>> {
+        suspend fun getAllEquipments(): Response<List<Materiel>> {
             return MaterielApiClient.materielApiService.getAllMateriel()
         }
 
@@ -27,5 +29,6 @@ class MaterielRepo {
             return MaterielApiClient.materielApiService.deletMateriel(id)
         }
     }
+
 
 }

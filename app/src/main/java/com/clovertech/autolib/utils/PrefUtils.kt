@@ -18,7 +18,8 @@ class PrefUtils {
         KEY1,
         ID,
         token,
-        idModel
+        idModel,
+        taskUuid
     }
 
     companion object {

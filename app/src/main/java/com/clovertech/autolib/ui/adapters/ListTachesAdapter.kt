@@ -10,6 +10,7 @@ import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.home.HomeFragment
 import com.clovertech.autolib.ui.home.HomeViewModel
+import com.clovertech.autolib.utils.PrefUtils
 
 class ListTachesAdapter(val context: Context, val vm: HomeViewModel, frag: HomeFragment) :
     RecyclerView.Adapter<MyViewHolder>() {
@@ -32,9 +33,8 @@ class ListTachesAdapter(val context: Context, val vm: HomeViewModel, frag: HomeF
         holder.progres.text = data[position].idTaskState.toString() + "%"
         holder.titreTache.text = data[position].taskTitle.toString()
         holder.itemView.setOnClickListener(View.OnClickListener {
-
-            fragment.update(data[position].taskModel.id)
-
+            fragment.update(data[position].taskModel.id, data[position])
+            PrefUtils.with(context).save(PrefUtils.Keys.taskUuid, data[position].uuid)
         })
 
     }
