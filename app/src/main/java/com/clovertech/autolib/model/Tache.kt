@@ -1,12 +1,8 @@
 package com.clovertech.autolib.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-
-@Entity(tableName = "taches")
 data class Tache(
-    @PrimaryKey(autoGenerate = true) var idTask: Int,
+
     var idAgent: Int,
     var idVehicule: Int,
     var description: String,
@@ -14,9 +10,9 @@ data class Tache(
     var idTaskState: Int,
     var assignmentDate: String,
     var endDate: String,
-    var steps: List<Step>,
+    var taskModel: TaskModelToken,
     var usedEquipements: List<Materiel>,
-    var uuid: Int
+    var uuid: String
 
 ) {
 

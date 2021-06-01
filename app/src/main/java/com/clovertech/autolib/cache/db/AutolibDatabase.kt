@@ -14,7 +14,11 @@ import com.clovertech.autolib.model.Agent
 import com.clovertech.autolib.model.Auth_utilisateur
 import com.clovertech.autolib.model.Tache
 
-@Database(entities = arrayOf(Auth_utilisateur::class, Tache::class, Agent::class), version = 3, exportSchema = false)
+@Database(
+    entities = arrayOf(Auth_utilisateur::class,  Agent::class),
+    version = 3,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class AutolibDatabase : RoomDatabase() {
     abstract fun authDao(): AuthDAO

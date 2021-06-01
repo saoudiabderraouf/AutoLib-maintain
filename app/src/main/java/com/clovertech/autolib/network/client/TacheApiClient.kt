@@ -2,6 +2,7 @@ package com.clovertech.autolib.network.client
 
 import com.clovertech.autolib.network.service.AuthApiService
 import com.clovertech.autolib.network.service.TacheApiService
+import com.clovertech.autolib.network.service.TacheModelApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,6 +26,10 @@ object TacheApiClient {
 
     val tacheApiService : TacheApiService by lazy {
         retrofit.create(TacheApiService::class.java)
+
+    }
+    val tacheModelApiService : TacheModelApiService by lazy {
+        retrofit.create(TacheModelApiService::class.java)
 
     }
 
