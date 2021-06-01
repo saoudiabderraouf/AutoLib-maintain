@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TacheModel
+import com.clovertech.autolib.model.TaskModelToken
 import com.clovertech.autolib.repository.TacheRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -14,6 +16,11 @@ import retrofit2.Response
 class TacheViewModel : ViewModel() {
     val ResponseTacheById: MutableLiveData<Response<List<Tache>>> = MutableLiveData()
     val ResponseTacheModel: MutableLiveData<Response<TacheModel>> = MutableLiveData()
+
+    var taskModel: TacheModel= TacheModel(1,"", emptyList())
+    var task: Tache= Tache(0,0,"","",0,"","", TaskModelToken(0,""), emptyList(),"")
+
+
     fun insertTache(context: Context, tache: Tache) {
         TacheRepo.insertTache(context, tache)
     }

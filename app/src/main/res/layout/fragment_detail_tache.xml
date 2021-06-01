@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dirtyWhite">
 
         <TextView
             android:id="@+id/titreTask"
@@ -95,13 +96,11 @@
             android:id="@+id/view2"
             style="@style/Divider"
             android:layout_marginStart="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="76dp"
             android:layout_marginEnd="22dp"
-            android:layout_marginRight="22dp"
             android:background="#DBD9F3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -132,7 +131,7 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="140dp"
             android:fontFamily="@font/montserrat"
             android:text="Etapes de la tache"
             android:textColor="@color/noir"
@@ -140,28 +139,28 @@
             app:layout_constraintStart_toStartOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="28dp"
-            android:layout_height="38dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:src="@drawable/ic_plus"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecyclerView"
-            android:layout_width="409dp"
-            android:layout_height="369dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="2dp"
-            android:layout_marginRight="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <Button
+            android:id="@+id/addMaterial"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="+"
+            android:textColor="@color/dirtyWhite"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
