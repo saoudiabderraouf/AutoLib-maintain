@@ -23,12 +23,14 @@ import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
 import com.michalsvec.singlerowcalendar.utils.DateUtils
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DashboardFragment : Fragment() {
 
     private var currentMonth = 0
     private val calendar = Calendar.getInstance()
+    private val allTasks = mutableListOf<Tache>()
 
     private lateinit var taskViewModel: TacheViewModel
     private lateinit var pagerAdapter: TaskFragmentAdapter
@@ -49,8 +51,8 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initCalendar(view)
         initPager(view)
+        initCalendar(view)
         attachObservers()
     }
 
@@ -63,7 +65,8 @@ class DashboardFragment : Fragment() {
         taskViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
                 it.body()?.let { it1 ->
-                    pagerAdapter.updateTasksUI(it1)
+                    allTasks.clear()
+                    allTasks.addAll(it1)
                 }
             }
         })
@@ -130,56 +133,47 @@ class DashboardFragment : Fragment() {
 
         // Setup observers
         val myCalendarChangesObserver = object : CalendarChangesObserver {
-            override fun whenWeekMonthYearChanged(
-                weekNumber: String,
-                monthNumber: String,
-                monthName: String,
-                year: String,
-                date: Date
-            ) {
-                super.whenWeekMonthYearChanged(weekNumber, monthNumber, monthName, year, date)
-            }
 
             override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
+                pagerAdapter.updateTasksUI(getTasksByDate(date))
                 super.whenSelectionChanged(isSelected, position, date)
-            }
-
-            override fun whenCalendarScrolled(dx: Int, dy: Int) {
-                super.whenCalendarScrolled(dx, dy)
-            }
-
-            override fun whenSelectionRestored() {
-                super.whenSelectionRestored()
-            }
-
-            override fun whenSelectionRefreshed() {
-                super.whenSelectionRefreshed()
             }
         }
 
         val calendarView:SingleRowCalendar = view.findViewById(R.id.calendarView)
+        val day = calendar[Calendar.DAY_OF_WEEK_IN_MONTH]
 
         val cal = calendarView.apply {
             calendarViewManager = myCalendarViewManager
             calendarChangesObserver = myCalendarChangesObserver
             calendarSelectionManager = mySelectionManager
+            initialPositionIndex = day
+            includeCurrentDate = true
             setDates(getDatesOfCurrentMonth())
             init()
         }
 
+        cal.select(day)
+
         buttonPreviousMonthDashboard.setOnClickListener {
             cal.setDates(getDatesOfPreviousMonth())
-            cal.init()
             textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
                     "${DateUtils.getYear(calendar.time)}"
         }
 
         buttonNextMonthDashboard.setOnClickListener {
             cal.setDates(getDatesOfNextMonth())
-            cal.init()
             textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
                     "${DateUtils.getYear(calendar.time)}"
         }
+
+        textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
+                "${DateUtils.getYear(calendar.time)}"
+    }
+
+    private fun getTasksByDate(date: Date): List<Tache>{
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        return allTasks.filter { sdf.format(date).equals(sdf.format(it.assignmentDate)) }
     }
 
     private fun getDatesOfNextMonth(): List<Date> {
@@ -234,16 +228,13 @@ class DashboardFragment : Fragment() {
 
     class TaskFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-        private lateinit var doneTasksFragment: TaskPagerFragment
-        private lateinit var ongoingTasksFragment: TaskPagerFragment
-        private val allTasks = mutableListOf<Tache>()
+        private val doneTasksFragment = TaskPagerFragment()
+        private val ongoingTasksFragment =  TaskPagerFragment()
 
         override fun getItemCount(): Int = 2
 
         override fun createFragment(position: Int): Fragment {
             // Return a NEW fragment instance in createFragment(int)
-            doneTasksFragment = TaskPagerFragment()
-            ongoingTasksFragment = TaskPagerFragment()
             return when (position){
                 0 -> doneTasksFragment
                 else -> ongoingTasksFragment
@@ -251,8 +242,6 @@ class DashboardFragment : Fragment() {
         }
 
         fun updateTasksUI(tasks: List<Tache>) {
-            allTasks.clear()
-            allTasks.addAll(tasks)
             doneTasksFragment.updateTasks(getDoneTasks(tasks))
             ongoingTasksFragment.updateTasks(getOngoingTasks(tasks))
         }

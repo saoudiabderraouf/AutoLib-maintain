@@ -12,13 +12,14 @@ import com.clovertech.autolib.model.TaskModelToken
 import com.clovertech.autolib.repository.TacheRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.util.*
 
 class TacheViewModel : ViewModel() {
     val ResponseTacheById: MutableLiveData<Response<List<Tache>>> = MutableLiveData()
     val ResponseTacheModel: MutableLiveData<Response<TacheModel>> = MutableLiveData()
 
     var taskModel: TacheModel= TacheModel(1,"", emptyList())
-    var task: Tache= Tache(0,0,"","",0,"","", TaskModelToken(0,""), emptyList(),"")
+    var task: Tache= Tache(0,0,"","",0, Date(),Date(), TaskModelToken(0,""), emptyList(),"")
 
 
     fun insertTache(context: Context, tache: Tache) {
