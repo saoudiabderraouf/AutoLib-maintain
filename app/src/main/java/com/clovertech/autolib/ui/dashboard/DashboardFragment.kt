@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -25,6 +26,9 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.*
 
 class DashboardFragment : Fragment() {
+
+    private var currentMonth = 0
+    private val calendar = Calendar.getInstance()
 
     private lateinit var taskViewModel: TacheViewModel
     private lateinit var pagerAdapter: TaskFragmentAdapter
@@ -51,10 +55,18 @@ class DashboardFragment : Fragment() {
     }
 
     private fun attachObservers() {
-        taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner,
+        /*taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner,
             {
                 pagerAdapter.updateTasksUI(it)
-            })
+            })*/
+        taskViewModel.getTacheIdAgent(PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 100))
+        taskViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
+            if (it.isSuccessful) {
+                it.body()?.let { it1 ->
+                    pagerAdapter.updateTasksUI(it1)
+                }
+            }
+        })
     }
 
     private fun initPager(view: View) {
@@ -75,6 +87,10 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initCalendar(view: View) {
+
+        calendar.time = Date()
+        currentMonth = calendar[Calendar.MONTH]
+
         // Init view manager
         val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(
@@ -143,15 +159,78 @@ class DashboardFragment : Fragment() {
 
         val calendarView:SingleRowCalendar = view.findViewById(R.id.calendarView)
 
-        val calendar = calendarView.apply {
+        val cal = calendarView.apply {
             calendarViewManager = myCalendarViewManager
             calendarChangesObserver = myCalendarChangesObserver
             calendarSelectionManager = mySelectionManager
-            futureDaysCount = 30
-            includeCurrentDate = true
+            setDates(getDatesOfCurrentMonth())
             init()
         }
+
+        buttonPreviousMonthDashboard.setOnClickListener {
+            cal.setDates(getDatesOfPreviousMonth())
+            cal.init()
+            textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
+                    "${DateUtils.getYear(calendar.time)}"
         }
+
+        buttonNextMonthDashboard.setOnClickListener {
+            cal.setDates(getDatesOfNextMonth())
+            cal.init()
+            textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
+                    "${DateUtils.getYear(calendar.time)}"
+        }
+    }
+
+    private fun getDatesOfNextMonth(): List<Date> {
+        currentMonth++ // + because we want next month
+        if (currentMonth == 12) {
+            // we will switch to january of next year, when we reach last month of year
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] + 1)
+            currentMonth = 0 // 0 == january
+        }
+        return getDates(mutableListOf())
+    }
+
+    private fun getDatesOfPreviousMonth(): List<Date> {
+        currentMonth-- // - because we want previous month
+        if (currentMonth == -1) {
+            // we will switch to december of previous year, when we reach first month of year
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
+            currentMonth = 11 // 11 == december
+        }
+        return getDates(mutableListOf())
+    }
+
+    private fun getDatesOfCurrentMonth(): List<Date> {
+        if (currentMonth == -1) {
+            // we will switch to december of previous year, when we reach first month of year
+            calendar.set(Calendar.YEAR, calendar[Calendar.YEAR] - 1)
+            currentMonth = 11 // 11 == december
+        }
+        return getDates(mutableListOf())
+    }
+
+    private fun getFutureDatesOfCurrentMonth(): List<Date> {
+        // get all next dates of current month
+        currentMonth = calendar[Calendar.MONTH]
+        return getDates(mutableListOf())
+    }
+
+
+    private fun getDates(list: MutableList<Date>): List<Date> {
+        // load dates of whole month
+        calendar.set(Calendar.MONTH, currentMonth)
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        list.add(calendar.time)
+        while (currentMonth == calendar[Calendar.MONTH]) {
+            calendar.add(Calendar.DATE, +1)
+            if (calendar[Calendar.MONTH] == currentMonth)
+                list.add(calendar.time)
+        }
+        calendar.add(Calendar.DATE, -1)
+        return list
+    }
 
     class TaskFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -165,10 +244,6 @@ class DashboardFragment : Fragment() {
             // Return a NEW fragment instance in createFragment(int)
             doneTasksFragment = TaskPagerFragment()
             ongoingTasksFragment = TaskPagerFragment()
-            //fragment.arguments = Bundle().apply {
-                // Our object is just an integer :-P
-                //putInt(ARG_OBJECT, position + 1)
-            //}
             return when (position){
                 0 -> doneTasksFragment
                 else -> ongoingTasksFragment
@@ -178,9 +253,16 @@ class DashboardFragment : Fragment() {
         fun updateTasksUI(tasks: List<Tache>) {
             allTasks.clear()
             allTasks.addAll(tasks)
-            //temp
-            doneTasksFragment.updateTasks(tasks)
-            ongoingTasksFragment.updateTasks(tasks)
+            doneTasksFragment.updateTasks(getDoneTasks(tasks))
+            ongoingTasksFragment.updateTasks(getOngoingTasks(tasks))
+        }
+
+        private fun getOngoingTasks(allTasks: List<Tache>): List<Tache> {
+            return allTasks.filter { it.endDate == null }
+        }
+
+        private fun getDoneTasks(allTasks: List<Tache>): List<Tache> {
+            return allTasks.filter { it.endDate != null }
         }
     }
 }

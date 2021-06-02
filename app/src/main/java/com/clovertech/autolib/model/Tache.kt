@@ -9,7 +9,7 @@ data class Tache(
     var taskTitle: String,
     var idTaskState: Int,
     var assignmentDate: String,
-    var endDate: String,
+    var endDate: String?,
     var taskModel: TaskModelToken,
     var usedEquipements: List<Materiel>,
     var uuid: String
