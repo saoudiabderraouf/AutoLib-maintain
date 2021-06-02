@@ -34,6 +34,8 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
             android:text="Task Description"
+            android:maxLines="1"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
