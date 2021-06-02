@@ -1,8 +1,6 @@
 package com.clovertech.autolib.network.client
 
 import com.clovertech.autolib.network.service.AuthApiService
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +22,7 @@ object AuthApiClient {
     }
 
 
-    val authApiService : AuthApiService by lazy {
+    val authApiService: AuthApiService by lazy {
         retrofit.create(AuthApiService::class.java)
 
     }

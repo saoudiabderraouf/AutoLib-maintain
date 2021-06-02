@@ -33,24 +33,22 @@ class AjouterMateriel : Fragment() {
             ViewModelProvider(requireActivity()).get(EquipmentViewModel::class.java)
         ajouter_materiel.setOnClickListener {
             val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.taskUuid, "")
-            /*var newEquipement = token?.let { it1 ->
+            var newEquipement = token?.let { it1 ->
                 NewEquipement(
-                    materielDescript.text.toString(), materielQuantite.text.toString(), "",
+                    materielDescript.text.toString(),
+                    materielQuantite.text.toString().toInt(),
+                    "282d4458-aaeb-4e92-a674-12320b1de46a",
                     it1
                 )
-            }*/
-            var newEquipement = NewEquipement(
-                "test",
-                12,
-                "282d4458-aaeb-4e92-a674-12320b1de46a",
-                "969f0417-0611-4f7c-9fc3-1f4b3ca22573"
-            )
+            }
+
             if (newEquipement != null) {
                 equipmentViewModel.addMateriel(newEquipement)
 
                 equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
-                    if (it.code()==200) {
-                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT).show()
+                    if (it.code() == 200) {
+                        Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
                             .show()
