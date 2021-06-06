@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-
+    id 'com.google.gms.google-services'
 
 }
 
@@ -122,8 +122,12 @@ dependencies {
     // ViewPager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
-    //Sliding Root Nav
+    // Sliding Root Nav
     implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
 
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-messaging'
 
 }
