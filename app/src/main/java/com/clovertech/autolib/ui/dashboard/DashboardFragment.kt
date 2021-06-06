@@ -61,7 +61,7 @@ class DashboardFragment : Fragment() {
             {
                 pagerAdapter.updateTasksUI(it)
             })*/
-        taskViewModel.getTacheIdAgent(PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 100))
+        taskViewModel.getTacheIdAgent(100)
         taskViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
                 it.body()?.let { it1 ->
