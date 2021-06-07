@@ -7,6 +7,19 @@
     android:background="@color/dirtyWhite"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <TextView
+        android:id="@+id/textMonthDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Mai 2021"
+        android:fontFamily="@font/montserrat"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
@@ -15,7 +28,7 @@
         app:deselection="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMonthDashboard"
         app:longPress="false"
         app:multiSelection="false" />
 
@@ -45,12 +58,13 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabDashboard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:tabGravity="start"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -65,6 +79,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabDashboard" />
+
+    <ImageButton
+        android:id="@+id/buttonPreviousMonthDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_round_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textMonthDashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textMonthDashboard" />
+
+    <ImageButton
+        android:id="@+id/buttonNextMonthDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_round_arrow_forward_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/textMonthDashboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textMonthDashboard" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
