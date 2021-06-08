@@ -7,12 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.clovertech.autolib.cache.converter.Converters
 import com.clovertech.autolib.cache.dao.*
-import com.clovertech.autolib.model.Agent
-import com.clovertech.autolib.model.Auth_utilisateur
-import com.clovertech.autolib.model.Step
+import com.clovertech.autolib.model.*
 
 @Database(
-    entities = arrayOf(Auth_utilisateur::class, Agent::class, Step::class),
+    entities = arrayOf(Auth_utilisateur::class, Agent::class, Step::class, Tache::class, TacheModel::class),
     version = 3,
     exportSchema = false
 )
@@ -23,6 +21,7 @@ abstract class AutolibDatabase : RoomDatabase() {
     abstract fun profilsDao(): ProfilDAO
     abstract fun etatDao(): EtatDAO
     abstract fun stepDao(): StepDAO
+    abstract fun taskModelDao(): TacheModelDAO
 
 
     companion object {

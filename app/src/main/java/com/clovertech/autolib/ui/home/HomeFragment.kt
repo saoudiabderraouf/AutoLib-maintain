@@ -49,30 +49,18 @@ class HomeFragment : Fragment() {
 
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
-        id =3
+        id = 3
 
         if (id != 0) {
             Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
                 .show()
 
-            tacheViewModel.getTacheIdAgent(100)
-            tacheViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
-                if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Success in getting data", Toast.LENGTH_SHORT)
-                        .show()
-                    it.body()?.let { it1 ->
-                        adapter.setListTache(it1)
-                        nbTaches2.text = it1.size.toString()
-                        tachePrem = it1.get(0)
-                        loadSteps()
-                    }
-                } else {
-                    Toast.makeText(requireContext(), "failure in getting data", Toast.LENGTH_SHORT)
-                        .show()
+            tacheViewModel.getTacheIdAgent(requireContext(), 100)
+            tacheViewModel.getTacheAllModel(requireContext())
 
-
-                }
-
+            tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+                adapter.setListTache(it)
+                nbTaches2.text = it.size.toString()
             })
 
         }
@@ -83,53 +71,51 @@ class HomeFragment : Fragment() {
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
-
     }
 
     fun update(id: Int, tache: Tache) {
-        //tacheViewModel.tache=tache
         Toast.makeText(
             requireContext(), id.toString(),
             Toast.LENGTH_SHORT
         ).show()
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
 
-        viewModel.getTacheModelid(id)
-        viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel = it.body()!!
-                viewModel.task = tache
+        viewModel.getAllTacheModel(requireContext())?.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
 
-            } else {
-                loadSteps()
+                viewModel.taskModel = it.find { taskModel ->
+                    taskModel.id == id
+                }!!
+                adapterSteps.setListSteps(viewModel.taskModel.steps)
+                viewModel.task = tache
             }
 
         })
 
     }
 
-    fun loadSteps() {
 
-        var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-        if (tachePrem != null) {
+/*fun loadSteps() {
 
-            viewModel.getTacheModelid(tachePrem.taskModel.id)
-            viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
-                if (it.isSuccessful) {
-                    it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                    viewModel.taskModel = it.body()!!
-                    viewModel.task = tachePrem
+    var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+    if (tachePrem != null) {
 
-                } else {
+        viewModel.getTacheModelid(tachePrem.taskModel.id)
+        viewModel.getAllTacheModel().observe(viewLifecycleOwner, Observer {
+            if (it.isSuccessful) {
+                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
+                viewModel.taskModel = it.body()!!
+                viewModel.task = tachePrem
 
-                }
+            } else {
 
-            })
-        }
+            }
 
-
+        })
     }
+
+
+}*/
 
 
 }
