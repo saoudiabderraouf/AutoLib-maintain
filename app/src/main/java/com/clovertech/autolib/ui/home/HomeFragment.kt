@@ -12,9 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
@@ -51,88 +49,73 @@ class HomeFragment : Fragment() {
 
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
+        id = 3
 
         if (id != 0) {
-            tacheViewModel.getTacheIdAgent(100)
-            tacheViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
-                if (it.isSuccessful) {
-                    it.body()?.let { it1 ->
-                        adapter.setListTache(it1)
-                        nbTaches2.text = it1.size.toString()
-                        tachePrem = it1.get(0)
-                        loadSteps()
-                    }
-                } else {
-                    /*val tache1 = Tache(1, 1, "test", "je teste", 5,"12/12/14","","")
-                    val tache2 = Tache(2, 5, "test", "je teste", 5,"12/12/12","","")
-                    this.context?.let { tacheViewModel.insertTache(it, tache1) }
-                    this.context?.let { tacheViewModel.insertTache(it, tache2) }
-                    this.context?.let {
-                        tacheViewModel.getAllTaches(it)?.observe(viewLifecycleOwner, Observer {
-                            adapter.setListTache(it)
+            Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
+                .show()
 
-                })
-            }*/
+            tacheViewModel.getTacheIdAgent(requireContext(), 100)
+            tacheViewModel.getTacheAllModel(requireContext())
 
-
-                }
-
+            tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+                adapter.setListTache(it)
+                nbTaches2.text = it.size.toString()
             })
 
         }
 
-        details.setOnClickListener(){
-            var viewModel= ViewModelProvider(this).get(TacheViewModel::class.java)
+        details.setOnClickListener() {
+            var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
 
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
-
     }
 
     fun update(id: Int, tache: Tache) {
-        //tacheViewModel.tache=tache
         Toast.makeText(
             requireContext(), id.toString(),
             Toast.LENGTH_SHORT
         ).show()
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
 
-        viewModel.getTacheModelid(id)
-        viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel= it.body()!!
-                viewModel.task=tache
+        viewModel.getAllTacheModel(requireContext())?.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
 
-            } else {
-               loadSteps()
+                viewModel.taskModel = it.find { taskModel ->
+                    taskModel.id == id
+                }!!
+                adapterSteps.setListSteps(viewModel.taskModel.steps)
+                viewModel.task = tache
             }
 
         })
 
     }
 
-    fun loadSteps() {
 
-        var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-        if (tachePrem!=null){
+/*fun loadSteps() {
+
+    var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+    if (tachePrem != null) {
 
         viewModel.getTacheModelid(tachePrem.taskModel.id)
-        viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
+        viewModel.getAllTacheModel().observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
                 it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel= it.body()!!
-                viewModel.task=tachePrem
+                viewModel.taskModel = it.body()!!
+                viewModel.task = tachePrem
 
             } else {
 
             }
 
-        })}
-
-
+        })
     }
+
+
+}*/
 
 
 }
