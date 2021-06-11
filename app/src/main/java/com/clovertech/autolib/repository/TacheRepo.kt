@@ -9,7 +9,6 @@ import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class TacheRepo {
     companion object {
@@ -22,53 +21,67 @@ class TacheRepo {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
-        fun insertAllTaches(context: Context, taches: List<Tache>) {
-
-            appDb = initializeDB(context)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                // appDb!!.tacheDao().insertAllTaches(taches)
-            }
-
-        }
-
         fun insertTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                // appDb!!.tacheDao().insertTache(tache)
+                appDb!!.tacheDao().addTask(tache)
             }
 
         }
 
-        /*fun getTacheById(context: Context, id: Int): Tache {
-            appDb = initializeDB(context)
-            return appDb!!.tacheDao().getTacheById(id)
-        }*/
-
-        fun updateTache(context: Context, tache: Tache) {
-            appDb = initializeDB(context)
-            //return appDb!!.tacheDao().updateTache(tache)
-
-        }
 
         fun getAllTaches(context: Context): LiveData<List<Tache>>? {
 
             appDb = initializeDB(context)
 
-            //taches = appDb!!.tacheDao().getAllTaches()
+            taches = appDb!!.tacheDao().getAllTasks()
 
-            return null
+            return taches
         }
 
-        suspend fun getTacheIdAgent(id: Int): Response<List<Tache>> {
-            return TacheApiClient.tacheApiService.getTasksById(id)
+        fun getAllModelTaches(context: Context): LiveData<List<TacheModel>>? {
+
+            appDb = initializeDB(context)
+
+            val taches = appDb!!.taskModelDao().getAllTasks()
+
+            return taches
         }
 
-        suspend fun getTacheModelById(id: Int): Response<TacheModel> {
-            return TacheApiClient.tacheModelApiService.getTacheModelById(id)
+         suspend fun getTacheIdAgent(context: Context, id: Int) {
+            var Response = TacheApiClient.tacheApiService.getTasksById(id)
+
+            if (Response.isSuccessful) {
+                var lisTache = Response.body()!!
+                for (tache in lisTache) {
+                    insertTache(context, tache)
+                }
+            }
         }
+
+        fun insertTacheModel(context: Context, tacheModel: TacheModel) {
+
+            appDb = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                appDb!!.taskModelDao().addTaskModel(tacheModel)
+            }
+
+        }
+
+        suspend fun getAllTacheModel(context: Context) {
+            var Response = TacheApiClient.tacheModelApiService.getAllTacheModel()
+            if (Response.isSuccessful) {
+                var listSteps = Response.body()!!
+                for (tacheModel in listSteps) {
+                    insertTacheModel(context, tacheModel)
+                }
+
+            }
+        }
+
 
     }
 }

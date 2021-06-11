@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Login
-import com.clovertech.autolib.ui.MainActivity
+import com.clovertech.autolib.ui.SampleActivity
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*
@@ -28,7 +28,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.login_button -> {
-                validateLogin()
+                startActivity(Intent(this, SampleActivity::class.java))
+                //validateLogin()
             }
 
         }
@@ -63,7 +64,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             val content = response.body()
                             if (content != null) {
                                 shareToken(content.token, content.id)
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(Intent(this, SampleActivity::class.java))
+                                finish()
                             }
 
                         } else {
