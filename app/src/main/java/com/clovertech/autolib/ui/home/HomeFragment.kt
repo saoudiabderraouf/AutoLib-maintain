@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
@@ -37,12 +38,13 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         var adapter = ListTachesAdapter(requireActivity(), vm, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
 
-        adapterSteps = TaskStepsAdapter(requireActivity())
+        adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         tasksRecyclerView.adapter = adapterSteps
@@ -73,26 +75,25 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun update(id: Int, tache: Tache) {
+    fun update(tache: Tache) {
         Toast.makeText(
-            requireContext(), id.toString(),
+            requireContext(), tache.uuid.toString(),
             Toast.LENGTH_SHORT
         ).show()
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
 
-        viewModel.getAllTacheModel(requireContext())?.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-
-                viewModel.taskModel = it.find { taskModel ->
-                    taskModel.id == id
-                }!!
-                adapterSteps.setListSteps(viewModel.taskModel.steps)
-                viewModel.task = tache
-            }
-
-        })
+        tache.steps?.let { adapterSteps.setListSteps(it) }
+        viewModel.task = tache
 
     }
+
+
+}
+
+fun updateTask(step: List<Step>) {
+
+
+}
 
 
 /*fun loadSteps() {
@@ -118,7 +119,7 @@ class HomeFragment : Fragment() {
 }*/
 
 
-}
+
 
 
 

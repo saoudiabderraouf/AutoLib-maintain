@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
+import com.clovertech.autolib.ui.home.HomeFragment
 import com.clovertech.autolib.viewmodel.TacheViewModel
 
-class TaskStepsAdapter(val context: Context) :
+class TaskStepsAdapter(val context: Context, val vm: TacheViewModel) :
     RecyclerView.Adapter<ViewHolderTask>() {
     var data = listOf<Step>()
-   
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTask {
         return ViewHolderTask(
             LayoutInflater.from(context)
@@ -30,6 +33,8 @@ class TaskStepsAdapter(val context: Context) :
         holder.itemView.setOnClickListener(View.OnClickListener {
             data[position].completed = !data[position].completed
             holder.titreStep.setChecked(data[position].completed)
+            vm.task.steps = data
+            //vm.updateTache(context, vm.task)
         })
 
     }

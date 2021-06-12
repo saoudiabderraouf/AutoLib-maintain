@@ -50,7 +50,7 @@ class TacheRepo {
             return taches
         }
 
-         suspend fun getTacheIdAgent(context: Context, id: Int) {
+        suspend fun getTacheIdAgent(context: Context, id: Int) {
             var Response = TacheApiClient.tacheApiService.getTasksById(id)
 
             if (Response.isSuccessful) {
@@ -80,6 +80,16 @@ class TacheRepo {
                 }
 
             }
+        }
+
+        fun updateTache(context: Context, tache: Tache) {
+
+            appDb = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                appDb!!.tacheDao().updateTask(tache)
+            }
+
         }
 
 
