@@ -32,9 +32,10 @@ class TaskStepsAdapter(val context: Context, val vm: TacheViewModel) :
         holder.titreStep.setChecked(data[position].completed)
         holder.itemView.setOnClickListener(View.OnClickListener {
             data[position].completed = !data[position].completed
-            holder.titreStep.setChecked(data[position].completed)
-            vm.task.steps = data
-            //vm.updateTache(context, vm.task)
+            //holder.titreStep.setChecked(data[position].completed)
+            vm.task.steps?.get(position)?.completed = data[position].completed
+            vm.updateTache(context, vm.task)
+            notifyDataSetChanged()
         })
 
     }

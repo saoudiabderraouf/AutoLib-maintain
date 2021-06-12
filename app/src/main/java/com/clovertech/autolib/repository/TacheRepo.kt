@@ -82,7 +82,7 @@ class TacheRepo {
             }
         }
 
-        fun updateTache(context: Context, tache: Tache) {
+         fun updateTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
 

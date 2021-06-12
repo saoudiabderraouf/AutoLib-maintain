@@ -54,8 +54,8 @@ class HomeFragment : Fragment() {
         id = 3
 
         if (id != 0) {
-            Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
-                .show()
+           /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
+                .show()*/
 
             tacheViewModel.getTacheIdAgent(requireContext(), 100)
             tacheViewModel.getTacheAllModel(requireContext())
@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
         }
 
         details.setOnClickListener() {
-            var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
+            //var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
 
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
@@ -76,12 +76,11 @@ class HomeFragment : Fragment() {
     }
 
     fun update(tache: Tache) {
-        Toast.makeText(
+       /* Toast.makeText(
             requireContext(), tache.uuid.toString(),
             Toast.LENGTH_SHORT
-        ).show()
+        ).show()*/
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-
         tache.steps?.let { adapterSteps.setListSteps(it) }
         viewModel.task = tache
 

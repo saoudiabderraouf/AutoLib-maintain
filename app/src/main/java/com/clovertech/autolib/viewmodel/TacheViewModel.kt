@@ -25,7 +25,6 @@ class TacheViewModel : ViewModel() {
     fun insertTache(context: Context, tache: Tache) {
         TacheRepo.insertTache(context, tache)
     }
-
     fun updateTache(context: Context, tache: Tache) {
         TacheRepo.updateTache(context, tache)
     }
