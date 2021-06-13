@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        var adapter = ListTachesAdapter(requireActivity(), vm, this)
+        var adapter = ListTachesAdapter(requireActivity(), tacheViewModel, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
