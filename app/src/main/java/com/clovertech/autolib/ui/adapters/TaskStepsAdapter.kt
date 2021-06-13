@@ -30,12 +30,11 @@ class TaskStepsAdapter(val context: Context, val vm: TacheViewModel) :
     override fun onBindViewHolder(holder: ViewHolderTask, position: Int) {
         holder.titreStep.text = data[position].step
         holder.titreStep.setChecked(data[position].completed)
-        holder.itemView.setOnClickListener(View.OnClickListener {
+        holder.titreStep.setOnClickListener(View.OnClickListener {
             data[position].completed = !data[position].completed
-            //holder.titreStep.setChecked(data[position].completed)
+            holder.titreStep.setChecked(data[position].completed)
             vm.task.steps?.get(position)?.completed = data[position].completed
             vm.updateTache(context, vm.task)
-            notifyDataSetChanged()
         })
 
     }
