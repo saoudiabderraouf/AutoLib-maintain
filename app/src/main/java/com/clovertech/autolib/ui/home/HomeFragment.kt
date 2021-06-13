@@ -2,6 +2,7 @@ package com.clovertech.autolib.ui.home
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +13,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.network.client.NotificationsApiClient
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
+import com.clovertech.autolib.viewmodel.NotificationViewModel
 import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+
+    val TAG = "LOG TAG"
+
     lateinit var tacheViewModel: TacheViewModel
+    lateinit var notificationViewModel: NotificationViewModel
     lateinit var adapterSteps: TaskStepsAdapter
     lateinit var tachePrem: Tache
 
@@ -39,6 +49,7 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         var adapter = ListTachesAdapter(requireActivity(), vm, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -73,6 +84,8 @@ class HomeFragment : Fragment() {
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
+        sendFCMToken()
+
     }
 
     fun update(tache: Tache) {
@@ -86,6 +99,28 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun sendFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            var token = task.result
+            if(token == null){
+                token = ""
+            }
+
+            // Post token
+            notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
+
+            // Log
+            Log.d(TAG, "FCM token : " + token)
+
+        })
+    }
+
 
 }
 
@@ -93,6 +128,7 @@ fun updateTask(step: List<Step>) {
 
 
 }
+
 
 
 /*fun loadSteps() {

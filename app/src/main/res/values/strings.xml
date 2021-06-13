@@ -9,5 +9,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_channel_id">default_channel_id</string>
+    <string name="notif_msg_default">Vous avez une nouvelle tache!</string>
+    <string name="channel_name">Notification des taches</string>
+    <string name="channel_description">Notification concernant les taches</string>
 
 </resources>
