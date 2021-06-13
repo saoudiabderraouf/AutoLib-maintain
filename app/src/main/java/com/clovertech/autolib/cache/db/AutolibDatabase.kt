@@ -10,7 +10,7 @@ import com.clovertech.autolib.cache.dao.*
 import com.clovertech.autolib.model.*
 
 @Database(
-    entities = arrayOf(Auth_utilisateur::class, Agent::class, Step::class, Tache::class, TacheModel::class),
+    entities = arrayOf(Auth_utilisateur::class, Agent::class, Step::class, Tache::class, TacheModel::class, Materiel:: class),
     version = 3,
     exportSchema = false
 )

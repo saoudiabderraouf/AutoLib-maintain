@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
@@ -37,12 +38,13 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+        tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         var adapter = ListTachesAdapter(requireActivity(), vm, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
 
-        adapterSteps = TaskStepsAdapter(requireActivity())
+        adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         tasksRecyclerView.adapter = adapterSteps
@@ -52,8 +54,8 @@ class HomeFragment : Fragment() {
         id = 3
 
         if (id != 0) {
-            Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
-                .show()
+           /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
+                .show()*/
 
             tacheViewModel.getTacheIdAgent(requireContext(), 100)
             tacheViewModel.getTacheAllModel(requireContext())
@@ -66,33 +68,31 @@ class HomeFragment : Fragment() {
         }
 
         details.setOnClickListener() {
-            var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
+            //var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
 
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
     }
 
-    fun update(id: Int, tache: Tache) {
-        Toast.makeText(
-            requireContext(), id.toString(),
+    fun update(tache: Tache) {
+       /* Toast.makeText(
+            requireContext(), tache.uuid.toString(),
             Toast.LENGTH_SHORT
-        ).show()
+        ).show()*/
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-
-        viewModel.getAllTacheModel(requireContext())?.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-
-                viewModel.taskModel = it.find { taskModel ->
-                    taskModel.id == id
-                }!!
-                adapterSteps.setListSteps(viewModel.taskModel.steps)
-                viewModel.task = tache
-            }
-
-        })
+        tache.steps?.let { adapterSteps.setListSteps(it) }
+        viewModel.task = tache
 
     }
+
+
+}
+
+fun updateTask(step: List<Step>) {
+
+
+}
 
 
 /*fun loadSteps() {
@@ -118,7 +118,7 @@ class HomeFragment : Fragment() {
 }*/
 
 
-}
+
 
 
 

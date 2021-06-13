@@ -2,22 +2,24 @@ package com.clovertech.autolib.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity(tableName = "Tasks")
 data class Tache(
 
-    var idAgent: Int,
-    var idVehicule: Int,
-    var description: String,
-    var taskTitle: String,
-    var idTaskState: Int,
-    var assignmentDate: Date,
-    var endDate: Date?,
-    var taskModel: TaskModelToken,
-    var usedEquipements: List<Materiel>?,
-    @PrimaryKey var uuid: String,
-    var isSyns: Int = 0
+    @Expose var idAgent: Int,
+    @Expose var idVehicule: Int,
+    @Expose var description: String,
+    @Expose var taskTitle: String,
+    @Expose var idTaskState: Int,
+    @Expose var assignmentDate: Date,
+    @Expose var endDate: Date?,
+    @SerializedName("usedEquipments") var usedEquipements: List<Materiel>?,
+    @Expose var steps: List<Step>?,
+    @Expose @PrimaryKey var uuid: String,
+    var isSync: Int = 0
 
 ) {
 

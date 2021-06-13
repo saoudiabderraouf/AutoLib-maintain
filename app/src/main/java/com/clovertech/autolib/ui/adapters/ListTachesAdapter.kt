@@ -33,7 +33,7 @@ class ListTachesAdapter(val context: Context, val vm: HomeViewModel, frag: HomeF
         holder.progres.text = data[position].idTaskState.toString() + "%"
         holder.titreTache.text = data[position].taskTitle.toString()
         holder.itemView.setOnClickListener(View.OnClickListener {
-            fragment.update(data[position].taskModel.id, data[position])
+            fragment.update(data[position])
             PrefUtils.with(context).save(PrefUtils.Keys.taskUuid, data[position].uuid)
         })
 
