@@ -1,6 +1,7 @@
 package com.clovertech.autolib.repository
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
@@ -10,7 +11,6 @@ import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Response
 
 class TacheRepo {
     companion object {
@@ -43,14 +43,6 @@ class TacheRepo {
             return taches
         }
 
-        fun getAllModelTaches(context: Context): LiveData<List<TacheModel>>? {
-
-            appDb = initializeDB(context)
-
-            val taches = appDb!!.taskModelDao().getAllTasks()
-
-            return taches
-        }
 
         suspend fun getTacheIdAgent(context: Context, id: Int) {
             var Response = TacheApiClient.tacheApiService.getTasksById(id)
@@ -84,17 +76,36 @@ class TacheRepo {
             }
         }
 
-         fun updateTache(context: Context, tache: Tache) {
+        suspend fun updateStatetask(context: Context, tache: Tache) {
+            var listFiltered = tache.steps?.filter { it.completed == true }
+            if (listFiltered?.size == 1) {
+                var Response =
+                    TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                if (Response.isSuccessful) {
+                    //Toast.makeText(context, Response.body(), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                if (listFiltered?.size == tache.steps?.size) {
+                    var Response =
+                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                    if (Response.isSuccessful) {
+                        //Toast.makeText(context, Response.body(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+
+        }
+
+        fun updateTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
 
-
             CoroutineScope(Dispatchers.IO).launch {
-                var listFiltered= tache.steps?.filter {it.completed==true}
-                if (listFiltered?.size==1)
-                {
-                    var Response= TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
-                }
+                updateStatetask(context , tache)
+
+            }
+            CoroutineScope(Dispatchers.IO).launch {
 
                 appDb!!.tacheDao().updateTask(tache)
             }

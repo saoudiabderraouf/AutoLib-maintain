@@ -1,4 +1,7 @@
 package com.clovertech.autolib.model
 
-data class TaskState(var idTaskState: Int) {
+import com.google.gson.annotations.SerializedName
+
+data class TaskState(
+    @SerializedName("idTaskState") var idTaskState: Int) {
 }
