@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TacheModel
+import com.clovertech.autolib.model.TaskState
 import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.Response
 
 class TacheRepo {
     companion object {
@@ -86,7 +88,14 @@ class TacheRepo {
 
             appDb = initializeDB(context)
 
+
             CoroutineScope(Dispatchers.IO).launch {
+                var listFiltered= tache.steps?.filter {it.completed==true}
+                if (listFiltered?.size==1)
+                {
+                    var Response= TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                }
+
                 appDb!!.tacheDao().updateTask(tache)
             }
 

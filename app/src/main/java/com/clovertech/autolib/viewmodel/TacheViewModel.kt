@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TacheModel
-import com.clovertech.autolib.model.TaskModelToken
 import com.clovertech.autolib.repository.TacheRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -18,13 +17,16 @@ class TacheViewModel : ViewModel() {
     val ResponseTacheModel: MutableLiveData<Response<TacheModel>> = MutableLiveData()
     var taskModel: TacheModel = TacheModel(1, "", emptyList())
     var task: Tache =
-        Tache(0, 0, "", "", 0, Date(), Date(),
-             mutableListOf(), mutableListOf(), "")
+        Tache(
+            0, 0, "", "", 0, Date(), Date(),
+            mutableListOf(), mutableListOf(), ""
+        )
 
 
     fun insertTache(context: Context, tache: Tache) {
         TacheRepo.insertTache(context, tache)
     }
+
     fun updateTache(context: Context, tache: Tache) {
         TacheRepo.updateTache(context, tache)
     }
@@ -44,11 +46,6 @@ class TacheViewModel : ViewModel() {
         viewModelScope.launch {
             TacheRepo.getAllTacheModel(context)
         }
-    }
-
-
-    fun getAllTacheModel(context: Context): LiveData<List<TacheModel>>? {
-        return TacheRepo.getAllModelTaches(context)
     }
 
 }
