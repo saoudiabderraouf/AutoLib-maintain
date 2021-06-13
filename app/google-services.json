@@ -1,55 +1,33 @@
 {
   "project_info": {
-<<<<<<< HEAD
-    "project_number": "381949049032",
-    "project_id": "extreme-tribute-316100",
-    "storage_bucket": "extreme-tribute-316100.appspot.com"
-=======
     "project_number": "322250650230",
     "project_id": "autolibdz-5f062",
     "storage_bucket": "autolibdz-5f062.appspot.com"
->>>>>>> 2b65ca8ebee44029dda67e8b83bd996f24da466f
   },
   "client": [
     {
       "client_info": {
-<<<<<<< HEAD
-        "mobilesdk_app_id": "1:381949049032:android:ae7236b4249c26fb9d0dfd",
-=======
         "mobilesdk_app_id": "1:322250650230:android:e0a6560d3a5701d91f2557",
->>>>>>> 2b65ca8ebee44029dda67e8b83bd996f24da466f
         "android_client_info": {
           "package_name": "com.clovertech.autolib"
         }
       },
       "oauth_client": [
         {
-<<<<<<< HEAD
-          "client_id": "381949049032-gll1tivnbs22k83o4lc4c6upt54fkkte.apps.googleusercontent.com",
-=======
           "client_id": "322250650230-hoo5jka8j0e4046hbp6ojd1432usjr2s.apps.googleusercontent.com",
->>>>>>> 2b65ca8ebee44029dda67e8b83bd996f24da466f
           "client_type": 3
         }
       ],
       "api_key": [
         {
-<<<<<<< HEAD
-          "current_key": "AIzaSyA4BcZvmxShYoiVuHTeYE3bUMXPMpDlmrM"
-=======
           "current_key": "AIzaSyAvO8idXR9hx7TqM5uAhjB0fO4ND4bnqaY"
->>>>>>> 2b65ca8ebee44029dda67e8b83bd996f24da466f
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-<<<<<<< HEAD
-              "client_id": "381949049032-gll1tivnbs22k83o4lc4c6upt54fkkte.apps.googleusercontent.com",
-=======
               "client_id": "322250650230-hoo5jka8j0e4046hbp6ojd1432usjr2s.apps.googleusercontent.com",
->>>>>>> 2b65ca8ebee44029dda67e8b83bd996f24da466f
               "client_type": 3
             }
           ]
