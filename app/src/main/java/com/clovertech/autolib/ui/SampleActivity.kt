@@ -27,6 +27,7 @@ import com.clovertech.autolib.ui.menu.SpaceItem
 import com.clovertech.autolib.ui.panne.PanneFragment
 import com.clovertech.autolib.ui.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,6 +46,8 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initFirebase()
 
         initBottomBar()
 
@@ -136,6 +139,10 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
         list.layoutManager = LinearLayoutManager(this)
         list.adapter = adapter
         adapter.setSelected(POS_ACCUEIL)
+    }
+
+    private fun initFirebase() {
+        FirebaseApp.initializeApp(this)
     }
 
 
