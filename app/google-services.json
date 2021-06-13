@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "381949049032",
+    "project_id": "extreme-tribute-316100",
+    "storage_bucket": "extreme-tribute-316100.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381949049032:android:ae7236b4249c26fb9d0dfd",
+        "android_client_info": {
+          "package_name": "com.clovertech.autolib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381949049032-gll1tivnbs22k83o4lc4c6upt54fkkte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4BcZvmxShYoiVuHTeYE3bUMXPMpDlmrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381949049032-gll1tivnbs22k83o4lc4c6upt54fkkte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
