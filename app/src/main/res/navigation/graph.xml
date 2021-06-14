@@ -42,5 +42,9 @@
         android:id="@+id/ajouterMateriel"
         android:name="com.clovertech.autolib.ui.AjouterMateriel"
         android:label="Ajouter un Materiel"
-        tools:layout="@layout/fragment_ajouter_materiel" />
+        tools:layout="@layout/fragment_ajouter_materiel" >
+        <action
+            android:id="@+id/action_ajouterMateriel_to_detailTache"
+            app:destination="@id/detailTache" />
+    </fragment>
 </navigation>
