@@ -8,10 +8,16 @@ import androidx.room.TypeConverters
 import com.clovertech.autolib.cache.converter.Converters
 import com.clovertech.autolib.cache.dao.*
 import com.clovertech.autolib.model.*
+import com.clovertech.autolib.ui.Notif
 
 @Database(
-    entities = arrayOf(Auth_utilisateur::class, Agent::class, Step::class, Tache::class, TacheModel::class, Materiel:: class),
-    version = 3,
+    entities = arrayOf(Auth_utilisateur::class,
+        Agent::class, Step::class,
+        Tache::class,
+        TacheModel::class,
+        Materiel::class,
+        Notif::class),
+    version = 1,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -22,7 +28,7 @@ abstract class AutolibDatabase : RoomDatabase() {
     abstract fun etatDao(): EtatDAO
     abstract fun stepDao(): StepDAO
     abstract fun taskModelDao(): TacheModelDAO
-
+    abstract fun notificationDao(): NotificationDAO
 
     companion object {
 

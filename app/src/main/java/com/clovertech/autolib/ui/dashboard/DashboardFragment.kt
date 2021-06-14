@@ -61,7 +61,6 @@ class DashboardFragment : Fragment() {
             {
                 pagerAdapter.updateTasksUI(it)
             })*/
-        taskViewModel.getTacheIdAgent(requireContext(), 100)
         taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
             allTasks.clear()
             allTasks.addAll(it)

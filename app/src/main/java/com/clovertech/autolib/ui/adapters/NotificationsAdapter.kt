@@ -10,11 +10,16 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.Tache
 import  com.clovertech.autolib.ui.Notif
 
 
-class NotificationsAdapter(val context: Context, var data:List<Notif>):RecyclerView.Adapter<NotificationHolder>()
+class NotificationsAdapter(val context: Context, ):RecyclerView.Adapter<NotificationHolder>()
 {
+
+    var data = mutableListOf<Notif>()
+    val tasks = mutableListOf<Tache>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
         return NotificationHolder(
             LayoutInflater.from(context)
@@ -26,9 +31,9 @@ class NotificationsAdapter(val context: Context, var data:List<Notif>):RecyclerV
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        holder.titre.text = data[position].titre
-        holder.date.text=data[position].date
-        holder.image.setImageResource(data[position].image)
+        holder.titre.text = "Vous avez une nouvelle tache"
+        //holder.date.text=data[position].date
+        //holder.image.setImageResource(data[position].image)
         holder.lu.isVisible= !data[position].lu
 
 
@@ -36,6 +41,18 @@ class NotificationsAdapter(val context: Context, var data:List<Notif>):RecyclerV
 
         })
 
+    }
+
+    fun setNotificationList(list: List<Notif>){
+        data.clear()
+        data.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun setTaskList(list: List<Tache>){
+        tasks.clear()
+        tasks.addAll(list)
+        notifyDataSetChanged()
     }
 
 
