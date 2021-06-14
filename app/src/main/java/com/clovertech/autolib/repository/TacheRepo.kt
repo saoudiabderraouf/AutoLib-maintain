@@ -12,6 +12,7 @@ import com.clovertech.autolib.utils.DialogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class TacheRepo {
     companion object {
@@ -128,6 +129,7 @@ class TacheRepo {
                                         TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
                                     if (Response.isSuccessful) {
                                         tache.idTaskState = 3
+                                        tache.endDate = Calendar.getInstance().time
                                     }
                                     appDb!!.tacheDao().updateTask(tache)
                                 }
