@@ -12,5 +12,9 @@
     <string name="notif_msg_default">Vous avez une nouvelle tache!</string>
     <string name="channel_name">Notification des taches</string>
     <string name="channel_description">Notification concernant les taches</string>
+    <string name="close">Cloturer</string>
+    <string name="cancel">Annuler</string>
+    <string name="closeDialogTitle">Cloturation d\'une tache</string>
+    <string name="closeMessagePre">"Voulez vous cloturer la tache : "</string>
 
 </resources>
