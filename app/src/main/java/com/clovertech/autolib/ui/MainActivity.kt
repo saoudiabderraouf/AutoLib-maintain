@@ -54,6 +54,28 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
         }
 
+
+        temp()
+    }
+
+    private fun temp() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            var token = task.result
+            if(token == null){
+                token = ""
+            }
+
+            // Log and toast
+            Log.d(TAG, "FCM token : " + token)
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+        })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
