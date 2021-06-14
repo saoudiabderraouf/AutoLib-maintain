@@ -1,14 +1,18 @@
 package com.clovertech.autolib.repository
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.lifecycle.LiveData
+import com.clovertech.autolib.R
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TaskState
 import com.clovertech.autolib.network.client.TacheApiClient
+import com.clovertech.autolib.utils.DialogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class TacheRepo {
     companion object {
@@ -104,29 +108,47 @@ class TacheRepo {
 
             appDb = initializeDB(context)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                var listFiltered = tache.steps?.filter { it.completed == true }
-                if (listFiltered?.size == 1) {
-                    var Response =
-                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
-                    if (Response.isSuccessful) {
-                        tache.idTaskState = 2
-                    }
-                } else {
-                    if (listFiltered?.size == tache.steps?.size) {
+            var listFiltered = tache.steps?.filter { it.completed }
+            if (listFiltered?.size == tache.steps?.size) {
+                DialogUtils.with(context)
+                    .showDialog(
+                        context.getString(R.string.closeDialogTitle),
+                        context.getString(R.string.closeMessagePre) + tache.taskTitle,
+                        { dialogInterface: DialogInterface, i: Int ->
+                            CoroutineScope(Dispatchers.IO).launch {
+                                var Response =
+                                    TacheApiClient.tacheApiService.updateTaskState(
+                                        tache.uuid,
+                                        TaskState(3)
+                                    )
+                                if (Response.isSuccessful) {
+                                    tache.idTaskState = 3
+                                    tache.endDate = Calendar.getInstance().time
+                                }
+                                appDb!!.tacheDao().updateTask(tache)
+                            }
+                        }, null
+                    )
+            } else {
+                if (listFiltered?.size == 1)
+                    CoroutineScope(Dispatchers.IO).launch {
                         var Response =
-                            TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                            TacheApiClient.tacheApiService.updateTaskState(
+                                tache.uuid,
+                                TaskState(2)
+                            )
                         if (Response.isSuccessful) {
-                            tache.idTaskState = 3
+                            tache.idTaskState = 2
                         }
+                        appDb!!.tacheDao().updateTask(tache)
                     }
-
+                else {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        appDb!!.tacheDao().updateTask(tache)
+                    }
                 }
-                appDb!!.tacheDao().updateTask(tache)
             }
-
         }
-
-
     }
 }
+

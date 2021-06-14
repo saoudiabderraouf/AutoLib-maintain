@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
         }
 
+
         temp()
     }
 
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "FCM token : " + token)
             Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

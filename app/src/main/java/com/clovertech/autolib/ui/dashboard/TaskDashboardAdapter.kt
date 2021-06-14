@@ -20,7 +20,11 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.description.text = tasks[position].description
+        val task = tasks[position]
+        holder.description.text = task.description
+        holder.title.text = task.taskTitle
+        val progress = task.steps!!.filter { it.completed }.size * 100 / task.steps!!.size
+        holder.progress.text = progress.toString() + "%"
     }
 
     override fun getItemCount(): Int {
