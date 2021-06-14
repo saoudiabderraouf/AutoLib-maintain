@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.ui.adapters.NotificationsAdapter
 import com.clovertech.autolib.viewmodel.NotificationViewModel
-
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.recyclerView
 import kotlinx.android.synthetic.main.fragment_notifications.*
 
 

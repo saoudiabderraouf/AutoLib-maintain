@@ -6,11 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
@@ -22,6 +27,7 @@ import com.clovertech.autolib.viewmodel.TacheViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : Fragment() {
 
@@ -49,10 +55,36 @@ class HomeFragment : Fragment() {
         notificationViewModel =
             ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         var adapter = ListTachesAdapter(requireActivity(), tacheViewModel, this)
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = adapter
+        pagerTasksHome.adapter = adapter
+        pagerTasksHome.clipToPadding = false
+        pagerTasksHome.clipChildren = false
+        pagerTasksHome.offscreenPageLimit = 4
+        val transformer = CompositePageTransformer()
+        transformer.addTransformer(MarginPageTransformer(32))
+        //transformer.addTransformer { page, position ->
+        //    val r = 1 - Math.abs(position)
+        //    page.scaleY = 0.85f + r * 0.15f
+        //}
+        pagerTasksHome.setPageTransformer(transformer)
+        pagerTasksHome.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
 
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                tacheViewModel.task = adapter.data[position]
+                adapterSteps.setListSteps(adapter.data[position].steps!!)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
+        })
         adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
@@ -72,6 +104,7 @@ class HomeFragment : Fragment() {
                     it.filter { tache -> ((tache.idTaskState == 1) || (tache.idTaskState == 2)) }
                 adapter.setListTache(listFiltered)
                 nbTaches2.text = listFiltered.size.toString()
+                pagerTasksHome.requestTransform()
             })
 
         }
@@ -89,14 +122,9 @@ class HomeFragment : Fragment() {
     }
 
     fun update(tache: Tache) {
-        /* Toast.makeText(
-             requireContext(), tache.uuid.toString(),
-             Toast.LENGTH_SHORT
-         ).show()*/
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         tache.steps?.let { adapterSteps.setListSteps(it) }
         viewModel.task = tache
-
     }
 
     private fun sendFCMToken() {
@@ -121,36 +149,10 @@ class HomeFragment : Fragment() {
         })
     }
 
-
-}
-
-fun updateTask(step: List<Step>) {
-
-
-}
-
-
-/*fun loadSteps() {
-
-    var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-    if (tachePrem != null) {
-
-        viewModel.getTacheModelid(tachePrem.taskModel.id)
-        viewModel.getAllTacheModel().observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel = it.body()!!
-                viewModel.task = tachePrem
-
-            } else {
-
-            }
-
-        })
+    fun goToTaskDetails(tache: Tache) {
+        view?.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
     }
-
-
-}*/
+}
 
 
 
