@@ -1,9 +1,11 @@
 package com.clovertech.autolib.model
 
+import com.google.gson.annotations.Expose
+
 data class NewEquipement(
-    var description: String,
-    var quantity: Int,
-    var equipment: String,
-    var taskUUID: String
+    @Expose var description: String,
+    @Expose var quantity: Int,
+    @Expose var equipment: String,
+    @Expose var taskUUID: String
 
 ) {}
