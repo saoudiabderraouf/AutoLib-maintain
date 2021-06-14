@@ -58,7 +58,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener{
                     materielDescript.text.toString(),
                     materielQuantite.text.toString().toInt(),
                     "282d4458-aaeb-4e92-a674-12320b1de46a",
-                    it1
+                    viewModelTask.task.uuid
                 )
 
             }
@@ -71,7 +71,13 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener{
 
                 equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
                     if (it.code() == 200) {
-                        //viewModelTask.task.usedEquipements?.add(material)
+                        var listEquipment:MutableList<Materiel>?= viewModelTask.task.usedEquipements as MutableList<Materiel>?
+                        if (listEquipment != null) {
+                            listEquipment.add(material)
+                        }
+                        viewModelTask.task.usedEquipements=listEquipment
+                        viewModelTask.updateTache(requireContext(), viewModelTask.task)
+
                         Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
                             .show()
                     } else {

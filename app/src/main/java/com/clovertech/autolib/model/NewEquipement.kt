@@ -9,5 +9,4 @@ data class NewEquipement(
     @Expose var equipment: String,
     @Expose var taskUUID: String
 
-
 ) {}
