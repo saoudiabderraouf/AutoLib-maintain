@@ -96,9 +96,9 @@
             android:id="@+id/idVoiture"
             android:layout_width="119dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/progressBar"
-            android:layout_alignStart="@+id/progressBar"
-            android:layout_alignLeft="@+id/progressBar"
+            android:layout_below="@+id/progressTaskHome"
+            android:layout_alignStart="@+id/progressTaskHome"
+            android:layout_alignLeft="@+id/progressTaskHome"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginStart="-1dp"
@@ -116,7 +116,7 @@
             android:textSize="12sp" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progressTaskHome"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="30dp"
             android:layout_height="8dp"

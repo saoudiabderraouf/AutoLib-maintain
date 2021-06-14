@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TacheModel
+import com.clovertech.autolib.model.TaskState
 import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class TacheRepo {
     companion object {
@@ -22,53 +22,113 @@ class TacheRepo {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
-        fun insertAllTaches(context: Context, taches: List<Tache>) {
-
-            appDb = initializeDB(context)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                // appDb!!.tacheDao().insertAllTaches(taches)
-            }
-
-        }
+        /**
+         * Inserer une tache dans la cache
+         * @param tache*/
 
         fun insertTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                // appDb!!.tacheDao().insertTache(tache)
+                appDb!!.tacheDao().addTask(tache)
             }
 
         }
 
-        /*fun getTacheById(context: Context, id: Int): Tache {
-            appDb = initializeDB(context)
-            return appDb!!.tacheDao().getTacheById(id)
-        }*/
+        /**
+         * Recuperer la liste des taches existantes dans la cache
+         * @return list<Tache>
+         *     */
 
-        fun updateTache(context: Context, tache: Tache) {
-            appDb = initializeDB(context)
-            //return appDb!!.tacheDao().updateTache(tache)
-
-        }
 
         fun getAllTaches(context: Context): LiveData<List<Tache>>? {
 
             appDb = initializeDB(context)
 
-            //taches = appDb!!.tacheDao().getAllTaches()
+            taches = appDb!!.tacheDao().getAllTasks()
 
-            return null
+            return taches
         }
 
-        suspend fun getTacheIdAgent(id: Int): Response<List<Tache>> {
-            return TacheApiClient.tacheApiService.getTasksById(id)
+        /**
+         * Recuperer la liste des taches d'un agent par son id du service et les insere une par une dans la cache
+         * @param idAgent*/
+
+
+        suspend fun getTacheIdAgent(context: Context, id: Int) {
+            var Response = TacheApiClient.tacheApiService.getTasksById(id)
+
+            if (Response.isSuccessful) {
+                var lisTache = Response.body()!!
+                for (tache in lisTache) {
+                    insertTache(context, tache)
+                }
+            }
         }
 
-        suspend fun getTacheModelById(id: Int): Response<TacheModel> {
-            return TacheApiClient.tacheModelApiService.getTacheModelById(id)
+
+
+        /**
+         * Mettre a jour l'etat d'une tache dans le service
+         * @param tache
+         * si 2 en cours
+         * si 3 terminée*/
+        suspend fun updateStatetask(tache: Tache) {
+            var listFiltered = tache.steps?.filter { it.completed == true }
+            if (listFiltered?.size == 1) {
+                var Response =
+                    TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                if (Response.isSuccessful) {
+                    tache.idTaskState = 2
+                }
+            } else {
+                if (listFiltered?.size == tache.steps?.size) {
+                    var Response =
+                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                    if (Response.isSuccessful) {
+                        tache.idTaskState = 3
+                    }
+                }
+
+            }
+
         }
+
+        /**
+         * Mettre à jour l'etat des etapes d'une tache dans la cache
+         * @param context
+         * @param tache*/
+
+        fun updateTache(context: Context, tache: Tache) {
+
+            appDb = initializeDB(context)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                var listFiltered = tache.steps?.filter { it.completed == true }
+                if (listFiltered?.size == 1) {
+                    var Response =
+                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                    if (Response.isSuccessful) {
+                        tache.idTaskState = 2
+                    }
+                } else {
+                    if (listFiltered?.size == tache.steps?.size) {
+                        var Response =
+                            TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                        if (Response.isSuccessful) {
+                            tache.idTaskState = 3
+                        }
+                    }
+
+                }
+
+
+                appDb!!.tacheDao().updateTask(tache)
+            }
+
+        }
+
 
     }
 }

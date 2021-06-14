@@ -6,20 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
-import com.clovertech.autolib.ui.Notif
 import com.clovertech.autolib.ui.adapters.NotificationsAdapter
-import com.clovertech.autolib.ui.home.HomeViewModel
+import com.clovertech.autolib.viewmodel.NotificationViewModel
 
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.recyclerView
+import kotlinx.android.synthetic.main.fragment_notifications.*
 
 
 class NotificationsFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var notificationsViewModel: NotificationViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -31,10 +33,12 @@ class NotificationsFragment : Fragment() {
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val vm= ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
+
+        notificationsViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
 
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-        recyclerView.adapter = NotificationsAdapter(requireActivity(), this.loadData())
+        val adapter = NotificationsAdapter(requireActivity())
+        recyclerView.adapter = adapter
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
         recyclerView.addItemDecoration(
@@ -44,17 +48,11 @@ class NotificationsFragment : Fragment() {
             )
         )
 
+        notificationsViewModel.getAllNotifications(requireContext()).observe(viewLifecycleOwner, Observer {
+            adapter.setNotificationList(it)
+            notifs.text = it.size.toString()
+        })
 
-    }
-
-    fun loadData():List<Notif> {
-        val data = mutableListOf<Notif>()
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,false))
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,false))
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,false))
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,true))
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,true))
-        data.add(Notif("L'administrateur LOREM Ipsum vous a attribué une révision","Il y a 2j",R.drawable.ic_launcher_background,true))
-        return data
+        notificationsViewModel.fetchAllNotifications(requireContext())
     }
 }

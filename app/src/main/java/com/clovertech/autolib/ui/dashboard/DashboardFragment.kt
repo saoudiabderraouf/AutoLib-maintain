@@ -61,15 +61,11 @@ class DashboardFragment : Fragment() {
             {
                 pagerAdapter.updateTasksUI(it)
             })*/
-        taskViewModel.getTacheIdAgent(PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 100))
-        taskViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.let { it1 ->
-                    allTasks.clear()
-                    allTasks.addAll(it1)
-                }
-            }
+        taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+            allTasks.clear()
+            allTasks.addAll(it)
         })
+
     }
 
     private fun initPager(view: View) {
