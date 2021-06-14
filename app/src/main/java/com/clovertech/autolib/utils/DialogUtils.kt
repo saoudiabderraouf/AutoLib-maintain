@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import com.clovertech.autolib.R
+import kotlinx.coroutines.Job
 
 
 class DialogUtils {
@@ -29,14 +30,17 @@ class DialogUtils {
             .setIcon(R.drawable.ic_round_check_24)
     }
 
-    fun showDialog(title: String,message: String,
-                   onConfirm: DialogInterface.OnClickListener,
-                    onCancel: DialogInterface.OnClickListener? = null){
+    fun showDialog(
+        title: String, message: String,
+        onConfirm: DialogInterface.OnClickListener,
+        onCancel: DialogInterface.OnClickListener? = null)
+    {
         builder.setTitle(title)
             .setMessage(message)
             .setPositiveButton(R.string.close, onConfirm)
             .setNegativeButton(R.string.cancel, onCancel)
             .show()
+
     }
 
     private class Builder(val context: Context) {
