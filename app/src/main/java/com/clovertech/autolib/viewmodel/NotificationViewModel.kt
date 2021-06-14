@@ -11,6 +11,7 @@ import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.model.TaskModelToken
 import com.clovertech.autolib.repository.NotificationRepo
 import com.clovertech.autolib.repository.TacheRepo
+import com.clovertech.autolib.ui.Notif
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.util.*
@@ -21,5 +22,12 @@ class NotificationViewModel : ViewModel() {
         NotificationRepo.postFCMToken(context, agentToken)
     }
 
+    fun getAllNotifications(context: Context): LiveData<List<Notif>>{
+        return NotificationRepo.getAllNotifications(context)
+    }
+
+    fun fetchAllNotifications(context: Context){
+        NotificationRepo.fetchAllNotifications(context)
+    }
 
 }

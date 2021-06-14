@@ -84,6 +84,8 @@ class HomeFragment : Fragment() {
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
+        tacheViewModel.getTacheIdAgent(requireContext(), 100)
+
         sendFCMToken()
 
     }
