@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
             }
 
             // Post token
-            notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
+           // notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
 
             // Log
             Log.d(TAG, "FCM token : " + token)
