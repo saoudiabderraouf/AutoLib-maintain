@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -46,8 +48,17 @@ class DetailTache : Fragment() {
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         matrialRecyclerView.adapter = adapterMateriels
 
-        //Toast.makeText(requireContext(), viewModel.task.usedEquipements.size.toString(), Toast.LENGTH_SHORT).show()
-        // adapterMateriels.setListMaterial(viewModel.task.usedEquipements)
+        if (viewModel.task.usedEquipements !=null){
+            Toast.makeText(requireContext(), viewModel.task.usedEquipements!!.size.toString(), Toast.LENGTH_SHORT).show()
+            if (viewModel.task.usedEquipements!!.size !=0){
+                ajouterMaterialText.isVisible=false
+            }
+            else{
+                ajouterMaterialText.isVisible=true
+            }
+            viewModel.task.usedEquipements?.let { adapterMateriels.setListMaterial(it) }
+        }
+
 
         addMaterial.setOnClickListener() {
             it.findNavController()?.navigate(R.id.action_detailTache_to_ajouterMateriel)

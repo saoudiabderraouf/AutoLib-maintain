@@ -137,9 +137,6 @@ dependencies {
     // SingleRowCalendar
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
 
-    // ViewPager2
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-
     // Sliding Root Nav
     implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
 
@@ -148,5 +145,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging'
 
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 
 }

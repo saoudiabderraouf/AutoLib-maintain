@@ -34,8 +34,7 @@ class ListTachesAdapter(val context: Context, val vm: TacheViewModel, frag: Home
         holder.idVoiture.text = data[position].idVehicule.toString()
         holder.titreTache.text = data[position].taskTitle.toString()
         holder.itemView.setOnClickListener(View.OnClickListener {
-            fragment.update(data[position])
-            PrefUtils.with(context).save(PrefUtils.Keys.taskUuid, data[position].uuid)
+            fragment.goToTaskDetails(data[position])
         })
         holder.progressBar.max = data[position].steps?.size ?: 0
         holder.progressBar.progress = data[position].steps?.filter { it.completed }?.size ?: 0
@@ -46,7 +45,6 @@ class ListTachesAdapter(val context: Context, val vm: TacheViewModel, frag: Home
     fun setListTache(list: List<Tache>) {
         data = list
         notifyDataSetChanged()
-
     }
 
 }

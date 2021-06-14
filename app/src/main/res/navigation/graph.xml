@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.clovertech.autolib.ui.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Accueil"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detailTache"
@@ -17,22 +17,22 @@
     <fragment
         android:id="@+id/navigation_userProfil"
         android:name="com.clovertech.autolib.ui.userProfil.UserProfilFragment"
-        android:label="fragment_profil"
+        android:label="Profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.clovertech.autolib.ui.notifications.NotificationsFragment"
-        android:label="fragment_notifications"
+        android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="com.clovertech.autolib.ui.dashboard.DashboardFragment"
-        android:label="fragment_dashboard"
+        android:label="Calendrier"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/detailTache"
         android:name="com.clovertech.autolib.ui.DetailTache"
-        android:label="fragment_detail_tache"
+        android:label="Détail"
         tools:layout="@layout/fragment_detail_tache" >
         <action
             android:id="@+id/action_detailTache_to_ajouterMateriel"
@@ -41,6 +41,10 @@
     <fragment
         android:id="@+id/ajouterMateriel"
         android:name="com.clovertech.autolib.ui.AjouterMateriel"
-        android:label="fragment_ajouter_materiel"
-        tools:layout="@layout/fragment_ajouter_materiel" />
+        android:label="Ajouter un Materiel"
+        tools:layout="@layout/fragment_ajouter_materiel" >
+        <action
+            android:id="@+id/action_ajouterMateriel_to_detailTache"
+            app:destination="@id/detailTache" />
+    </fragment>
 </navigation>
