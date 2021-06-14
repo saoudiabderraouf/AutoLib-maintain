@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.model.TaskState
 import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +23,8 @@ class TacheRepo {
 
         /**
          * Inserer une tache dans la cache
-         * @param tache*/
+         * @param tache
+         * @param context*/
 
         fun insertTache(context: Context, tache: Tache) {
 
@@ -53,7 +53,8 @@ class TacheRepo {
 
         /**
          * Recuperer la liste des taches d'un agent par son id du service et les insere une par une dans la cache
-         * @param idAgent*/
+         * @param idAgent
+         * */
 
 
         suspend fun getTacheIdAgent(context: Context, id: Int) {
@@ -68,12 +69,11 @@ class TacheRepo {
         }
 
 
-
         /**
          * Mettre a jour l'etat d'une tache dans le service
          * @param tache
-         * si 2 en cours
-         * si 3 terminée*/
+         * 2 si  tache en cours
+         * 3 si terminée*/
         suspend fun updateStatetask(tache: Tache) {
             var listFiltered = tache.steps?.filter { it.completed == true }
             if (listFiltered?.size == 1) {
@@ -122,8 +122,6 @@ class TacheRepo {
                     }
 
                 }
-
-
                 appDb!!.tacheDao().updateTask(tache)
             }
 

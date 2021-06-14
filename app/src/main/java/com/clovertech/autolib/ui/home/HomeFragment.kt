@@ -6,17 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.network.client.NotificationsApiClient
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
@@ -49,7 +46,8 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-        notificationViewModel = ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        notificationViewModel =
+            ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
         var adapter = ListTachesAdapter(requireActivity(), tacheViewModel, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
@@ -65,15 +63,15 @@ class HomeFragment : Fragment() {
         id = 3
 
         if (id != 0) {
-           /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
-                .show()*/
-
+            /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
+                 .show()*/
             tacheViewModel.getTacheIdAgent(requireContext(), 100)
-           // tacheViewModel.getTacheAllModel(requireContext())
-
+            // tacheViewModel.getTacheAllModel(requireContext())
             tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
-                adapter.setListTache(it)
-                nbTaches2.text = it.size.toString()
+                var listFiltered =
+                    it.filter { tache -> ((tache.idTaskState == 1) || (tache.idTaskState == 2)) }
+                adapter.setListTache(listFiltered)
+                nbTaches2.text = listFiltered.size.toString()
             })
 
         }
@@ -91,10 +89,10 @@ class HomeFragment : Fragment() {
     }
 
     fun update(tache: Tache) {
-       /* Toast.makeText(
-            requireContext(), tache.uuid.toString(),
-            Toast.LENGTH_SHORT
-        ).show()*/
+        /* Toast.makeText(
+             requireContext(), tache.uuid.toString(),
+             Toast.LENGTH_SHORT
+         ).show()*/
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         tache.steps?.let { adapterSteps.setListSteps(it) }
         viewModel.task = tache
@@ -110,12 +108,12 @@ class HomeFragment : Fragment() {
 
             // Get new FCM registration token
             var token = task.result
-            if(token == null){
+            if (token == null) {
                 token = ""
             }
 
             // Post token
-           // notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
+            // notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
 
             // Log
             Log.d(TAG, "FCM token : " + token)
@@ -130,7 +128,6 @@ fun updateTask(step: List<Step>) {
 
 
 }
-
 
 
 /*fun loadSteps() {
