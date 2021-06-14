@@ -2,10 +2,10 @@ package com.clovertech.autolib.ui.home
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,15 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
+import com.clovertech.autolib.viewmodel.NotificationViewModel
 import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
+
+    val TAG = "LOG TAG"
+
     lateinit var tacheViewModel: TacheViewModel
+    lateinit var notificationViewModel: NotificationViewModel
     lateinit var adapterSteps: TaskStepsAdapter
     lateinit var tachePrem: Tache
 
@@ -39,103 +45,115 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
-        var adapter = ListTachesAdapter(requireActivity(), vm, this)
+        tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        notificationViewModel =
+            ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
+        var adapter = ListTachesAdapter(requireActivity(), tacheViewModel, this)
         recyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = adapter
 
-        adapterSteps = TaskStepsAdapter(requireActivity())
+        adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         tasksRecyclerView.adapter = adapterSteps
 
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
+        id = 3
 
         if (id != 0) {
-            tacheViewModel.getTacheIdAgent(100)
-            tacheViewModel.ResponseTacheById.observe(viewLifecycleOwner, Observer {
-                if (it.isSuccessful) {
-                    it.body()?.let { it1 ->
-                        adapter.setListTache(it1)
-                        nbTaches2.text = it1.size.toString()
-                        tachePrem = it1.get(0)
-                        loadSteps()
-                    }
-                } else {
-                    /*val tache1 = Tache(1, 1, "test", "je teste", 5,"12/12/14","","")
-                    val tache2 = Tache(2, 5, "test", "je teste", 5,"12/12/12","","")
-                    this.context?.let { tacheViewModel.insertTache(it, tache1) }
-                    this.context?.let { tacheViewModel.insertTache(it, tache2) }
-                    this.context?.let {
-                        tacheViewModel.getAllTaches(it)?.observe(viewLifecycleOwner, Observer {
-                            adapter.setListTache(it)
-
-                })
-            }*/
-
-
-                }
-
+            /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
+                 .show()*/
+            tacheViewModel.getTacheIdAgent(requireContext(), 100)
+            // tacheViewModel.getTacheAllModel(requireContext())
+            tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+                var listFiltered =
+                    it.filter { tache -> ((tache.idTaskState == 1) || (tache.idTaskState == 2)) }
+                adapter.setListTache(listFiltered)
+                nbTaches2.text = listFiltered.size.toString()
             })
 
         }
 
-        details.setOnClickListener(){
-            var viewModel= ViewModelProvider(this).get(TacheViewModel::class.java)
+        details.setOnClickListener() {
+            //var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
 
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
+        tacheViewModel.getTacheIdAgent(requireContext(), 100)
+
+        sendFCMToken()
 
     }
 
-    fun update(id: Int, tache: Tache) {
-        //tacheViewModel.tache=tache
-        Toast.makeText(
-            requireContext(), id.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
+    fun update(tache: Tache) {
+        /* Toast.makeText(
+             requireContext(), tache.uuid.toString(),
+             Toast.LENGTH_SHORT
+         ).show()*/
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        tache.steps?.let { adapterSteps.setListSteps(it) }
+        viewModel.task = tache
 
-        viewModel.getTacheModelid(id)
-        viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel= it.body()!!
-                viewModel.task=tache
+    }
 
-            } else {
-               loadSteps()
+    private fun sendFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
             }
+
+            // Get new FCM registration token
+            var token = task.result
+            if (token == null) {
+                token = ""
+            }
+
+            // Post token
+            // notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
+
+            // Log
+            Log.d(TAG, "FCM token : " + token)
 
         })
-
-    }
-
-    fun loadSteps() {
-
-        var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-        if (tachePrem!=null){
-
-        viewModel.getTacheModelid(tachePrem.taskModel.id)
-        viewModel.ResponseTacheModel.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
-                viewModel.taskModel= it.body()!!
-                viewModel.task=tachePrem
-
-            } else {
-
-            }
-
-        })}
-
-
     }
 
 
 }
+
+fun updateTask(step: List<Step>) {
+
+
+}
+
+
+/*fun loadSteps() {
+
+    var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+    if (tachePrem != null) {
+
+        viewModel.getTacheModelid(tachePrem.taskModel.id)
+        viewModel.getAllTacheModel().observe(viewLifecycleOwner, Observer {
+            if (it.isSuccessful) {
+                it.body()?.steps?.let { it1 -> adapterSteps.setListSteps(it1) }
+                viewModel.taskModel = it.body()!!
+                viewModel.task = tachePrem
+
+            } else {
+
+            }
+
+        })
+    }
+
+
+}*/
+
+
+
 
 
 

@@ -14,7 +14,6 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.clovertech.autolib.R
 import com.clovertech.autolib.ui.adapters.OnboardingAdapter
 import com.clovertech.autolib.ui.login.LoginActivity
-import com.clovertech.autolib.utils.PrefUtils
 
 
 class OnBoardingScreens : AppCompatActivity() {
@@ -25,18 +24,9 @@ class OnBoardingScreens : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (restorePrefData()) {
-            val token = PrefUtils.with(this).getString(PrefUtils.Keys.token,"")
-            if (token == "") {
-                val loginActivity = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(loginActivity)
-                finish()
-            } else {
-                val loginActivity = Intent(applicationContext, SampleActivity::class.java)
-                startActivity(loginActivity)
-                finish()
-
-            }
-
+            val mainActivity = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(mainActivity)
+            finish()
         }
 
         setContentView(R.layout.activity_on_boarding_screens)
@@ -58,7 +48,8 @@ class OnBoardingScreens : AppCompatActivity() {
             if (onboardingViewPager.currentItem + 1 < onboardingAdapter!!.itemCount) {
                 onboardingViewPager.currentItem = onboardingViewPager.currentItem + 1
             } else {
-                startActivity(Intent(applicationContext, LoginActivity::class.java))
+
+                startActivity(Intent(applicationContext, SampleActivity::class.java))
                 savePrefsData()
                 finish()
             }
@@ -102,8 +93,8 @@ class OnBoardingScreens : AppCompatActivity() {
     private fun setOnboardingItem() {
         val onBoardingItems: MutableList<OnBoardingItem> = mutableListOf()
         val itemFastFood = OnBoardingItem()
-        itemFastFood.title="Choose your meal"
-        itemFastFood.description="You can easily choose your meal and take it!"
+        itemFastFood.title="check your activities"
+        itemFastFood.description="You can easily check your activities!"
         itemFastFood.image=R.drawable.choose_your_meal
 
         val itemPayOnline = OnBoardingItem()
@@ -113,8 +104,8 @@ class OnBoardingScreens : AppCompatActivity() {
 
         val itemEatTogether = OnBoardingItem()
 
-        itemEatTogether.title="Fast delivery"
-        itemEatTogether.description="Our delivery partners are too fast, they will not disappoint you!"
+        itemEatTogether.title="See your calendar"
+        itemEatTogether.description="Our system provide a good calendar for you"
         itemEatTogether.image=R.drawable.fast_delivery
 
         val itemDayAndNight = OnBoardingItem()

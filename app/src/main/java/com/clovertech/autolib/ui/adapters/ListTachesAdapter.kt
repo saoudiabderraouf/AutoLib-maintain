@@ -4,14 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.home.HomeFragment
 import com.clovertech.autolib.ui.home.HomeViewModel
+import com.clovertech.autolib.utils.PrefUtils
+import com.clovertech.autolib.viewmodel.TacheViewModel
 
-class ListTachesAdapter(val context: Context, val vm: HomeViewModel, frag: HomeFragment) :
+class ListTachesAdapter(val context: Context, val vm: TacheViewModel, frag: HomeFragment) :
     RecyclerView.Adapter<MyViewHolder>() {
     var fragment = frag
     var data = listOf<Tache>()
@@ -29,12 +32,15 @@ class ListTachesAdapter(val context: Context, val vm: HomeViewModel, frag: HomeF
 
         holder.descript.text = data[position].description
         holder.idVoiture.text = data[position].idVehicule.toString()
-        holder.progres.text = data[position].idTaskState.toString() + "%"
         holder.titreTache.text = data[position].taskTitle.toString()
         holder.itemView.setOnClickListener(View.OnClickListener {
-            fragment.update(data[position].taskModel.id, data[position])
+            fragment.update(data[position])
+            PrefUtils.with(context).save(PrefUtils.Keys.taskUuid, data[position].uuid)
         })
-
+        holder.progressBar.max = data[position].steps?.size ?: 0
+        holder.progressBar.progress = data[position].steps?.filter { it.completed }?.size ?: 0
+        val progress = holder.progressBar.progress * 100 / holder.progressBar.max
+        holder.progres.text = progress.toString() + "%"
     }
 
     fun setListTache(list: List<Tache>) {
@@ -51,7 +57,7 @@ class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val descript = view.findViewById<TextView>(R.id.description)
     val idVoiture = view.findViewById<TextView>(R.id.idVoiture)
     val progres = view.findViewById<TextView>(R.id.avancement)
-
+    val progressBar = view.findViewById<ProgressBar>(R.id.progressTaskHome)
 }
 
 

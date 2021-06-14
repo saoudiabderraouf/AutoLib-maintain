@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface TacheModelApiService {
-    @GET("taskModel/{idModel}")
-    suspend fun getTacheModelById(@Path("idModel" )id: Int): Response<TacheModel>
+    @GET("taskModel")
+    suspend fun getAllTacheModel(): Response<List<TacheModel>>
 }

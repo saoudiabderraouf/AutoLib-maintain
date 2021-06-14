@@ -3,6 +3,7 @@ package com.clovertech.autolib.network.client
 import com.clovertech.autolib.network.service.AuthApiService
 import com.clovertech.autolib.network.service.TacheApiService
 import com.clovertech.autolib.network.service.TacheModelApiService
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,9 +17,10 @@ object TacheApiClient {
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
 
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
         Retrofit.Builder()
             .baseUrl("https://service-tasks.herokuapp.com")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
     }

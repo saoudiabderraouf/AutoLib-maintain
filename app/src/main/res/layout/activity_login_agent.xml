@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity"
     tools:viewBindingIgnore="true">
-    <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
 
     <EditText
         android:id="@+id/numChasis"
-        android:layout_width="0dp"
+        android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
         android:background="@drawable/rounded_corners"
         android:ems="10"
         android:hint="   Email"
@@ -29,11 +22,9 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="0dp"
+        android:layout_width="325dp"
         android:layout_height="55dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
         android:background="@drawable/rounded_corners"
         android:ems="10"
         android:hint="   Password"
@@ -42,25 +33,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numChasis" />
 
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="0dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="20dp"
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="296dp"
+        android:layout_height="53dp"
+        android:background="@drawable/rounded_corners"
 
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/rounded_corners"
+        android:fontFamily="@font/montserrat"
+        android:text="SE CONNECTER"
 
-            android:fontFamily="@font/montserrat"
-            android:text="SE CONNECTER"
+        app:backgroundTint="@color/app_honey"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-            app:backgroundTint="@color/app_honey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/quest"
-            app:layout_constraintTop_toBottomOf="@+id/quest"
-            app:layout_constraintVertical_bias="0.252" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -76,16 +63,13 @@
 
     <TextView
         android:id="@+id/logo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="80dp"
         android:fontFamily="@font/font_file"
         android:text="AutoLib DZ"
         android:textColor="@color/app_black"
         android:textSize="30dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -93,26 +77,21 @@
 
     <TextView
         android:id="@+id/title2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="80dp"
         android:fontFamily="@font/montserrat"
         android:text="Maintenance"
         android:textSize="15dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="0dp"
+        android:layout_width="344dp"
         android:layout_height="90dp"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center_horizontal"
         android:text="Bienvenue chez AutoLib Dz, connectez-vous avec le compte fournis par l'administrateur tâches"
@@ -133,7 +112,4 @@
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
