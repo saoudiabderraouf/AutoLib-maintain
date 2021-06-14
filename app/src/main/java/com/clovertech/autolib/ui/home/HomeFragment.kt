@@ -68,8 +68,8 @@ class HomeFragment : Fragment() {
            /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
                 .show()*/
 
-            //tacheViewModel.getTacheIdAgent(requireContext(), 100)
-            tacheViewModel.getTacheAllModel(requireContext())
+            tacheViewModel.getTacheIdAgent(requireContext(), 100)
+           // tacheViewModel.getTacheAllModel(requireContext())
 
             tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
                 adapter.setListTache(it)

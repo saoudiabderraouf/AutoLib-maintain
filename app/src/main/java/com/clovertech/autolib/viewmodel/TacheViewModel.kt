@@ -42,10 +42,6 @@ class TacheViewModel : ViewModel() {
         }
     }
 
-    fun getTacheAllModel(context: Context) {
-        viewModelScope.launch {
-            TacheRepo.getAllTacheModel(context)
-        }
-    }
+
 
 }

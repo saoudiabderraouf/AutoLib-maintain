@@ -1,7 +1,6 @@
 package com.clovertech.autolib.repository
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
@@ -23,6 +22,10 @@ class TacheRepo {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
+        /**
+         * Inserer une tache dans la cache
+         * @param tache*/
+
         fun insertTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
@@ -33,6 +36,11 @@ class TacheRepo {
 
         }
 
+        /**
+         * Recuperer la liste des taches existantes dans la cache
+         * @return list<Tache>
+         *     */
+
 
         fun getAllTaches(context: Context): LiveData<List<Tache>>? {
 
@@ -42,6 +50,10 @@ class TacheRepo {
 
             return taches
         }
+
+        /**
+         * Recuperer la liste des taches d'un agent par son id du service et les insere une par une dans la cache
+         * @param idAgent*/
 
 
         suspend fun getTacheIdAgent(context: Context, id: Int) {
@@ -55,41 +67,27 @@ class TacheRepo {
             }
         }
 
-        fun insertTacheModel(context: Context, tacheModel: TacheModel) {
 
-            appDb = initializeDB(context)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                appDb!!.taskModelDao().addTaskModel(tacheModel)
-            }
-
-        }
-
-        suspend fun getAllTacheModel(context: Context) {
-            var Response = TacheApiClient.tacheModelApiService.getAllTacheModel()
-            if (Response.isSuccessful) {
-                var listSteps = Response.body()!!
-                for (tacheModel in listSteps) {
-                    insertTacheModel(context, tacheModel)
-                }
-
-            }
-        }
-
-        suspend fun updateStatetask(context: Context, tache: Tache) {
+        /**
+         * Mettre a jour l'etat d'une tache dans le service
+         * @param tache
+         * si 2 en cours
+         * si 3 terminée*/
+        suspend fun updateStatetask(tache: Tache) {
             var listFiltered = tache.steps?.filter { it.completed == true }
             if (listFiltered?.size == 1) {
                 var Response =
                     TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
                 if (Response.isSuccessful) {
-                    //Toast.makeText(context, Response.body(), Toast.LENGTH_SHORT).show()
+                    tache.idTaskState = 2
                 }
             } else {
                 if (listFiltered?.size == tache.steps?.size) {
                     var Response =
                         TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
                     if (Response.isSuccessful) {
-                        //Toast.makeText(context, Response.body(), Toast.LENGTH_SHORT).show()
+                        tache.idTaskState = 3
                     }
                 }
 
@@ -97,15 +95,34 @@ class TacheRepo {
 
         }
 
+        /**
+         * Mettre à jour l'etat des etapes d'une tache dans la cache
+         * @param context
+         * @param tache*/
+
         fun updateTache(context: Context, tache: Tache) {
 
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                updateStatetask(context , tache)
+                var listFiltered = tache.steps?.filter { it.completed == true }
+                if (listFiltered?.size == 1) {
+                    var Response =
+                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                    if (Response.isSuccessful) {
+                        tache.idTaskState = 2
+                    }
+                } else {
+                    if (listFiltered?.size == tache.steps?.size) {
+                        var Response =
+                            TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                        if (Response.isSuccessful) {
+                            tache.idTaskState = 3
+                        }
+                    }
 
-            }
-            CoroutineScope(Dispatchers.IO).launch {
+                }
+
 
                 appDb!!.tacheDao().updateTask(tache)
             }
