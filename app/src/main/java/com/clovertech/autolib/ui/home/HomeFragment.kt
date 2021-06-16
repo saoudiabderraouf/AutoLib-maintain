@@ -88,6 +88,7 @@ class HomeFragment : Fragment() {
         adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        tasksRecyclerView.isNestedScrollingEnabled = false
         tasksRecyclerView.adapter = adapterSteps
 
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
