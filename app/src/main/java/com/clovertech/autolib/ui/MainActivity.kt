@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
             this.setSupportActionBar(toolbar);
             toolbar.setTitle("")
-            toolbar.setBackgroundColor(getResources().getColor(R.color.dirtyWhite))
             val navView: BottomNavigationView = findViewById(R.id.nav_view)
             val navController = findNavController(R.id.nav_host_fragment)
             val appBarConfiguration = AppBarConfiguration(

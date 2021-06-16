@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:background="@color/dirtyWhite">
+    android:background="?android:attr/colorBackground"
+    tools:context=".ui.home.HomeFragment">
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -25,12 +23,11 @@
         android:id="@+id/etapes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/montserrat"
-        android:text="Etapes"
-        android:textColor="@color/noir"
+        android:text="Etapes de la tache"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pagerTasksHome" />
@@ -39,13 +36,12 @@
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/montserrat"
         android:text="Details"
         android:textColor="@color/blue"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etapes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/etapes" />
 
@@ -53,92 +49,83 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="26dp"
         android:fontFamily="@font/montserrat"
         android:text="Salut! Hamid Reda !"
-        android:textColor="@color/noir"
+        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toEndOf="@+id/myCardView"
+        app:layout_constraintStart_toEndOf="@+id/roundedimag"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nbTaches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/montserrat"
         android:text="Vous avez"
-        android:textColor="@color/noir"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/myCardView"
-        app:layout_constraintTop_toBottomOf="@+id/myCardView" />
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/roundedimag"
+        app:layout_constraintTop_toBottomOf="@+id/roundedimag" />
 
     <TextView
         android:id="@+id/nbTaches3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:fontFamily="@font/montserrat"
         android:text="tâches"
-        android:textColor="@color/noir"
-        android:textSize="24sp"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/nbTaches"
         app:layout_constraintStart_toEndOf="@+id/nbTaches2"
-        app:layout_constraintTop_toBottomOf="@+id/myCardView" />
+        app:layout_constraintTop_toTopOf="@+id/nbTaches" />
 
     <TextView
         android:id="@+id/nbTaches2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="2"
         android:textColor="@color/colorAccent"
-        android:textSize="24sp"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/nbTaches"
         app:layout_constraintStart_toEndOf="@+id/nbTaches"
-        app:layout_constraintTop_toBottomOf="@+id/myCardView" />
+        app:layout_constraintTop_toTopOf="@+id/nbTaches" />
 
     <TextView
         android:id="@+id/today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Aujourd'hui"
-        android:textColor="@color/noir"
-        android:textSize="24sp"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="28sp"
         app:layout_constraintStart_toStartOf="@+id/nbTaches"
         app:layout_constraintTop_toBottomOf="@+id/nbTaches" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/myCardView"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/roundedimag"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_image_view"
-        app:cardCornerRadius="50dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/roundedimag"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/imageShapeOverlay"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tasksRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
