@@ -52,17 +52,21 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
         initBottomBar()
 
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-        this.setSupportActionBar(toolbar);
-        toolbar.setTitle("")
-        toolbar.setBackgroundColor( getResources().getColor(R.color.dirtyWhite))
+        this.setSupportActionBar(toolbar)
+        toolbar.title = ""
 
         screenIcons = this.loadScreenIcons()
         screenTitles = loadScreenTitles()
-        menuItems =arrayOf(R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_calendar,-1,-1, R.id.navigation_userProfil)
+        menuItems =arrayOf(R.id.navigation_home
+            , R.id.navigation_notifications
+            , R.id.navigation_calendar
+            ,-1
+            ,-1
+            , R.id.navigation_userProfil)
 
 
         adapter = DrawerAdapter(
-            Arrays.asList(
+            listOf(
                 createItemFor(POS_ACCUEIL).setChecked(true),
                 createItemFor(POS_NOTIF),
                 createItemFor(POS_CALENDAR),
@@ -111,7 +115,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             false
         }*/
 
-        navView.setSelectedItemId(R.id.navigation_home);
+        navView.setSelectedItemId(R.id.navigation_home)
 
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -121,6 +125,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             R.id.navigation_calendar,
             R.id.navigation_userProfil,
         ))
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
