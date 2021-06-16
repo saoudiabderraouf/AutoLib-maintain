@@ -4,73 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notifLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/dirtyWhite">
+    android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/contenu"
-        android:layout_width="186dp"
-        android:layout_height="72dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/roundedimage"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/imageNotif"
-        android:layout_toRightOf="@+id/imageNotif"
-        android:fontFamily="@font/montserrat"
-        android:text="TextView"
-        android:textColor="@color/noir"
-        android:textStyle="normal"
-        app:layout_constraintStart_toEndOf="@+id/imageNotif"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="1dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/imageShapeOverlay"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/montserrat"
-        android:text="TextView"
-        android:textColor="@color/noir"
-        android:textSize="12sp"
-        android:textStyle="bold"
+        android:text="il' ya 3min"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageNotif"
-        app:layout_constraintTop_toBottomOf="@+id/imageNotif" />
+        app:layout_constraintStart_toStartOf="@+id/roundedimage"
+        app:layout_constraintTop_toBottomOf="@+id/roundedimage" />
+
+    <TextView
+        android:id="@+id/contenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/montserrat"
+        android:text="TextView"
+        android:textColor="?attr/colorOnPrimary"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/roundedimage"
+        app:layout_constraintEnd_toStartOf="@+id/lu"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/roundedimage"
+        app:layout_constraintTop_toTopOf="@+id/roundedimage" />
 
     <ImageView
         android:id="@+id/lu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/onboarding_indicator_inactive"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toEndOf="@+id/contenu"
-        app:layout_constraintTop_toTopOf="@+id/contenu" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageNotif"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_image_view"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <ImageView
-            android:id="@+id/roundedimage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

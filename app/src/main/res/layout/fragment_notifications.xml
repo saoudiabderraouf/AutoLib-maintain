@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dirtyWhite"
+    android:background="?android:attr/colorBackground"
     tools:context=".ui.notifications.NotificationsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,87 +31,78 @@
             android:id="@+id/salutations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="26dp"
             android:fontFamily="@font/montserrat"
             android:text="Salut! Hamid Reda !"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.042"
-            app:layout_constraintStart_toEndOf="@+id/imageNotif"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/roundedimage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/uHave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
             android:text="Vous avez"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/imageNotif"
-            app:layout_constraintTop_toBottomOf="@+id/imageNotif" />
+            app:layout_constraintStart_toStartOf="@+id/roundedimage"
+            app:layout_constraintTop_toBottomOf="@+id/roundedimage" />
 
         <TextView
             android:id="@+id/nbTaches3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:fontFamily="@font/montserrat"
             android:text="notifications"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/nonLu"
             app:layout_constraintStart_toEndOf="@+id/notifs"
-            app:layout_constraintTop_toBottomOf="@+id/imageNotif" />
+            app:layout_constraintTop_toTopOf="@+id/uHave" />
 
         <TextView
             android:id="@+id/notifs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="3"
             android:textColor="@color/colorAccent"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/nonLu"
             app:layout_constraintStart_toEndOf="@+id/uHave"
-            app:layout_constraintTop_toBottomOf="@+id/imageNotif" />
+            app:layout_constraintTop_toTopOf="@+id/uHave" />
 
         <TextView
             android:id="@+id/nonLu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="non lues"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/uHave"
             app:layout_constraintTop_toBottomOf="@+id/uHave" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/imageNotif"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/roundedimage"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rounded_image_view"
-            app:cardCornerRadius="50dp"
+            android:padding="1dp"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/roundedimage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/imageShapeOverlay"
+            app:srcCompat="@mipmap/ic_launcher" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
