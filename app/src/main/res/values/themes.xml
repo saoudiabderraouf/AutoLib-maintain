@@ -2,9 +2,6 @@
     <!-- Base application theme. -->
     <style name="Theme.Agent_APP" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/app_black</item>
-        <item name="colorAccent">@color/colorAccent</item>-->
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
