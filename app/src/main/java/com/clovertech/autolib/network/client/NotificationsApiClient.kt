@@ -17,7 +17,7 @@ object NotificationsApiClient {
 
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
         Retrofit.Builder()
-            .baseUrl("https://service-task-notif.herokuapp.com")
+            .baseUrl("https://volet-maintenance.herokuapp.com/service-taskNotif/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()

@@ -19,7 +19,7 @@ object TacheApiClient {
 
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
         Retrofit.Builder()
-            .baseUrl("https://service-tasks.herokuapp.com")
+            .baseUrl("https://volet-maintenance.herokuapp.com/service-task/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()

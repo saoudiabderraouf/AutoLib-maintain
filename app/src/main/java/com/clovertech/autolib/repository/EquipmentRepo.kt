@@ -8,8 +8,8 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 
-class EquipmentRepo {
-    companion object {
+object EquipmentRepo {
+
         suspend fun getAllEquipments(): Response<List<Equipement>> {
             return EquipmentApiClient.equipmentApiService.getAllEquipment()
         }
@@ -17,6 +17,4 @@ class EquipmentRepo {
         suspend fun addNewEquipment(newEquipement: NewEquipement): Response<EquipementToken> {
             return EquipmentApiClient.equipmentApiService.addNewUsedEquipment(newEquipement)
         }
-
-    }
 }

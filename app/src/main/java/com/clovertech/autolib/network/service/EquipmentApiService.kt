@@ -10,9 +10,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface EquipmentApiService {
-    @GET("equipment")
+    @GET("/equipment")
     suspend fun getAllEquipment(): Response<List<Equipement>>
 
-    @POST("usedEquipment")
+    @POST("/usedEquipment")
     suspend fun addNewUsedEquipment(@Body newequipement: NewEquipement): Response<EquipementToken>
 }
