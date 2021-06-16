@@ -33,6 +33,7 @@ class OnboardingAdapter(private val onBoardingItems: List<OnBoardingItem>) :
         private val textTitle: TextView
         private val textDescription: TextView
         private val imageOnboarding: ImageView
+
         fun setOnBoardingData(onBoardingItem: OnBoardingItem) {
             textTitle.text = onBoardingItem.title
             textDescription.text = onBoardingItem.description

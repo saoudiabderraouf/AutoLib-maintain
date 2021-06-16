@@ -17,11 +17,13 @@ import com.clovertech.autolib.ui.login.LoginActivity
 
 
 class OnBoardingScreens : AppCompatActivity() {
-    private var onboardingAdapter: OnboardingAdapter? = null
+
+    private var onBoardingAdapter: OnboardingAdapter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Agent_APP)
 
         if (restorePrefData()) {
             val mainActivity = Intent(applicationContext, LoginActivity::class.java)
@@ -31,10 +33,13 @@ class OnBoardingScreens : AppCompatActivity() {
 
         setContentView(R.layout.activity_on_boarding_screens)
 
-        var buttonOnboardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
+        val buttonOnbBoardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
+        val skipButton = findViewById<Button>(R.id.skip_button)
+        val backButton = findViewById<Button>(R.id.backward_button)
+
         setOnboardingItem()
         val onboardingViewPager = findViewById<ViewPager2>(R.id.onboardingViewPager)
-        onboardingViewPager.adapter = onboardingAdapter
+        onboardingViewPager.adapter = onBoardingAdapter
 
         setOnboadingIndicator()
         setCurrentOnboardingIndicators(0)
@@ -44,14 +49,25 @@ class OnBoardingScreens : AppCompatActivity() {
                 setCurrentOnboardingIndicators(position)
             }
         })
-        buttonOnboardingAction.setOnClickListener(){
-            if (onboardingViewPager.currentItem + 1 < onboardingAdapter!!.itemCount) {
+        buttonOnbBoardingAction.setOnClickListener{
+            if (onboardingViewPager.currentItem + 1 < onBoardingAdapter!!.itemCount) {
                 onboardingViewPager.currentItem = onboardingViewPager.currentItem + 1
             } else {
-
                 startActivity(Intent(applicationContext, SampleActivity::class.java))
                 savePrefsData()
                 finish()
+            }
+        }
+
+        skipButton.setOnClickListener {
+            startActivity(Intent(applicationContext, SampleActivity::class.java))
+            savePrefsData()
+            finish()
+        }
+
+        backButton.setOnClickListener {
+            if (onboardingViewPager.currentItem - 1 >= 0) {
+                onboardingViewPager.currentItem = onboardingViewPager.currentItem - 1
             }
         }
 
@@ -59,10 +75,10 @@ class OnBoardingScreens : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setCurrentOnboardingIndicators(index: Int) {
-        var layoutOnboardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
-        var buttonOnboardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
+        val layoutOnboardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
+        val buttonOnboardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
 
-        val childCount: Int = layoutOnboardingIndicator.getChildCount()
+        val childCount: Int = layoutOnboardingIndicator.childCount
         for (i in 0 until childCount) {
             val imageView = layoutOnboardingIndicator.getChildAt(i) as ImageView
             if (i == index) {
@@ -81,10 +97,10 @@ class OnBoardingScreens : AppCompatActivity() {
                 )
             }
         }
-        if (index == onboardingAdapter?.getItemCount()?.minus(1)){
-            buttonOnboardingAction.setText("Get Started")
+        if (index == onBoardingAdapter?.itemCount?.minus(1)){
+            buttonOnboardingAction.text = "Get Started"
         }else {
-            buttonOnboardingAction.setText("Next")
+            buttonOnboardingAction.text = "Next"
         }
     }
 
@@ -113,17 +129,17 @@ class OnBoardingScreens : AppCompatActivity() {
         itemDayAndNight.description="Our service is on day and night!"
         itemDayAndNight.image=R.drawable.day_and_night
 
-        onBoardingItems.add(itemFastFood);
-        onBoardingItems.add(itemPayOnline);
-        onBoardingItems.add(itemEatTogether);
-        onBoardingItems.add(itemDayAndNight);
+        onBoardingItems.add(itemFastFood)
+        onBoardingItems.add(itemPayOnline)
+        onBoardingItems.add(itemEatTogether)
+        onBoardingItems.add(itemDayAndNight)
 
-        onboardingAdapter = OnboardingAdapter(onBoardingItems);
+        onBoardingAdapter = OnboardingAdapter(onBoardingItems);
     }
 
     private fun setOnboadingIndicator() {
-        var layoutOnboardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
-        val indicators: Array<ImageView?> = arrayOfNulls<ImageView>(onboardingAdapter!!.itemCount)
+        val layoutOnboardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
+        val indicators: Array<ImageView?> = arrayOfNulls(onBoardingAdapter!!.itemCount)
         val layoutParams = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
@@ -135,7 +151,7 @@ class OnBoardingScreens : AppCompatActivity() {
                     applicationContext, R.drawable.onboarding_indicator_inactive
                 )
             )
-            indicators[i]?.setLayoutParams(layoutParams)
+            indicators[i]?.layoutParams = layoutParams
             layoutOnboardingIndicator!!.addView(indicators[i])
         }
     }
@@ -149,7 +165,7 @@ class OnBoardingScreens : AppCompatActivity() {
         val pref = applicationContext.getSharedPreferences("myPrefs", MODE_PRIVATE)
         val editor = pref.edit()
         editor.putBoolean("isOpnend", true)
-        editor.commit()
+        editor.apply()
     }
 
 
