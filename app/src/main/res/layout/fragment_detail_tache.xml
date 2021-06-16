@@ -4,38 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dirtyWhite"
+    android:background="?android:attr/colorBackground"
     tools:context=".ui.DetailTache">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dirtyWhite">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/titreTask"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/montserrat"
             android:text="Revision"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/descriptTask"
-            android:layout_width="357dp"
-            android:layout_height="82dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="22dp"
-            android:layout_marginRight="22dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/montserrat"
             android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -91,9 +91,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/montserrat"
-            android:text="Materiel"
-            android:textColor="@color/noir"
-            android:textSize="18dp"
+            android:text="Materiels"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -104,7 +104,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
             android:text="Ajouter un materiel"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -115,7 +115,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat"
             android:text="Etapes de la tache"
-            android:textColor="@color/noir"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@+id/ajouterMaterialText"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
@@ -134,17 +134,17 @@
 
         <FrameLayout
             android:id="@+id/addMaterial"
-            android:layout_marginTop="12dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/rounded_button"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:padding="4dp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            android:visibility="visible">
+            app:layout_constraintTop_toBottomOf="@+id/view">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -152,9 +152,6 @@
                 android:layout_margin="4dp"
                 android:src="@drawable/ic_plus" />
         </FrameLayout>
-
-
-
 
 
         <androidx.recyclerview.widget.RecyclerView

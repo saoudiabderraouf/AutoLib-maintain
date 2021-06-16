@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detailTache"
-            app:destination="@id/detailTache" />
+            app:destination="@id/detailTache"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/navigation_userProfil"
@@ -36,7 +40,11 @@
         tools:layout="@layout/fragment_detail_tache" >
         <action
             android:id="@+id/action_detailTache_to_ajouterMateriel"
-            app:destination="@id/ajouterMateriel" />
+            app:destination="@id/ajouterMateriel"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ajouterMateriel"
@@ -45,6 +53,10 @@
         tools:layout="@layout/fragment_ajouter_materiel" >
         <action
             android:id="@+id/action_ajouterMateriel_to_detailTache"
-            app:destination="@id/detailTache" />
+            app:destination="@id/detailTache"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>
