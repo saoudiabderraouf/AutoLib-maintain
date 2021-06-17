@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/navigation_userProfil"
         android:name="com.clovertech.autolib.ui.userProfil.UserProfilFragment"
-        android:label="Profil"
+        android:label="Profile"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/navigation_notifications"
@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/detailTache"
-        android:name="com.clovertech.autolib.ui.DetailTache"
+        android:name="com.clovertech.autolib.ui.home.DetailTache"
         android:label="Détail"
         tools:layout="@layout/fragment_detail_tache" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/ajouterMateriel"
-        android:name="com.clovertech.autolib.ui.AjouterMateriel"
+        android:name="com.clovertech.autolib.ui.home.AjouterMateriel"
         android:label="Ajouter un Materiel"
         tools:layout="@layout/fragment_ajouter_materiel" >
         <action
@@ -59,4 +59,14 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_panne"
+        android:name="com.clovertech.autolib.ui.panne.PanneFragment"
+        android:label="Pannes"
+        tools:layout="@layout/fragment_panne" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.clovertech.autolib.ui.settings.SettingsFragment"
+        android:label="Paramètres"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

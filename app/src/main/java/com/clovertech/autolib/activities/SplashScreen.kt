@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.activities
 
 
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.clovertech.autolib.R
+import com.clovertech.autolib.ui.adapters.OnBoardingScreens
 
 
 class SplashScreen : AppCompatActivity() {

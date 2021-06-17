@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Login
-import com.clovertech.autolib.ui.SampleActivity
+import com.clovertech.autolib.activities.SampleActivity
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*

@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.panne
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

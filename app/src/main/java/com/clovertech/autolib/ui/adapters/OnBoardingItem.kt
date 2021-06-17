@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.adapters
 
 class OnBoardingItem {
     var image = 0

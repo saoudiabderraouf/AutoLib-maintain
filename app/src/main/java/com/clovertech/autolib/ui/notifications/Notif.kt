@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.notifications
 
 import androidx.room.Entity
 import androidx.room.Ignore

@@ -36,7 +36,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".ui.SampleActivity">
+        <activity android:name=".activities.SampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,10 +44,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.SplashScreen" />
+        <activity android:name=".activities.SplashScreen" />
 
-        <activity android:name=".ui.OnBoardingScreens" />
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.adapters.OnBoardingScreens" />
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".ui.login.LoginActivity">
 
         </activity>

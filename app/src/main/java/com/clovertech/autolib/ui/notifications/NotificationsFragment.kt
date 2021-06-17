@@ -36,20 +36,12 @@ class NotificationsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
         val adapter = NotificationsAdapter(requireActivity())
         recyclerView.adapter = adapter
-        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
-        notificationsViewModel.getAllNotifications(requireContext()).observe(viewLifecycleOwner, Observer {
+        notificationsViewModel.fetchAllNotifications(requireContext())
+
+        notificationsViewModel.getAllNotifications(requireContext()).observe(viewLifecycleOwner, {
             adapter.setNotificationList(it)
             notifs.text = it.size.toString()
         })
-
-        notificationsViewModel.fetchAllNotifications(requireContext())
     }
 }

@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.activities
 import android.app.Activity
 import android.app.SearchManager
 import android.content.Intent

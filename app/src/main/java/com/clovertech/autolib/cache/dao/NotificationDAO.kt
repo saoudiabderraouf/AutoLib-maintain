@@ -2,8 +2,7 @@ package com.clovertech.autolib.cache.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.ui.Notif
+import com.clovertech.autolib.ui.notifications.Notif
 
 @Dao
 interface NotificationDAO {

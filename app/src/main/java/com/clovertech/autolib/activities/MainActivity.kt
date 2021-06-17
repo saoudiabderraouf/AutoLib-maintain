@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.activities
 
 import android.app.SearchManager
 import android.content.Context
@@ -52,8 +52,6 @@ class MainActivity : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
         }
-
-
         temp()
     }
 

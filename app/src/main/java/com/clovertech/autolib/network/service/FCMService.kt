@@ -5,8 +5,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
@@ -15,7 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.network.client.NotificationsApiClient
-import com.clovertech.autolib.ui.MainActivity
+import com.clovertech.autolib.activities.MainActivity
 import com.clovertech.autolib.utils.PrefUtils
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

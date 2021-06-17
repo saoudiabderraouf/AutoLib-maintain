@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Tache
-import  com.clovertech.autolib.ui.Notif
+import  com.clovertech.autolib.ui.notifications.Notif
 
 
 class NotificationsAdapter(val context: Context, ):RecyclerView.Adapter<NotificationHolder>()

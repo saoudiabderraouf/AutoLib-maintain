@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.clovertech.autolib.cache.converter.Converters
 import com.clovertech.autolib.cache.dao.*
 import com.clovertech.autolib.model.*
-import com.clovertech.autolib.ui.Notif
+import com.clovertech.autolib.ui.notifications.Notif
 
 @Database(
     entities = arrayOf(Auth_utilisateur::class,

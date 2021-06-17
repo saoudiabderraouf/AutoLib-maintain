@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.clovertech.autolib.R
-import com.clovertech.autolib.ui.adapters.OnboardingAdapter
+import com.clovertech.autolib.activities.SampleActivity
 import com.clovertech.autolib.ui.login.LoginActivity
 
 

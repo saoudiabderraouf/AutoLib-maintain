@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.activities
 
 
 import android.app.SearchManager
@@ -31,7 +31,6 @@ import com.google.firebase.FirebaseApp
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 
 class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
@@ -39,6 +38,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
     private lateinit var screenIcons: Array<Drawable?>
     private lateinit var menuItems: Array<Int>
     private lateinit var adapter:DrawerAdapter
+    private lateinit var navView: BottomNavigationView
 
 
     private var slidingRootNav: SlidingRootNav? = null
@@ -48,12 +48,13 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
         setContentView(R.layout.activity_main)
 
         initFirebase()
-
         initBottomBar()
 
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
         this.setSupportActionBar(toolbar)
         toolbar.title = ""
+
+        navView = findViewById(R.id.nav_view)
 
         screenIcons = this.loadScreenIcons()
         screenTitles = loadScreenTitles()
@@ -78,43 +79,6 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             ) as List<DrawerItem<DrawerAdapter.ViewHolder>>?
         )
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        /*listener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            val fragment: Fragment
-            when (item.itemId) {
-                R.id.navigation_userProfil -> {
-                    supportActionBar?.title = "Profile"
-                    fragment = UserProfilFragment()
-                    showFragment(fragment)
-                    adapter.setSelected(POS_PROFIL)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_home -> {
-                    supportActionBar?.title = "Accueil"
-                    fragment = HomeFragment()
-                    showFragment(fragment)
-                    adapter.setSelected(POS_ACCUEIL)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_notifications -> {
-                    supportActionBar?.title = "Notifications"
-                    fragment = NotificationsFragment()
-                    showFragment(fragment)
-                    adapter.setSelected(POS_NOTIF)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_calendar -> {
-                    supportActionBar?.title = "Calendrier"
-                    fragment = DashboardFragment()
-                    showFragment(fragment)
-                    adapter.setSelected(POS_CALENDAR)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }*/
-
         navView.setSelectedItemId(R.id.navigation_home)
 
 
@@ -124,6 +88,8 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             R.id.navigation_notifications,
             R.id.navigation_calendar,
             R.id.navigation_userProfil,
+            R.id.nav_panne,
+            R.id.nav_settings
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -164,35 +130,40 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
 
 
     override fun onItemSelected(position: Int) {
-
-        if (position == POS_LOGOUT) {
-            finish()
+        slidingRootNav!!.closeMenu()
+        var id = 0
+        var isAtBottom = false
+        when (position) {
+            POS_ACCUEIL -> {
+                id = R.id.navigation_home
+                isAtBottom = true
+            }
+            POS_NOTIF -> {
+                id = R.id.navigation_notifications
+                isAtBottom = true
+            }
+            POS_CALENDAR -> {
+                id = R.id.navigation_calendar
+                isAtBottom = true
+            }
+            POS_PANNE -> { id = R.id.nav_panne}
+            POS_SETTINGS -> { id = R.id.nav_settings}
+            POS_PROFIL -> {
+                id = R.id.navigation_userProfil
+                isAtBottom = true
+            }
+            POS_LOGOUT -> { finish() }
         }
-        else if(position == POS_PANNE){
-            slidingRootNav!!.closeMenu()
-            val selectedScreen: Fragment = PanneFragment()
-            showFragment(selectedScreen)
-
-        }
-        else if(position == POS_SETTINGS){
-            slidingRootNav!!.closeMenu()
-            val selectedScreen: Fragment = SettingsFragment()
-            showFragment(selectedScreen)
-
-        }
-        else{
-            slidingRootNav!!.closeMenu()
-            val bottomNavigationView: BottomNavigationView = findViewById(R.id.nav_view)
-            bottomNavigationView.setSelectedItemId(menuItems[position]);
-        }
+        navigateTo(id,position,isAtBottom)
 
     }
 
-
-    private fun showFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, fragment)
-            .commit()
+    private fun navigateTo(id: Int,position: Int, isAtBottom: Boolean){
+        if(isAtBottom){
+            navView.setSelectedItemId(menuItems[position])
+        }
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.navigate(id)
     }
 
     private fun createItemFor(position: Int): SimpleItem {

@@ -1,4 +1,4 @@
-package com.clovertech.autolib.ui
+package com.clovertech.autolib.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
