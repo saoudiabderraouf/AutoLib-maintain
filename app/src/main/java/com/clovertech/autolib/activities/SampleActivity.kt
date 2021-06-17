@@ -89,7 +89,9 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             R.id.navigation_calendar,
             R.id.navigation_userProfil,
             R.id.nav_panne,
-            R.id.nav_settings
+            R.id.nav_settings,
+            R.id.detailTache,
+            R.id.ajouterMateriel
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
