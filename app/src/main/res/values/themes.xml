@@ -23,5 +23,16 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <style name="checkboxAppearance" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="materialThemeOverlay">@style/checkboxTheme</item>
+        <item name="useMaterialThemeColors">false</item>
+        <item name="enforceMaterialTheme">false</item>
+    </style>
+
+    <style name="checkboxTheme">
+        <item name="enforceMaterialTheme">false</item>
+        <item name="useMaterialThemeColors">false</item>
+    </style>
+
 
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
@@ -28,14 +29,14 @@ class TaskStepsAdapter(val context: Context, val vm: TacheViewModel) :
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolderTask, position: Int) {
-        holder.titreStep.text = data[position].step
-        holder.titreStep.setChecked(data[position].completed)
-        holder.titreStep.setOnClickListener(View.OnClickListener {
+        holder.taskTitle.text = data[position].step
+        holder.titreStep.isChecked = data[position].completed
+        holder.titreStep.setOnClickListener{
             data[position].completed = !data[position].completed
-            holder.titreStep.setChecked(data[position].completed)
+            holder.titreStep.isChecked = data[position].completed
             vm.task.steps?.get(position)?.completed = data[position].completed
             vm.updateTache(context, vm.task)
-        })
+        }
 
     }
 
@@ -50,5 +51,6 @@ class TaskStepsAdapter(val context: Context, val vm: TacheViewModel) :
 
 class ViewHolderTask(view: View) : RecyclerView.ViewHolder(view) {
     val titreStep = view.findViewById<CheckBox>(R.id.todoCheckBox)
+    val taskTitle = view.findViewById<TextView>(R.id.task_title)
 }
 
