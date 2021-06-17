@@ -21,11 +21,12 @@
             android:layout_height="120dp"
             android:layout_marginTop="32dp"
             android:padding="1dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/imageShapeOverlay"
-            app:srcCompat="@drawable/rounded_button" />
+            app:srcCompat="@drawable/user_pic" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/upload"
@@ -35,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/roundedimag"
             app:layout_constraintEnd_toEndOf="@+id/roundedimag"
             app:shapeAppearanceOverlay="@style/imageShapeOverlay"
-            app:srcCompat="@drawable/rounded_button"
+            app:srcCompat="@drawable/ic_upload_layered"
             app:strokeColor="?android:attr/colorBackground"
             app:strokeWidth="3dp" />
 
