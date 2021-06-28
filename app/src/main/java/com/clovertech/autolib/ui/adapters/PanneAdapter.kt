@@ -30,7 +30,7 @@ class PanneAdapter(val context: Context) :
 
 
         holder.panneText.text = data[position].Description
-        holder.panneDate.text = data[position].dateNotification.toString()
+        //holder.panneDate.text = data[position].dateNotification.toString()
 
         holder.itemView.setOnClickListener(View.OnClickListener {
             //fragment.update(data[position].taskModel.id, data[position])

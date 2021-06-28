@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.Agent
-import com.clovertech.autolib.model.Token
 import com.clovertech.autolib.model.Utilisateur
-import com.clovertech.autolib.repository.LoginRepo
 import com.clovertech.autolib.repository.ProfilRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -26,7 +24,8 @@ class ProfilViewModel : ViewModel() {
     fun updateProfil(context: Context, profil: Agent) {
         ProfilRepo.updateProfil(context, profil)
     }
-    fun getThisProfil(id : Int){
+
+    fun getThisProfil(id: Int) {
         viewModelScope.launch {
             val response: Response<Utilisateur> = ProfilRepo.getProfil(id)
             ResponseProfil.value = response

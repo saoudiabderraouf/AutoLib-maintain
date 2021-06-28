@@ -26,7 +26,7 @@ class OnBoardingScreens : AppCompatActivity() {
         setTheme(R.style.Theme_Agent_APP)
 
         if (restorePrefData()) {
-            val mainActivity = Intent(applicationContext, LoginActivity::class.java)
+            val mainActivity = Intent(applicationContext, SampleActivity::class.java)
             startActivity(mainActivity)
             finish()
         }

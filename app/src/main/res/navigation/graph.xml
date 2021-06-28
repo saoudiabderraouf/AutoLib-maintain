@@ -59,14 +59,28 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_panne"
-        android:name="com.clovertech.autolib.ui.panne.PanneFragment"
-        android:label="Pannes"
-        tools:layout="@layout/fragment_panne" />
+
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.clovertech.autolib.ui.settings.SettingsFragment"
         android:label="Paramètres"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_nav_settings_to_themeFragment"
+            app:destination="@id/themeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="com.clovertech.autolib.ThemeFragment"
+        android:label="Theme"
+        tools:layout="@layout/fragment_theme" >
+        <action
+            android:id="@+id/action_themeFragment_to_nav_settings"
+            app:destination="@id/nav_settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_panne"
+        android:name="com.clovertech.autolib.ui.panne.AjouterPanneFragment"
+        android:label="Signaler Panne"
+        tools:layout="@layout/fragment_ajouter_panne" />
 </navigation>
