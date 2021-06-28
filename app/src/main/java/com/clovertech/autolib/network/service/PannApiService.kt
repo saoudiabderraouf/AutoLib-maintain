@@ -13,4 +13,6 @@ interface PannApiService {
     suspend fun validerPanne(panne: Panne): Response<String>
     @POST
     suspend fun deletePanne(panne: Panne): Response<String>
+    @POST
+    suspend fun insertPanne(panne: Panne): Response<String>
 }

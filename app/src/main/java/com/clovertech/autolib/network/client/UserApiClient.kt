@@ -16,14 +16,14 @@ object UserApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://19879da459e6.ngrok.io")
+            .baseUrl("http://192.168.43.201:8100/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
 
 
-    val utilisateurApiService : UserApiService by lazy {
+    val utilisateurApiService: UserApiService by lazy {
         retrofit.create(UserApiService::class.java)
 
     }

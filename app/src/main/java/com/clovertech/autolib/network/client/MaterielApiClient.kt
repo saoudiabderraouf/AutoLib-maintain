@@ -15,7 +15,7 @@ object MaterielApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://service-equipment.herokuapp.com/service-taskNotif/")
+            .baseUrl("https://volet-maintenance.herokuapp.com/service-materiel")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

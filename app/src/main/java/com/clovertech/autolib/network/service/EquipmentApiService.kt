@@ -13,6 +13,6 @@ interface EquipmentApiService {
     @GET("/equipment")
     suspend fun getAllEquipment(): Response<List<Equipement>>
 
-    @POST("/usedEquipment")
+    @POST("service-materiel/usedEquipment")
     suspend fun addNewUsedEquipment(@Body newequipement: NewEquipement): Response<EquipementToken>
 }

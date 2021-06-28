@@ -7,15 +7,14 @@ import java.util.*
 
 @Entity(tableName = "pannes")
 data class Panne(
-    @Expose @PrimaryKey val idPanne: Int,
-    @Expose val dateNotification: Date,
-    @Expose val dateReparationPanne: Date,
-    @Expose val etat: String,
-    @Expose val Description: String,
-    @Expose val numChassis: Int,
-    @Expose val idAgentEnvoyeNotif: Int,
-    @Expose val idAgentTraitePanne: Int,
-    @Expose val niveauSecurity: String
-) {
 
+    @Expose var dateNotifPanne: String,
+    @Expose var idAgentSentNotif: Int,
+    @Expose var state: String,
+    @Expose var idVehicle: String,
+    @Expose var Description: String,
+    @Expose var severityLevel: Int
+
+) {
+@PrimaryKey var id:Int = 0
 }
