@@ -1,8 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Agent_APP" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
@@ -15,8 +13,6 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
 
         <item name="android:windowBackground">@color/white</item>
-
-        <item name="fontFamily">@font/montserrat</item>
     </style>
 
     <style name="Divider">
@@ -40,6 +36,17 @@
         <item name="colorControlActivated">@color/green</item>
         <item name="android:colorForeground">#888888</item>
     </style>
+
+    <style name="Theme.Agent_APP.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" >
+        <item name="android:shadowColor" >@color/white</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 
 </resources>

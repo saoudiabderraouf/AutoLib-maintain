@@ -6,6 +6,7 @@
     <color name="royalBlack">#333</color>
     <color name="colorInput">#3CC9DAF4</color>
     <color name="greyTrans">#617C7C7C</color>
+    <color name="transparent">#00000000</color>
 
     <color name="app_black">#333333</color>
     <color name="app_honey">#F9C31A</color>

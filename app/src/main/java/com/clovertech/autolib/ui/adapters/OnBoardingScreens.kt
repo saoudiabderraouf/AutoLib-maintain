@@ -60,7 +60,7 @@ class OnBoardingScreens : AppCompatActivity() {
         }
 
         skipButton.setOnClickListener {
-            startActivity(Intent(applicationContext, SampleActivity::class.java))
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
             savePrefsData()
             finish()
         }
@@ -113,11 +113,6 @@ class OnBoardingScreens : AppCompatActivity() {
         itemFastFood.description="You can easily check your activities!"
         itemFastFood.image=R.drawable.choose_your_meal
 
-        val itemPayOnline = OnBoardingItem()
-        itemPayOnline.title="Choose your payment"
-        itemPayOnline.description="You can pay us using any methods, online or offline!"
-        itemPayOnline.image=R.drawable.choose_your_payment
-
         val itemEatTogether = OnBoardingItem()
 
         itemEatTogether.title="See your calendar"
@@ -130,7 +125,6 @@ class OnBoardingScreens : AppCompatActivity() {
         itemDayAndNight.image=R.drawable.day_and_night
 
         onBoardingItems.add(itemFastFood)
-        onBoardingItems.add(itemPayOnline)
         onBoardingItems.add(itemEatTogether)
         onBoardingItems.add(itemDayAndNight)
 
