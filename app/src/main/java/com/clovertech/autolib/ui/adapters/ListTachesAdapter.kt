@@ -38,7 +38,11 @@ class ListTachesAdapter(val context: Context, val vm: TacheViewModel, frag: Home
         })
         holder.progressBar.max = data[position].steps?.size ?: 0
         holder.progressBar.progress = data[position].steps?.filter { it.completed }?.size ?: 0
-        val progress = holder.progressBar.progress * 100 / holder.progressBar.max
+        var progress: Int =0
+        if (holder.progressBar.max != 0) {
+            progress = holder.progressBar.progress * 100 / holder.progressBar.max
+        }
+
         holder.progres.text = progress.toString() + "%"
     }
 
