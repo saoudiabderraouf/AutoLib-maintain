@@ -16,7 +16,7 @@ object UserApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.43.201:8100/")
+            .baseUrl("https://7ecbc4e0161f.ngrok.io/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
