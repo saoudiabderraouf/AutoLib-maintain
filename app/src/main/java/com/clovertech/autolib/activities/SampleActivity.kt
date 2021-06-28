@@ -170,6 +170,9 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
                 isAtBottom = true
             }
             POS_LOGOUT -> {
+                PrefUtils.with(this).save(PrefUtils.Keys.token, "")
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }

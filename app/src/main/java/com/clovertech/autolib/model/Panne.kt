@@ -3,17 +3,18 @@ package com.clovertech.autolib.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity(tableName = "pannes")
 data class Panne(
 
-    @Expose var dateNotifPanne: String,
-    @Expose var idAgentSentNotif: Int,
-    @Expose var state: String,
-    @Expose var idVehicle: String,
-    @Expose var Description: String,
-    @Expose var severityLevel: Int
+    @SerializedName("dateNotifPanne") var dateNotifPanne: String,
+    @SerializedName("idAgentSentNotif") var idAgentSentNotif: Int,
+    @SerializedName("state") var state: String,
+    @SerializedName("idVehicle") var idVehicle: Int,
+    @SerializedName("description") var description: String,
+    @SerializedName("severityLevel") var severityLevel: Int
 
 ) {
 @PrimaryKey var id:Int = 0

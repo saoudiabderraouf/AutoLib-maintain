@@ -29,7 +29,7 @@ class PanneAdapter(val context: Context) :
     override fun onBindViewHolder(holder: PanneViewHolder, position: Int) {
 
 
-        holder.panneText.text = data[position].Description
+        holder.panneText.text = data[position].description
         //holder.panneDate.text = data[position].dateNotification.toString()
 
         holder.itemView.setOnClickListener(View.OnClickListener {

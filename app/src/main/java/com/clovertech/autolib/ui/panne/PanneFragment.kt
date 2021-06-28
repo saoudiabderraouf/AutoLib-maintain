@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.clovertech.autolib.R
+import com.clovertech.autolib.viewmodel.PanneViewModel
 
 class PanneFragment : Fragment() {
 

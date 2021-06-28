@@ -10,6 +10,7 @@ import com.clovertech.autolib.network.client.TacheApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class PanneRepo {
     companion object {
@@ -41,15 +42,9 @@ class PanneRepo {
             return PanneRepo.pannes
         }
 
-        suspend fun getPanneIdAgent(context: Context, id: Int) {
-            var Response = PanneApiClient.panneApiService.getPanneByIdAgent(id)
 
-            if (Response.isSuccessful) {
-                var listPanne = Response.body()!!
-                for (panne in listPanne) {
-                    PanneRepo.insertPanne(context, panne)
-                }
-            }
+        suspend fun addPanne(panne:Panne): Response<Panne> {
+            return PanneApiClient.panneApiService.insertPanne(panne)
         }
 
 
