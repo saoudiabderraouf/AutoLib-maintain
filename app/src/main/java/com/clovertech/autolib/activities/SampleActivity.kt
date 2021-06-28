@@ -10,6 +10,7 @@ import android.widget.SearchView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -26,6 +27,7 @@ import com.clovertech.autolib.ui.menu.SimpleItem
 import com.clovertech.autolib.ui.menu.SpaceItem
 import com.clovertech.autolib.ui.panne.PanneFragment
 import com.clovertech.autolib.ui.settings.SettingsFragment
+import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.yarolegovich.slidingrootnav.SlidingRootNav
@@ -46,6 +48,8 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         initFirebase()
         initBottomBar()

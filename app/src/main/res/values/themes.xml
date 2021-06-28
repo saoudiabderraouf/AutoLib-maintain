@@ -36,5 +36,10 @@
         <item name="useMaterialThemeColors">false</item>
     </style>
 
+    <style name="MyIOSSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/green</item>
+        <item name="android:colorForeground">#888888</item>
+    </style>
+
 
 </resources>

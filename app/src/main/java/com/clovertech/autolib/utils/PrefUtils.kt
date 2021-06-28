@@ -20,7 +20,8 @@ class PrefUtils {
         token,
         idModel,
         taskUuid,
-        NOTIFICATION_COUNT
+        NOTIFICATION_COUNT,
+        dark
     }
 
     companion object {
