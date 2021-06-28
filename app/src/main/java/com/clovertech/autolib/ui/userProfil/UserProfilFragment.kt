@@ -29,9 +29,9 @@ class UserProfilFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         var viewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
-        id = 3
+       // id = 3
         if (id != 0) {
-            viewModel.getThisProfil(3)
+            viewModel.getThisProfil(id)
             viewModel.ResponseProfil.observe(viewLifecycleOwner, Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)

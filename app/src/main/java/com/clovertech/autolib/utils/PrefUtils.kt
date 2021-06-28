@@ -20,6 +20,7 @@ class PrefUtils {
         token,
         idModel,
         taskUuid,
+        nameAgent,
         NOTIFICATION_COUNT
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
@@ -12,7 +13,9 @@ import com.clovertech.autolib.model.Login
 import com.clovertech.autolib.activities.SampleActivity
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
+import com.clovertech.autolib.viewmodel.ProfilViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*
+import kotlinx.android.synthetic.main.fragment_profil.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -85,8 +88,28 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     fun shareToken(token: String, idUser: Int) {
         PrefUtils.with(this).save(PrefUtils.Keys.token, token)
         PrefUtils.with(this).save(PrefUtils.Keys.ID, idUser)
+        var viewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
+
+        if (idUser != 0) {
+            viewModel.getThisProfil(idUser)
+            viewModel.ResponseProfil.observe(this, Observer {
+                if (it.isSuccessful) {
+                    Toast.makeText(this, it.code().toString(), Toast.LENGTH_SHORT)
+                        .show()
+                    var profil = it.body()
+                    if (profil != null) {
+                        var name = profil.firstName + " " + profil.lastName
+                        PrefUtils.with(this).save(PrefUtils.Keys.nameAgent, name)
+                    }
+                } else {
+                    Toast.makeText(this, it.code().toString(), Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+        }
 
     }
+
 
 }
 
