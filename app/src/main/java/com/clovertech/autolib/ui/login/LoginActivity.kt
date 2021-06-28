@@ -28,8 +28,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.login_button -> {
-                startActivity(Intent(this, SampleActivity::class.java))
-                //validateLogin()
+                //startActivity(Intent(this, SampleActivity::class.java))
+                validateLogin()
             }
 
         }

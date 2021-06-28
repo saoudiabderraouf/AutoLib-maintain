@@ -36,7 +36,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.SampleActivity">
+        <activity android:name=".activities.SampleActivity"/>
+
+        <activity android:name=".activities.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +46,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SplashScreen" />
 
         <activity android:name=".ui.adapters.OnBoardingScreens" />
         <activity android:name=".activities.MainActivity" />

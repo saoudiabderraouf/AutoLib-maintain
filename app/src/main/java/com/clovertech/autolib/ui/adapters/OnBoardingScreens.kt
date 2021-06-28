@@ -53,14 +53,14 @@ class OnBoardingScreens : AppCompatActivity() {
             if (onboardingViewPager.currentItem + 1 < onBoardingAdapter!!.itemCount) {
                 onboardingViewPager.currentItem = onboardingViewPager.currentItem + 1
             } else {
-                startActivity(Intent(applicationContext, SampleActivity::class.java))
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
                 savePrefsData()
                 finish()
             }
         }
 
         skipButton.setOnClickListener {
-            startActivity(Intent(applicationContext, SampleActivity::class.java))
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
             savePrefsData()
             finish()
         }

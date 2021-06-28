@@ -26,7 +26,7 @@ class UserProfilFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-
+        super.onActivityCreated(savedInstanceState)
         var viewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
         id = 3
@@ -49,7 +49,7 @@ class UserProfilFragment : Fragment() {
                 }
             })
         }
-        super.onActivityCreated(savedInstanceState)
+
 
     }
 
