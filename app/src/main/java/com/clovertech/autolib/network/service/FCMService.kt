@@ -29,7 +29,7 @@ class FCMService: FirebaseMessagingService() {
     override fun onNewToken(p0: String) {
         super.onNewToken(p0)
         CoroutineScope(Dispatchers.IO).launch {
-            val request = NotificationsApiClient.notificationService.postToken(AgentToken(100, p0))
+            val request = NotificationsApiClient.notificationService.postToken(AgentToken(3, p0))
             if (request.isSuccessful){
                 Log.d(TAG, "Refreshed token: $p0")
             }

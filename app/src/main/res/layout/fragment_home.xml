@@ -28,7 +28,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/pagerTasksHome"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="180dp"
                     android:layout_marginTop="4dp"
                     android:paddingHorizontal="46dp"
                     app:layout_constraintEnd_toEndOf="parent"

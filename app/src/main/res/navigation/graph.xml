@@ -17,6 +17,13 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_home_to_nav_vehicule_detail"
+            app:destination="@id/nav_vehicule_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/navigation_userProfil"
@@ -41,6 +48,13 @@
         <action
             android:id="@+id/action_detailTache_to_ajouterMateriel"
             app:destination="@id/ajouterMateriel"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_detailTache_to_vehiculeFragment"
+            app:destination="@id/nav_vehicule_detail"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -83,4 +97,14 @@
         android:name="com.clovertech.autolib.ui.panne.AjouterPanneFragment"
         android:label="Signaler Panne"
         tools:layout="@layout/fragment_ajouter_panne" />
+    <fragment
+        android:id="@+id/nav_vehicule_detail"
+        android:name="com.clovertech.autolib.ui.vehiculedetail.VehiculeFragment"
+        android:label="Vehicule details"
+        tools:layout="@layout/fragment_vehicule" >
+        <argument
+            android:name="idVehicule"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

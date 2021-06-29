@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
+import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.adapters.ListTachesAdapter
 import com.clovertech.autolib.ui.adapters.TaskStepsAdapter
@@ -116,8 +117,11 @@ class HomeFragment : Fragment() {
 
         tacheViewModel.getTacheIdAgent(requireContext(), 100)
 
-        sendFCMToken()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        sendFCMToken()
     }
 
     fun update(tache: Tache) {
@@ -140,7 +144,7 @@ class HomeFragment : Fragment() {
             }
 
             // Post token
-            // notificationViewModel.postFCMToken(requireContext(), AgentToken(100, token))
+            notificationViewModel.postFCMToken(requireContext(), AgentToken(3, token))
 
             // Log
             Log.d(TAG, "FCM token : " + token)
