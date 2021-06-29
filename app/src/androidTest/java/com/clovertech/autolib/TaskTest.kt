@@ -11,7 +11,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.clovertech.autolib.views.activities.SampleActivity
+import com.clovertech.autolib.views.activities.HomeActivity
 import com.clovertech.autolib.adapters.MyViewHolder
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -23,8 +23,8 @@ import org.junit.runner.RunWith
 @LargeTest
 class TaskTest {
     @get:Rule
-    var activityRule: ActivityScenarioRule<SampleActivity> =
-        ActivityScenarioRule(SampleActivity::class.java)
+    var activityRule: ActivityScenarioRule<HomeActivity> =
+        ActivityScenarioRule(HomeActivity::class.java)
 
     @Test
     fun useAppContext() {

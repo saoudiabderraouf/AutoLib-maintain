@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agent_APP"
         android:usesCleartextTraffic="true">
+
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
@@ -24,19 +25,20 @@
             android:resource="@drawable/app_logo_jaune" />
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more. -->
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_channel_id" />
+
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <activity android:name="com.clovertech.autolib.views.activities.SampleActivity"/>
 
         <activity android:name="com.clovertech.autolib.views.activities.SplashScreen" >
             <intent-filter>
@@ -45,13 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name="com.clovertech.autolib.views.ui.onboarding.OnBoardingScreens" />
-        <activity android:name="com.clovertech.autolib.views.activities.MainActivity" />
-        <activity android:name="com.clovertech.autolib.views.activities.LoginActivity">
-
-        </activity>
+        <activity android:name="com.clovertech.autolib.views.activities.HomeActivity"/>
+        <activity android:name="com.clovertech.autolib.views.activities.OnBoardingActivity" />
+        <activity android:name="com.clovertech.autolib.views.activities.LoginActivity" />
 
 
         <service

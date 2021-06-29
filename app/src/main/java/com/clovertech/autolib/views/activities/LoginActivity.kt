@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         PrefUtils.with(this).save(PrefUtils.Keys.AGENT_NAME, name)
                         Toast.makeText(this, name.toString()+"hhhh", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(Intent(this, SampleActivity::class.java))
+                        startActivity(Intent(this, HomeActivity::class.java))
                         finish()
                     }
                 } else {

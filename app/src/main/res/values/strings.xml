@@ -18,6 +18,8 @@
     <string name="closeDialogTitle">Cloturation d\'une tache</string>
     <string name="closeMessagePre">"Voulez vous cloturer la tache : "</string>
     <string name="notif_title">Vous avez une nouvelle tache</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_next">Next</string>
 
 
 </resources>

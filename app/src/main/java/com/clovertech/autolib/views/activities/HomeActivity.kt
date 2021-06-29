@@ -33,14 +33,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 
 
-class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
+class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
+
     private lateinit var screenTitles: Array<String>
     private lateinit var screenIcons: Array<Drawable?>
     private lateinit var menuItems: Array<Int>
     private lateinit var adapter: DrawerAdapter
     private lateinit var navView: BottomNavigationView
-
-
     private var slidingRootNav: SlidingRootNav? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
