@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.network.client.NotificationsApiClient
-import com.clovertech.autolib.ui.notifications.Notif
+import com.clovertech.autolib.views.ui.notifications.Notif
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

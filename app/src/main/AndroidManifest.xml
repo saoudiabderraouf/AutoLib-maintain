@@ -36,9 +36,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activities.SampleActivity"/>
+        <activity android:name="com.clovertech.autolib.views.activities.SampleActivity"/>
 
-        <activity android:name=".activities.SplashScreen" >
+        <activity android:name="com.clovertech.autolib.views.activities.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,9 +47,9 @@
         </activity>
 
 
-        <activity android:name=".ui.adapters.OnBoardingScreens" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name="com.clovertech.autolib.views.ui.onboarding.OnBoardingScreens" />
+        <activity android:name="com.clovertech.autolib.views.activities.MainActivity" />
+        <activity android:name="com.clovertech.autolib.views.activities.LoginActivity">
 
         </activity>
 

@@ -11,8 +11,8 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.clovertech.autolib.activities.SampleActivity
-import com.clovertech.autolib.ui.adapters.MyViewHolder
+import com.clovertech.autolib.views.activities.SampleActivity
+import com.clovertech.autolib.adapters.MyViewHolder
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test

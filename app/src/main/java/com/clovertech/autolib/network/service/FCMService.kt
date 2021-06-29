@@ -11,7 +11,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.clovertech.autolib.R
-import com.clovertech.autolib.activities.SampleActivity
+import com.clovertech.autolib.views.activities.SampleActivity
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.network.client.NotificationsApiClient
 import com.clovertech.autolib.utils.PrefUtils

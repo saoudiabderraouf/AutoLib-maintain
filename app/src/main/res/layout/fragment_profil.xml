@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context=".ui.userProfil.UserProfilFragment">
+    tools:context=".views.ui.userProfil.UserProfilFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/colorBackground"
         android:orientation="vertical"
-        tools:context=".ui.userProfil.UserProfilFragment">
+        tools:context=".views.ui.userProfil.UserProfilFragment">
 
 
         <com.google.android.material.imageview.ShapeableImageView

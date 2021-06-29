@@ -2,14 +2,10 @@ package com.clovertech.autolib.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.repository.NotificationRepo
-import com.clovertech.autolib.ui.notifications.Notif
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.clovertech.autolib.views.ui.notifications.Notif
 
 class NotificationViewModel : ViewModel() {
 

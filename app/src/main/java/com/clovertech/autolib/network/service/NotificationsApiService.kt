@@ -1,7 +1,7 @@
 package com.clovertech.autolib.network.service
 
 import com.clovertech.autolib.model.AgentToken
-import com.clovertech.autolib.ui.notifications.Notif
+import com.clovertech.autolib.views.ui.notifications.Notif
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.clovertech.autolib.ui.home.HomeFragment"
+        android:name="com.clovertech.autolib.views.ui.home.HomeFragment"
         android:label="Accueil"
         tools:layout="@layout/fragment_home" >
         <action
@@ -27,22 +27,22 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_userProfil"
-        android:name="com.clovertech.autolib.ui.userProfil.UserProfilFragment"
+        android:name="com.clovertech.autolib.views.ui.userProfil.UserProfilFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.clovertech.autolib.ui.notifications.NotificationsFragment"
+        android:name="com.clovertech.autolib.views.ui.notifications.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="com.clovertech.autolib.ui.dashboard.DashboardFragment"
+        android:name="com.clovertech.autolib.views.ui.dashboard.DashboardFragment"
         android:label="Calendrier"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/detailTache"
-        android:name="com.clovertech.autolib.ui.home.DetailTache"
+        android:name="com.clovertech.autolib.views.ui.home.DetailTache"
         android:label="Détail"
         tools:layout="@layout/fragment_detail_tache" >
         <action
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/ajouterMateriel"
-        android:name="com.clovertech.autolib.ui.home.AjouterMateriel"
+        android:name="com.clovertech.autolib.views.ui.home.AjouterMateriel"
         android:label="Ajouter un Materiel"
         tools:layout="@layout/fragment_ajouter_materiel" >
         <action
@@ -76,7 +76,7 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.clovertech.autolib.ui.settings.SettingsFragment"
+        android:name="com.clovertech.autolib.views.ui.settings.SettingsFragment"
         android:label="Paramètres"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/themeFragment"
-        android:name="com.clovertech.autolib.ThemeFragment"
+        android:name="com.clovertech.autolib.views.ui.settings.ThemeFragment"
         android:label="Theme"
         tools:layout="@layout/fragment_theme" >
         <action
@@ -94,12 +94,12 @@
     </fragment>
     <fragment
         android:id="@+id/nav_panne"
-        android:name="com.clovertech.autolib.ui.panne.AjouterPanneFragment"
+        android:name="com.clovertech.autolib.views.ui.panne.AjouterPanneFragment"
         android:label="Signaler Panne"
         tools:layout="@layout/fragment_ajouter_panne" />
     <fragment
         android:id="@+id/nav_vehicule_detail"
-        android:name="com.clovertech.autolib.ui.vehiculedetail.VehiculeFragment"
+        android:name="com.clovertech.autolib.views.ui.vehiculedetail.VehiculeFragment"
         android:label="Vehicule details"
         tools:layout="@layout/fragment_vehicule" >
         <argument
