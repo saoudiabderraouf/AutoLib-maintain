@@ -34,6 +34,7 @@ import com.google.firebase.FirebaseApp
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.menu_left_drawer.*
 
 
 class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
@@ -116,12 +117,15 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
                 .inject()
 
 
+
             adapter.setListener(this)
             val list = findViewById<RecyclerView>(R.id.list)
             list.isNestedScrollingEnabled = false
             list.layoutManager = LinearLayoutManager(this)
             list.adapter = adapter
             adapter.setSelected(POS_ACCUEIL)
+
+            nomUser.setText(PrefUtils.with(this).getString(PrefUtils.Keys.nameAgent,"Hamid Reda"))
         }
     }
 
@@ -237,4 +241,5 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
         nav_view.enableItemShiftingMode(false)
         nav_view.enableAnimation(true)
     }
+
 }

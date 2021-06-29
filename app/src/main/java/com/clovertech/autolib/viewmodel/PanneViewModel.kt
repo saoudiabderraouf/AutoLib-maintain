@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.Panne
+import com.clovertech.autolib.model.PanneResponse
 import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.repository.PanneRepo
 import com.clovertech.autolib.repository.TacheRepo
@@ -14,7 +15,7 @@ import retrofit2.Response
 
 
 class PanneViewModel : ViewModel(){
-    val ResponsePanne: MutableLiveData<Response<Panne>> = MutableLiveData()
+    val ResponsePanne: MutableLiveData<Response<PanneResponse>> = MutableLiveData()
     fun getAllPannes(context: Context): LiveData<List<Panne>>? {
         return PanneRepo.getAllPannes(context)
     }

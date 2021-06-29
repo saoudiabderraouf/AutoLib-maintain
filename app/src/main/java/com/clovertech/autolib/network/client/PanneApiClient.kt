@@ -21,7 +21,7 @@ object PanneApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://3353aa3edbce.ngrok.io/addPanne/")
+            .baseUrl("http://3353aa3edbce.ngrok.io")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
