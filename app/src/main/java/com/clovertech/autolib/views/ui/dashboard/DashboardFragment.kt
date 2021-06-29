@@ -12,7 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Task
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
@@ -31,7 +31,7 @@ class DashboardFragment : Fragment() {
     private val calendar = Calendar.getInstance()
     private val allTasks = mutableListOf<Task>()
 
-    private lateinit var taskViewModel: TacheViewModel
+    private lateinit var taskViewModel: TaskViewModel
     private lateinit var pagerAdapter: TaskFragmentAdapter
     private lateinit var viewPager: ViewPager2
 
@@ -41,7 +41,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         taskViewModel =
-            ViewModelProvider(this).get(TacheViewModel::class.java)
+            ViewModelProvider(this).get(TaskViewModel::class.java)
         return inflater.inflate(
             R.layout.fragment_dashboard,
             container, false
@@ -60,7 +60,7 @@ class DashboardFragment : Fragment() {
             {
                 pagerAdapter.updateTasksUI(it)
             })*/
-        taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
             allTasks.clear()
             allTasks.addAll(it)
         })

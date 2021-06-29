@@ -11,7 +11,7 @@ import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Login
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
-import com.clovertech.autolib.viewmodel.ProfilViewModel
+import com.clovertech.autolib.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -82,12 +82,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
 
     fun shareToken(token: String, idUser: Int) {
-        PrefUtils.with(this).save(PrefUtils.Keys.token, token)
+        PrefUtils.with(this).save(PrefUtils.Keys.TOKEN, token)
         PrefUtils.with(this).save(PrefUtils.Keys.ID, idUser)
-        var viewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
+        var viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         if (idUser != 0) {
-            viewModel.getThisProfil(idUser)
+            viewModel.getThisProfile(idUser)
             viewModel.responseProfil.observe(this, Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(this, it.code().toString(), Toast.LENGTH_SHORT)
@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     var profil = it.body()
                     if (profil != null) {
                         var name = profil.firstName + " " + profil.lastName
-                        PrefUtils.with(this).save(PrefUtils.Keys.nameAgent, name)
+                        PrefUtils.with(this).save(PrefUtils.Keys.AGENT_NAME, name)
                         Toast.makeText(this, name.toString()+"hhhh", Toast.LENGTH_SHORT)
                             .show()
                         startActivity(Intent(this, SampleActivity::class.java))

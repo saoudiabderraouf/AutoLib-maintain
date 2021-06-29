@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MaterielViewModel : ViewModel() {
+
     val ResponseMateriel: MutableLiveData<Response<Materiel>> = MutableLiveData()
     val ResponseToken: MutableLiveData<Response<Token>> = MutableLiveData()
     val ResponseListMateriel: MutableLiveData<Response<List<Materiel>>> = MutableLiveData()

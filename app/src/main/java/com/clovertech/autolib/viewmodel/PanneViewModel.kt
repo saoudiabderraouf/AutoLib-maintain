@@ -13,14 +13,17 @@ import retrofit2.Response
 
 
 class PanneViewModel : ViewModel(){
-    val ResponsePanne: MutableLiveData<Response<PanneResponse>> = MutableLiveData()
+
+    private val responsePanne: MutableLiveData<Response<PanneResponse>> = MutableLiveData()
+
     fun getAllPannes(context: Context): LiveData<List<Panne>>? {
         return PanneRepo.getAllPannes(context)
     }
+
     fun addPanne(panne: Panne){
         viewModelScope.launch {
             val response = PanneRepo.addPanne(panne)
-            ResponsePanne.value= response
+            responsePanne.value= response
         }
 
     }

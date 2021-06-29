@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.views.ui.home.HomeFragment
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 
-class ListTasksAdapter(val context: Context, val vm: TacheViewModel, frag: HomeFragment) :
+class ListTasksAdapter(val context: Context, val vm: TaskViewModel, frag: HomeFragment) :
     RecyclerView.Adapter<ListTasksAdapter.MyViewHolder>() {
 
     var fragment = frag

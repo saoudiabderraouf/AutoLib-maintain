@@ -15,17 +15,12 @@ class PrefUtils {
 
     // enum to store keys
     enum class Keys {
-        KEY1,
         ID,
-        token,
-        idModel,
-        taskUuid,
-
-        dark,
-
-        nameAgent,
+        TOKEN,
+        TASK_UUID,
+        DARK_MODE,
+        AGENT_NAME,
         NOTIFICATION_COUNT
-
     }
 
     companion object {
@@ -85,18 +80,6 @@ class PrefUtils {
         editor.putStringSet(key.name, value).apply()
     }
 
-    fun getBoolean(key: Keys, defValue: Boolean): Boolean {
-        return preferences.getBoolean(key.name, defValue)
-    }
-
-    fun getFloat(key: Keys, defValue: Float): Float {
-        return try {
-            preferences.getFloat(key.name, defValue)
-        } catch (ex: ClassCastException) {
-            preferences.getString(key.name, defValue.toString())!!.toFloat()
-        }
-    }
-
     fun getInt(key: Keys, defValue: Int): Int {
         return try {
             preferences.getInt(key.name, defValue)
@@ -105,28 +88,8 @@ class PrefUtils {
         }
     }
 
-    fun getLong(key: Keys, defValue: Long): Long {
-        return try {
-            preferences.getLong(key.name, defValue)
-        } catch (ex: ClassCastException) {
-            preferences.getString(key.name, defValue.toString())!!.toLong()
-        }
-    }
-
     fun getString(key: Keys, defValue: String): String? {
         return preferences.getString(key.name, defValue)
-    }
-
-    fun getStringSet(key: Keys, defValue: Set<String>): Set<String>? {
-        return preferences.getStringSet(key.name, defValue)
-    }
-
-    fun getAll(): MutableMap<String, *>? {
-        return preferences.all
-    }
-
-    fun remove(key: String) {
-        editor.remove(key).apply()
     }
 
     fun clear() {
@@ -142,5 +105,37 @@ class PrefUtils {
             return PrefUtils(context, name, mode)
         }
     }
+
+    /*fun getLong(key: Keys, defValue: Long): Long {
+        return try {
+            preferences.getLong(key.name, defValue)
+        } catch (ex: ClassCastException) {
+            preferences.getString(key.name, defValue.toString())!!.toLong()
+        }
+    }
+
+    fun getStringSet(key: Keys, defValue: Set<String>): Set<String>? {
+        return preferences.getStringSet(key.name, defValue)
+    }
+
+    fun getAll(): MutableMap<String, *>? {
+        return preferences.all
+    }
+
+    fun remove(key: String) {
+        editor.remove(key).apply()
+    }
+
+    fun getBoolean(key: Keys, defValue: Boolean): Boolean {
+        return preferences.getBoolean(key.name, defValue)
+    }
+
+    fun getFloat(key: Keys, defValue: Float): Float {
+        return try {
+            preferences.getFloat(key.name, defValue)
+        } catch (ex: ClassCastException) {
+            preferences.getString(key.name, defValue.toString())!!.toFloat()
+        }
+    }*/
 
 }

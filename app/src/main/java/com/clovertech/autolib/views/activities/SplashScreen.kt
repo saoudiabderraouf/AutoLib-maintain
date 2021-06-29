@@ -21,10 +21,10 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
 
-        if (PrefUtils.with(this).getString(PrefUtils.Keys.dark,"")=="dark"){
+        if (PrefUtils.with(this).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }else{
-            if(PrefUtils.with(this).getString(PrefUtils.Keys.dark,"")=="light"){
+            if(PrefUtils.with(this).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             else{

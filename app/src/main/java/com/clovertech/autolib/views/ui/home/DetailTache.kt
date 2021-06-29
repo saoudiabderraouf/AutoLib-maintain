@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.adapters.MaterialAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.fragment_detail_tache.*
 
 
@@ -32,7 +32,7 @@ class DetailTache : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        var viewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
 
         titreTask.text = viewModel.task.taskTitle
         descriptTask.text = viewModel.task.description

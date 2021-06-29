@@ -46,7 +46,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val token = PrefUtils.with(this).getString(PrefUtils.Keys.token, "")
+        val token = PrefUtils.with(this).getString(PrefUtils.Keys.TOKEN, "")
         if (token == "") {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -121,7 +121,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
             list.adapter = adapter
             adapter.setSelected(POS_ACCUEIL)
 
-            nomUser.setText(PrefUtils.with(this).getString(PrefUtils.Keys.nameAgent,"Hamid Reda"))
+            nomUser.setText(PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda"))
         }
     }
 
@@ -170,7 +170,7 @@ class SampleActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener
                 isAtBottom = true
             }
             POS_LOGOUT -> {
-                PrefUtils.with(this).save(PrefUtils.Keys.token, "")
+                PrefUtils.with(this).save(PrefUtils.Keys.TOKEN, "")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()

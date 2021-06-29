@@ -44,7 +44,6 @@ class DialogUtils {
     }
 
     private class Builder(val context: Context) {
-
         fun build(): DialogUtils {
             return DialogUtils(context)
         }

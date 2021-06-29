@@ -11,8 +11,11 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class EquipmentViewModel : ViewModel() {
+
     val response: MutableLiveData<Response<EquipmentToken>> = MutableLiveData()
     val responseEquipment: MutableLiveData<Response<List<Equipment>>> = MutableLiveData()
+
+
     fun addMateriel(newEquipment: NewEquipment) {
         viewModelScope.launch {
             val response: Response<EquipmentToken> = EquipmentRepo.addNewEquipment(newEquipment)

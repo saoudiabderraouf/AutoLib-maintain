@@ -9,27 +9,22 @@ import com.clovertech.autolib.repository.TaskRepo
 import kotlinx.coroutines.launch
 import java.util.*
 
-class TacheViewModel : ViewModel() {
+class TaskViewModel : ViewModel() {
 
-    var task: Task =
-        Task(
-            0, 0, "", "", 0, Date(), Date(),
-            mutableListOf(), mutableListOf(), ""
-        )
+    var task: Task = Task(0, 0, "", "", 0, Date(), Date(),
+            mutableListOf(), mutableListOf(), "")
 
 
-
-
-    fun updateTache(context: Context, task: Task) {
+    fun updateTask(context: Context, task: Task) {
         TaskRepo.updateTask(context, task)
     }
 
 
-    fun getAllTaches(context: Context): LiveData<List<Task>>? {
+    fun getAllTasks(context: Context): LiveData<List<Task>>? {
         return TaskRepo.getAllTasks(context)
     }
 
-    fun getTacheIdAgent(context: Context, id: Int) {
+    fun getTasksByIdAgent(context: Context, id: Int) {
         viewModelScope.launch {
             TaskRepo.getTaskByIdAgent(context, id)
         }

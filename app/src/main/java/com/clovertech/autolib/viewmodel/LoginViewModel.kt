@@ -1,6 +1,5 @@
 package com.clovertech.autolib.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,12 +10,13 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
-    val Response: MutableLiveData<Response<Token>> = MutableLiveData()
+
+    private val loginResponse: MutableLiveData<Response<Token>> = MutableLiveData()
 
     fun onLoginButtonClick(login: Login) {
         viewModelScope.launch {
-            val response: Response<Token> = LoginRepo().userLogin(login)
-            Response.value = response
+            val response: Response<Token> = LoginRepo.userLogin(login)
+            loginResponse.value = response
         }
 
     }

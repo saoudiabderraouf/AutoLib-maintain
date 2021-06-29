@@ -29,10 +29,10 @@ class SettingsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.dark,"")=="dark"){
+        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
             nightModeStateText.setText("Noir")
         }else{
-            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.dark,"")=="light"){
+            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
                 nightModeStateText.setText("Clair")
             }
             else{

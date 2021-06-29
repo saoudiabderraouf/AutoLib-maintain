@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.clovertech.autolib.R
 import com.clovertech.autolib.utils.PrefUtils
-import com.clovertech.autolib.viewmodel.ProfilViewModel
+import com.clovertech.autolib.viewmodel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profil.*
 
 class UserProfilFragment : Fragment() {
@@ -27,11 +27,11 @@ class UserProfilFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        var viewModel = ViewModelProvider(this).get(ProfilViewModel::class.java)
+        var viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
        // id = 3
         if (id != 0) {
-            viewModel.getThisProfil(id)
+            viewModel.getThisProfile(id)
             viewModel.responseProfil.observe(viewLifecycleOwner, Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)

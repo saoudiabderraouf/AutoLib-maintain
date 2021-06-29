@@ -42,10 +42,10 @@ class ThemeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.dark,"")=="dark"){
+        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
             darkButton.isActivated=true
         }else{
-            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.dark,"")=="light"){
+            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
                 lightButton.isActivated=true
             }
             else{
@@ -53,15 +53,15 @@ class ThemeFragment : Fragment() {
             }
         }
         systemButton.setOnClickListener(){
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.dark,"system")
+            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"system")
             SystemMode(it)
         }
         lightButton.setOnClickListener(){
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.dark,"dark")
+            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"dark")
             NightModeOFF(it)
         }
         darkButton.setOnClickListener(){
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.dark,"light")
+            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"light")
             NightModeON(it)
         }
     }

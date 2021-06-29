@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Step
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 
-class TaskStepsAdapter(val context: Context, val viewModel: TacheViewModel) :
+class TaskStepsAdapter(val context: Context, val viewModel: TaskViewModel) :
     RecyclerView.Adapter<TaskStepsAdapter.ViewHolderTask>() {
 
     var data = listOf<Step>()
@@ -32,7 +32,7 @@ class TaskStepsAdapter(val context: Context, val viewModel: TacheViewModel) :
             data[position].completed = !data[position].completed
             holder.stepTitle.isChecked = data[position].completed
             viewModel.task.steps?.get(position)?.completed = data[position].completed
-            viewModel.updateTache(context, viewModel.task)
+            viewModel.updateTask(context, viewModel.task)
         }
 
     }

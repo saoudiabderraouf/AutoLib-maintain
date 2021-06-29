@@ -21,7 +21,7 @@ import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.NotificationViewModel
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
     val TAG = "LOG TAG"
 
-    lateinit var tacheViewModel: TacheViewModel
+    lateinit var taskViewModel: TaskViewModel
     lateinit var notificationViewModel: NotificationViewModel
     lateinit var adapterSteps: TaskStepsAdapter
     lateinit var taskPrem: Task
@@ -48,12 +48,12 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        textView4.text = "Salut! "+PrefUtils.with(requireContext()).getString(PrefUtils.Keys.nameAgent, "Hamid Reda")
+        textView4.text = "Salut! "+PrefUtils.with(requireContext()).getString(PrefUtils.Keys.AGENT_NAME, "Hamid Reda")
 
-        tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        taskViewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
         notificationViewModel =
             ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        var adapter = ListTasksAdapter(requireActivity(), tacheViewModel, this)
+        var adapter = ListTasksAdapter(requireActivity(), taskViewModel, this)
         pagerTasksHome.adapter = adapter
         pagerTasksHome.clipToPadding = false
         pagerTasksHome.clipChildren = false
@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                tacheViewModel.task = adapter.data[position]
+                taskViewModel.task = adapter.data[position]
                 adapterSteps.setListSteps(adapter.data[position].steps!!)
             }
 
@@ -84,22 +84,22 @@ class HomeFragment : Fragment() {
                 super.onPageScrollStateChanged(state)
             }
         })
-        adapterSteps = TaskStepsAdapter(requireActivity(), tacheViewModel)
+        adapterSteps = TaskStepsAdapter(requireActivity(), taskViewModel)
         tasksRecyclerView.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         tasksRecyclerView.isNestedScrollingEnabled = false
         tasksRecyclerView.adapter = adapterSteps
 
-        tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        taskViewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
         var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
         id = 3
 
         if (id != 0) {
             /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
                  .show()*/
-            tacheViewModel.getTacheIdAgent(requireContext(), 100)
+            taskViewModel.getTasksByIdAgent(requireContext(), 100)
             // tacheViewModel.getTacheAllModel(requireContext())
-            tacheViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner, Observer {
+            taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
                 var listFiltered =
                     it.filter { tache -> ((tache.idTaskState == 1) || (tache.idTaskState == 2)) }
                 adapter.setListTache(listFiltered)
@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
             it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
         }
 
-        tacheViewModel.getTacheIdAgent(requireContext(), 100)
+        taskViewModel.getTasksByIdAgent(requireContext(), 100)
 
     }
 
@@ -125,7 +125,7 @@ class HomeFragment : Fragment() {
     }
 
     fun update(task: Task) {
-        var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        var viewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
         task.steps?.let { adapterSteps.setListSteps(it) }
         viewModel.task = task
     }

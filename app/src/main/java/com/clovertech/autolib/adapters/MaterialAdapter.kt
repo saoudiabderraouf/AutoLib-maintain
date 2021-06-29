@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Materiel
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 
-class MaterialAdapter(val context: Context, val vm: TacheViewModel) :
+class MaterialAdapter(val context: Context, val vm: TaskViewModel) :
     RecyclerView.Adapter<MaterialAdapter.MaterialViewHolder>() {
     var data = listOf<Materiel>()
 

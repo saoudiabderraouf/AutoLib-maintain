@@ -16,7 +16,7 @@ import com.clovertech.autolib.model.Materiel
 import com.clovertech.autolib.model.NewEquipment
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.EquipmentViewModel
-import com.clovertech.autolib.viewmodel.TacheViewModel
+import com.clovertech.autolib.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.fragment_ajouter_materiel.*
 
 
@@ -37,7 +37,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
         super.onActivityCreated(savedInstanceState)
         equipmentViewModel =
             ViewModelProvider(requireActivity()).get(EquipmentViewModel::class.java)
-        var viewModelTask = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
+        var viewModelTask = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
         equipmentViewModel.getAllEquipment()
         equipmentViewModel.responseEquipment.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful){
@@ -63,7 +63,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
 
         ajouter_materiel.setOnClickListener {
             val view=it
-            val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.taskUuid, "")
+            val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.TASK_UUID, "")
             var newEquipement = token?.let { it1 ->
                 NewEquipment(
                     materielDescript.text.toString(),
@@ -89,7 +89,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
                             listEquipment.add(material)
                         }
                         viewModelTask.task.usedEquipements = listEquipment
-                        viewModelTask.updateTache(requireContext(), viewModelTask.task)
+                        viewModelTask.updateTask(requireContext(), viewModelTask.task)
 
                         Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
                             .show()
