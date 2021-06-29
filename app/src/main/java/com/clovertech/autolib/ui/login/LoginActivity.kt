@@ -67,8 +67,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             val content = response.body()
                             if (content != null) {
                                 shareToken(content.token, content.id)
-                                startActivity(Intent(this, SampleActivity::class.java))
-                                finish()
+
                             }
 
                         } else {
@@ -100,6 +99,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     if (profil != null) {
                         var name = profil.firstName + " " + profil.lastName
                         PrefUtils.with(this).save(PrefUtils.Keys.nameAgent, name)
+                        Toast.makeText(this, name.toString()+"hhhh", Toast.LENGTH_SHORT)
+                            .show()
+                        startActivity(Intent(this, SampleActivity::class.java))
+                        finish()
                     }
                 } else {
                     Toast.makeText(this, it.code().toString(), Toast.LENGTH_SHORT)

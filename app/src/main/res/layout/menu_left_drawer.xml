@@ -29,11 +29,11 @@
         android:paddingRight="24dp">
 
         <TextView
+            android:id="@+id/nomUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Hamid Reda"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/dirtyWhite"
             android:textSize="24sp" />
 

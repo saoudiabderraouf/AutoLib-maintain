@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val vm = ViewModelProvider(requireActivity()).get(HomeViewModel::class.java)
-        textView4.text = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.nameAgent, "")
+        textView4.text = "Salut! "+PrefUtils.with(requireContext()).getString(PrefUtils.Keys.nameAgent, "Hamid Reda")
 
         tacheViewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         notificationViewModel =

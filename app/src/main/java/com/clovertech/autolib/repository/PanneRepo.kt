@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Panne
+import com.clovertech.autolib.model.PanneResponse
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.network.client.PanneApiClient
 import com.clovertech.autolib.network.client.TacheApiClient
@@ -43,7 +44,7 @@ class PanneRepo {
         }
 
 
-        suspend fun addPanne(panne:Panne): Response<Panne> {
+        suspend fun addPanne(panne:Panne): Response<PanneResponse> {
             return PanneApiClient.panneApiService.insertPanne(panne)
         }
 
