@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.Task
-import com.clovertech.autolib.repository.TacheRepo
+import com.clovertech.autolib.repository.TaskRepo
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -21,17 +21,17 @@ class TacheViewModel : ViewModel() {
 
 
     fun updateTache(context: Context, task: Task) {
-        TacheRepo.updateTache(context, task)
+        TaskRepo.updateTask(context, task)
     }
 
 
     fun getAllTaches(context: Context): LiveData<List<Task>>? {
-        return TacheRepo.getAllTaches(context)
+        return TaskRepo.getAllTasks(context)
     }
 
     fun getTacheIdAgent(context: Context, id: Int) {
         viewModelScope.launch {
-            TacheRepo.getTacheIdAgent(context, id)
+            TaskRepo.getTaskByIdAgent(context, id)
         }
     }
 

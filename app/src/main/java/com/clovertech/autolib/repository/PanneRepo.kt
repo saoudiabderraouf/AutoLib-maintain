@@ -8,33 +8,26 @@ import com.clovertech.autolib.model.PanneResponse
 import com.clovertech.autolib.network.client.PanneApiClient
 import retrofit2.Response
 
-class PanneRepo {
-    companion object {
-
+object PanneRepo {
         var appDb: AutolibDatabase? = null
 
         var pannes: LiveData<List<Panne>>? = null
 
-        fun initializeDB(context: Context): AutolibDatabase {
+        private fun initializeDB(context: Context): AutolibDatabase {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
 
 
         fun getAllPannes(context: Context): LiveData<List<Panne>>? {
+            appDb = initializeDB(context)
+            pannes = appDb!!.panneDao().getAllPannes()
 
-            PanneRepo.appDb = PanneRepo.initializeDB(context)
-
-            PanneRepo.pannes = PanneRepo.appDb!!.panneDao().getAllPannes()
-
-            return PanneRepo.pannes
+            return pannes
         }
 
 
         suspend fun addPanne(panne:Panne): Response<PanneResponse> {
             return PanneApiClient.PANNE_API_SERVICE.insertPanne(panne)
         }
-
-
-    }
 }
