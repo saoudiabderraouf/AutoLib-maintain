@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.views.ui.onboarding.OnBoardingItem
+import com.clovertech.autolib.model.OnBoardingItem
 
 class OnBoardingAdapter(private val onBoardingItems: List<OnBoardingItem>) :
     RecyclerView.Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
