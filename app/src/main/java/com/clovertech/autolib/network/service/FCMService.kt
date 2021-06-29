@@ -11,9 +11,9 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.clovertech.autolib.R
+import com.clovertech.autolib.activities.SampleActivity
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.network.client.NotificationsApiClient
-import com.clovertech.autolib.activities.MainActivity
 import com.clovertech.autolib.utils.PrefUtils
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -44,7 +44,7 @@ class FCMService: FirebaseMessagingService() {
         createNotificationChannel()
         
         // Create push notification
-        val intent = Intent(this, MainActivity::class.java).apply {
+        val intent = Intent(this, SampleActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)

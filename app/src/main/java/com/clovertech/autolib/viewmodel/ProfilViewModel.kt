@@ -13,17 +13,6 @@ import retrofit2.Response
 class ProfilViewModel : ViewModel() {
     val ResponseProfil: MutableLiveData<Response<Utilisateur>> = MutableLiveData()
 
-    fun deleteProfil(context: Context, profil: Agent) {
-        ProfilRepo.deleteProfil(context, profil)
-    }
-
-    fun getProfilById(context: Context, id: Int): Agent {
-        return ProfilRepo.getProfilById(context, id)
-    }
-
-    fun updateProfil(context: Context, profil: Agent) {
-        ProfilRepo.updateProfil(context, profil)
-    }
 
     fun getThisProfil(id: Int) {
         viewModelScope.launch {
