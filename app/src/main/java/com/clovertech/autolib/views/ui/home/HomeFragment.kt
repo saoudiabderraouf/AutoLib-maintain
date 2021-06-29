@@ -16,7 +16,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.AgentToken
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
 import com.clovertech.autolib.utils.PrefUtils
@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
     lateinit var tacheViewModel: TacheViewModel
     lateinit var notificationViewModel: NotificationViewModel
     lateinit var adapterSteps: TaskStepsAdapter
-    lateinit var tachePrem: Tache
+    lateinit var taskPrem: Task
 
 
     override fun onCreateView(
@@ -124,10 +124,10 @@ class HomeFragment : Fragment() {
         sendFCMToken()
     }
 
-    fun update(tache: Tache) {
+    fun update(task: Task) {
         var viewModel = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
-        tache.steps?.let { adapterSteps.setListSteps(it) }
-        viewModel.task = tache
+        task.steps?.let { adapterSteps.setListSteps(it) }
+        viewModel.task = task
     }
 
     private fun sendFCMToken() {
@@ -152,7 +152,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    fun goToTaskDetails(tache: Tache) {
+    fun goToTaskDetails(task: Task) {
         view?.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
     }
 }

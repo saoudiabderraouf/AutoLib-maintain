@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "taskModel")
-data class TacheModel(
+data class TaskModel(
     @PrimaryKey var id: Int,
     var taskModelName: String,
     var steps: List<Step>

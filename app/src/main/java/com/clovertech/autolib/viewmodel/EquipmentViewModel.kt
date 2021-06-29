@@ -3,20 +3,20 @@ package com.clovertech.autolib.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.clovertech.autolib.model.Equipement
-import com.clovertech.autolib.model.EquipementToken
-import com.clovertech.autolib.model.NewEquipement
+import com.clovertech.autolib.model.Equipment
+import com.clovertech.autolib.model.EquipmentToken
+import com.clovertech.autolib.model.NewEquipment
 import com.clovertech.autolib.repository.EquipmentRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class EquipmentViewModel : ViewModel() {
-    val Response: MutableLiveData<Response<EquipementToken>> = MutableLiveData()
-    val ResponseEquipment: MutableLiveData<Response<List<Equipement>>> = MutableLiveData()
-    fun addMateriel(newEquipement: NewEquipement) {
+    val response: MutableLiveData<Response<EquipmentToken>> = MutableLiveData()
+    val responseEquipment: MutableLiveData<Response<List<Equipment>>> = MutableLiveData()
+    fun addMateriel(newEquipment: NewEquipment) {
         viewModelScope.launch {
-            val response: Response<EquipementToken> = EquipmentRepo.addNewEquipment(newEquipement)
-            Response.value = response
+            val response: Response<EquipmentToken> = EquipmentRepo.addNewEquipment(newEquipment)
+            this@EquipmentViewModel.response.value = response
         }
 
     }
@@ -24,7 +24,7 @@ class EquipmentViewModel : ViewModel() {
     fun getAllEquipment() {
         viewModelScope.launch {
             val response = EquipmentRepo.getAllEquipments()
-            ResponseEquipment.value = response
+            responseEquipment.value = response
         }
     }
 

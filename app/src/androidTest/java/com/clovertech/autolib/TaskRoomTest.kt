@@ -5,7 +5,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.clovertech.autolib.cache.db.AutolibDatabase
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class TaskRoomTest {
     @Test
     fun testInsertAndGetUser() {
         val task =
-            Tache(0, 0, "", "", 0, Date(), Date(),
+            Task(0, 0, "", "", 0, Date(), Date(),
                 mutableListOf(), mutableListOf(), "")
         CoroutineScope(Dispatchers.IO).launch {
             mDataBase.taskDao().addTask(task)

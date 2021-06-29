@@ -1,7 +1,6 @@
 package com.clovertech.autolib.network.client
 
-import com.clovertech.autolib.network.service.PannApiService
-import com.clovertech.autolib.network.service.TacheApiService
+import com.clovertech.autolib.network.service.PanneApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -10,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object PanneApiClient {
+
     private val gson : Gson by lazy {
         GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
     }
@@ -27,7 +27,7 @@ object PanneApiClient {
             .build()
     }
 
-    val panneApiService: PannApiService by lazy {
-        retrofit.create(PannApiService::class.java)
+    val PANNE_API_SERVICE: PanneApiService by lazy {
+        retrofit.create(PanneApiService::class.java)
     }
 }

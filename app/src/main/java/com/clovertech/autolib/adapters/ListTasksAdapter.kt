@@ -8,7 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.views.ui.home.HomeFragment
 import com.clovertech.autolib.viewmodel.TacheViewModel
 
@@ -16,7 +16,7 @@ class ListTasksAdapter(val context: Context, val vm: TacheViewModel, frag: HomeF
     RecyclerView.Adapter<ListTasksAdapter.MyViewHolder>() {
 
     var fragment = frag
-    var data = listOf<Tache>()
+    var data = listOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -47,7 +47,7 @@ class ListTasksAdapter(val context: Context, val vm: TacheViewModel, frag: HomeF
         holder.progress.text = "$progress %"
     }
 
-    fun setListTache(list: List<Tache>) {
+    fun setListTache(list: List<Task>) {
         data = list
         notifyDataSetChanged()
     }

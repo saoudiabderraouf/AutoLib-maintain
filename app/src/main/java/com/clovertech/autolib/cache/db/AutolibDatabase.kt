@@ -11,8 +11,8 @@ import com.clovertech.autolib.model.*
 import com.clovertech.autolib.views.ui.notifications.Notif
 
 @Database(
-    entities = [Auth_utilisateur::class, Agent::class
-        , Step::class, Tache::class, TacheModel::class
+    entities = [AuthUser::class, Agent::class
+        , Step::class, Task::class, TaskModel::class
         , Materiel::class, Panne::class, Notif::class],
     version = 1,
     exportSchema = false)

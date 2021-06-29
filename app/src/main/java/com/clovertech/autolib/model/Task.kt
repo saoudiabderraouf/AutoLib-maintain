@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity(tableName = "Tasks")
-data class Tache(
+data class Task(
 
     @Expose var idAgent: Int,
     @Expose @SerializedName("idVehicle")  var idVehicule: Int,

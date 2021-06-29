@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 
 
 
-data class NewEquipement(
+data class NewEquipment(
     @Expose var description: String,
     @Expose var quantity: Int,
     @Expose var equipment: String,

@@ -1,6 +1,6 @@
 package com.clovertech.autolib.model
 
-data class Utilisateur(
+data class User(
     var idUser: String,
     var userName: String,
     var lastName: String,

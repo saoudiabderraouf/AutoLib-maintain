@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Materiel
-import com.clovertech.autolib.model.NewEquipement
+import com.clovertech.autolib.model.NewEquipment
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.EquipmentViewModel
 import com.clovertech.autolib.viewmodel.TacheViewModel
@@ -39,7 +39,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
             ViewModelProvider(requireActivity()).get(EquipmentViewModel::class.java)
         var viewModelTask = ViewModelProvider(requireActivity()).get(TacheViewModel::class.java)
         equipmentViewModel.getAllEquipment()
-        equipmentViewModel.ResponseEquipment.observe(viewLifecycleOwner, Observer {
+        equipmentViewModel.responseEquipment.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful){
                 /*equipements= mutableListOf()
                 for (modelEquipment in it.body()!!){
@@ -65,7 +65,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
             val view=it
             val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.taskUuid, "")
             var newEquipement = token?.let { it1 ->
-                NewEquipement(
+                NewEquipment(
                     materielDescript.text.toString(),
                     materielQuantite.text.toString().toInt(),
                     "282d4458-aaeb-4e92-a674-12320b1de46a",
@@ -81,7 +81,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
             if (newEquipement != null) {
                 equipmentViewModel.addMateriel(newEquipement)
 
-                equipmentViewModel.Response.observe(viewLifecycleOwner, Observer {
+                equipmentViewModel.response.observe(viewLifecycleOwner, Observer {
                     if (it.code() == 200) {
                         var listEquipment: MutableList<Materiel>? =
                             viewModelTask.task.usedEquipements as MutableList<Materiel>?

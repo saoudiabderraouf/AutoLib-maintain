@@ -47,8 +47,9 @@ class FCMService: FirebaseMessagingService() {
         val intent = Intent(this, SampleActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-        var builder = NotificationCompat.Builder(this, getString(R.string.default_channel_id))
+        val builder = NotificationCompat.Builder(this, getString(R.string.default_channel_id))
             .setSmallIcon(R.drawable.app_logo_jaune)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.notif_msg_default))
@@ -56,6 +57,7 @@ class FCMService: FirebaseMessagingService() {
             .setVibrate(longArrayOf(1000))
             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
         with(NotificationManagerCompat.from(this)) {
             // notificationId is a unique int for each notification that you must define
             val notificationId = PrefUtils.with(applicationContext).getInt(PrefUtils.Keys.NOTIFICATION_COUNT, 0)

@@ -5,9 +5,9 @@ import android.content.DialogInterface
 import androidx.lifecycle.LiveData
 import com.clovertech.autolib.R
 import com.clovertech.autolib.cache.db.AutolibDatabase
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.model.TaskState
-import com.clovertech.autolib.network.client.TacheApiClient
+import com.clovertech.autolib.network.client.TaskApiClient
 import com.clovertech.autolib.utils.DialogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,11 +15,12 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class TacheRepo {
+
     companion object {
 
         var appDb: AutolibDatabase? = null
 
-        var taches: LiveData<List<Tache>>? = null
+        var taches: LiveData<List<Task>>? = null
 
         fun initializeDB(context: Context): AutolibDatabase {
             return AutolibDatabase.getDatabaseClient(context)
@@ -27,15 +28,15 @@ class TacheRepo {
 
         /**
          * Inserer une tache dans la cache
-         * @param tache
+         * @param task
          * @param context*/
 
-        fun insertTache(context: Context, tache: Tache) {
+        fun insertTache(context: Context, task: Task) {
 
             appDb = initializeDB(context)
 
             CoroutineScope(Dispatchers.IO).launch {
-                appDb!!.tacheDao().addTask(tache)
+                appDb!!.taskDao().addTask(task)
             }
 
         }
@@ -46,11 +47,11 @@ class TacheRepo {
          *  */
 
 
-        fun getAllTaches(context: Context): LiveData<List<Tache>>? {
+        fun getAllTaches(context: Context): LiveData<List<Task>>? {
 
             appDb = initializeDB(context)
 
-            taches = appDb!!.tacheDao().getAllTasks()
+            taches = appDb!!.taskDao().getAllTasks()
 
             return taches
         }
@@ -62,7 +63,7 @@ class TacheRepo {
 
 
         suspend fun getTacheIdAgent(context: Context, id: Int) {
-            var Response = TacheApiClient.tacheApiService.getTasksById(id)
+            val Response = TaskApiClient.TASK_API_SERVICE.getTasksById(id)
 
             if (Response.isSuccessful) {
                 var lisTache = Response.body()!!
@@ -75,23 +76,23 @@ class TacheRepo {
 
         /**
          * Mettre a jour l'etat d'une tache dans le service
-         * @param tache
+         * @param task
          * 2 si  tache en cours
          * 3 si terminée*/
-        suspend fun updateStatetask(tache: Tache) {
-            var listFiltered = tache.steps?.filter { it.completed == true }
+        suspend fun updateStatetask(task: Task) {
+            var listFiltered = task.steps?.filter { it.completed == true }
             if (listFiltered?.size == 1) {
                 var Response =
-                    TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(2))
+                    TaskApiClient.TASK_API_SERVICE.updateTaskState(task.uuid, TaskState(2))
                 if (Response.isSuccessful) {
-                    tache.idTaskState = 2
+                    task.idTaskState = 2
                 }
             } else {
-                if (listFiltered?.size == tache.steps?.size) {
+                if (listFiltered?.size == task.steps?.size) {
                     var Response =
-                        TacheApiClient.tacheApiService.updateTaskState(tache.uuid, TaskState(3))
+                        TaskApiClient.TASK_API_SERVICE.updateTaskState(task.uuid, TaskState(3))
                     if (Response.isSuccessful) {
-                        tache.idTaskState = 3
+                        task.idTaskState = 3
                     }
                 }
 
@@ -102,30 +103,30 @@ class TacheRepo {
         /**
          * Mettre à jour l'etat des etapes d'une tache dans la cache
          * @param context
-         * @param tache*/
+         * @param task*/
 
-        fun updateTache(context: Context, tache: Tache) {
+        fun updateTache(context: Context, task: Task) {
 
             appDb = initializeDB(context)
 
-            var listFiltered = tache.steps?.filter { it.completed }
-            if (listFiltered?.size == tache.steps?.size) {
+            var listFiltered = task.steps?.filter { it.completed }
+            if (listFiltered?.size == task.steps?.size) {
                 DialogUtils.with(context)
                     .showDialog(
                         context.getString(R.string.closeDialogTitle),
-                        context.getString(R.string.closeMessagePre) + tache.taskTitle,
+                        context.getString(R.string.closeMessagePre) + task.taskTitle,
                         { dialogInterface: DialogInterface, i: Int ->
                             CoroutineScope(Dispatchers.IO).launch {
                                 var Response =
-                                    TacheApiClient.tacheApiService.updateTaskState(
-                                        tache.uuid,
+                                    TaskApiClient.TASK_API_SERVICE.updateTaskState(
+                                        task.uuid,
                                         TaskState(3)
                                     )
                                 if (Response.isSuccessful) {
-                                    tache.idTaskState = 3
-                                    tache.endDate = Calendar.getInstance().time
+                                    task.idTaskState = 3
+                                    task.endDate = Calendar.getInstance().time
                                 }
-                                appDb!!.tacheDao().updateTask(tache)
+                                appDb!!.taskDao().updateTask(task)
                             }
                         }, null
                     )
@@ -133,18 +134,18 @@ class TacheRepo {
                 if (listFiltered?.size == 1)
                     CoroutineScope(Dispatchers.IO).launch {
                         var Response =
-                            TacheApiClient.tacheApiService.updateTaskState(
-                                tache.uuid,
+                            TaskApiClient.TASK_API_SERVICE.updateTaskState(
+                                task.uuid,
                                 TaskState(2)
                             )
                         if (Response.isSuccessful) {
-                            tache.idTaskState = 2
+                            task.idTaskState = 2
                         }
-                        appDb!!.tacheDao().updateTask(tache)
+                        appDb!!.taskDao().updateTask(task)
                     }
                 else {
                     CoroutineScope(Dispatchers.IO).launch {
-                        appDb!!.tacheDao().updateTask(tache)
+                        appDb!!.taskDao().updateTask(task)
                     }
                 }
             }

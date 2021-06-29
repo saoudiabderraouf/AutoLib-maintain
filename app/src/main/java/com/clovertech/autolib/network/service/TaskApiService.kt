@@ -1,13 +1,14 @@
 package com.clovertech.autolib.network.service
 
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.model.TaskState
 import retrofit2.Response
 import retrofit2.http.*
 
-interface TacheApiService {
+interface TaskApiService {
+
     @GET("task/agent/{idAgent}")
-    suspend fun getTasksById(@Path("idAgent") id: Int): Response<List<Tache>>
+    suspend fun getTasksById(@Path("idAgent") id: Int): Response<List<Task>>
 
     @PUT("taskState/{uuid}")
     suspend fun updateTaskState(

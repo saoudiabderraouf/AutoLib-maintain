@@ -1,9 +1,7 @@
 package com.clovertech.autolib.repository
 
-import com.clovertech.autolib.model.Equipement
 import com.clovertech.autolib.model.Materiel
 import com.clovertech.autolib.model.Token
-import com.clovertech.autolib.network.client.EquipmentApiClient
 import com.clovertech.autolib.network.client.MaterielApiClient
 import retrofit2.Response
 
@@ -26,7 +24,7 @@ class MaterielRepo {
         }
 
         suspend fun deleteMateriel(id: Int): Response<Token> {
-            return MaterielApiClient.materielApiService.deletMateriel(id)
+            return MaterielApiClient.materielApiService.deleteMateriel(id)
         }
     }
 

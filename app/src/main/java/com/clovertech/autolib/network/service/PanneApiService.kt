@@ -5,7 +5,7 @@ import com.clovertech.autolib.model.PanneResponse
 import retrofit2.Response
 import retrofit2.http.*
 
-interface PannApiService {
+interface PanneApiService {
 
     @POST("/addPanne")
     suspend fun insertPanne(@Body panne: Panne): Response<PanneResponse>

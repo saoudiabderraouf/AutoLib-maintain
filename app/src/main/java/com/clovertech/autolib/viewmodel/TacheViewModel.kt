@@ -2,20 +2,17 @@ package com.clovertech.autolib.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.model.TacheModel
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.repository.TacheRepo
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import java.util.*
 
 class TacheViewModel : ViewModel() {
 
-    var task: Tache =
-        Tache(
+    var task: Task =
+        Task(
             0, 0, "", "", 0, Date(), Date(),
             mutableListOf(), mutableListOf(), ""
         )
@@ -23,12 +20,12 @@ class TacheViewModel : ViewModel() {
 
 
 
-    fun updateTache(context: Context, tache: Tache) {
-        TacheRepo.updateTache(context, tache)
+    fun updateTache(context: Context, task: Task) {
+        TacheRepo.updateTache(context, task)
     }
 
 
-    fun getAllTaches(context: Context): LiveData<List<Tache>>? {
+    fun getAllTaches(context: Context): LiveData<List<Task>>? {
         return TacheRepo.getAllTaches(context)
     }
 

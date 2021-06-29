@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.viewmodel.TacheViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -29,7 +29,7 @@ class DashboardFragment : Fragment() {
 
     private var currentMonth = 0
     private val calendar = Calendar.getInstance()
-    private val allTasks = mutableListOf<Tache>()
+    private val allTasks = mutableListOf<Task>()
 
     private lateinit var taskViewModel: TacheViewModel
     private lateinit var pagerAdapter: TaskFragmentAdapter
@@ -166,7 +166,7 @@ class DashboardFragment : Fragment() {
                 "${DateUtils.getYear(calendar.time)}"
     }
 
-    private fun getTasksByDate(date: Date): List<Tache>{
+    private fun getTasksByDate(date: Date): List<Task>{
         val sdf = SimpleDateFormat("dd/MM/yyyy")
         return allTasks.filter { sdf.format(date).equals(sdf.format(it.assignmentDate)) }
     }
@@ -236,16 +236,16 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        fun updateTasksUI(tasks: List<Tache>) {
+        fun updateTasksUI(tasks: List<Task>) {
             doneTasksFragment.updateTasks(getDoneTasks(tasks))
             ongoingTasksFragment.updateTasks(getOngoingTasks(tasks))
         }
 
-        private fun getOngoingTasks(allTasks: List<Tache>): List<Tache> {
+        private fun getOngoingTasks(allTasks: List<Task>): List<Task> {
             return allTasks.filter { it.endDate == null }
         }
 
-        private fun getDoneTasks(allTasks: List<Tache>): List<Tache> {
+        private fun getDoneTasks(allTasks: List<Task>): List<Task> {
             return allTasks.filter { it.endDate != null }
         }
     }

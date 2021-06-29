@@ -5,15 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.clovertech.autolib.model.Tache
-import com.clovertech.autolib.model.TacheModel
+import com.clovertech.autolib.model.TaskModel
 
 @Dao
 interface TaskModelDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTaskModel(taskModel: TacheModel)
+    suspend fun addTaskModel(taskModel: TaskModel)
 
     @Query("SELECT * FROM taskModel")
-    fun getAllTasks(): LiveData<List<TacheModel>>
+    fun getAllTasks(): LiveData<List<TaskModel>>
 }

@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         if (idUser != 0) {
             viewModel.getThisProfil(idUser)
-            viewModel.ResponseProfil.observe(this, Observer {
+            viewModel.responseProfil.observe(this, Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(this, it.code().toString(), Toast.LENGTH_SHORT)
                         .show()

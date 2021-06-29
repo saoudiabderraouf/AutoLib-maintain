@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.clovertech.autolib.model.Panne
 import com.clovertech.autolib.model.PanneResponse
-import com.clovertech.autolib.model.TacheModel
 import com.clovertech.autolib.repository.PanneRepo
-import com.clovertech.autolib.repository.TacheRepo
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

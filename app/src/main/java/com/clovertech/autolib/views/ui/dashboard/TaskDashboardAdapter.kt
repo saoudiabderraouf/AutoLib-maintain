@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 
 class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHolder>() {
 
-    private val tasks = mutableListOf<Tache>()
+    private val tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -31,7 +31,7 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
         return tasks.size
     }
 
-    fun setTasks(list: List<Tache>){
+    fun setTasks(list: List<Task>){
         tasks.clear()
         tasks.addAll(list)
         notifyDataSetChanged()

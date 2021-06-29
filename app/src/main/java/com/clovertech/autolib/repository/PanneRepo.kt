@@ -5,12 +5,7 @@ import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Panne
 import com.clovertech.autolib.model.PanneResponse
-import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.network.client.PanneApiClient
-import com.clovertech.autolib.network.client.TacheApiClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class PanneRepo {
@@ -37,7 +32,7 @@ class PanneRepo {
 
 
         suspend fun addPanne(panne:Panne): Response<PanneResponse> {
-            return PanneApiClient.panneApiService.insertPanne(panne)
+            return PanneApiClient.PANNE_API_SERVICE.insertPanne(panne)
         }
 
 

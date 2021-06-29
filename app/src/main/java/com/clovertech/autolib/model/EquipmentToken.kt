@@ -1,6 +1,5 @@
 package com.clovertech.autolib.model
 
-data class EquipementToken (
+data class EquipmentToken (
     val token : String
-){
-}
+)

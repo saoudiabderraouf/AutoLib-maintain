@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 import  com.clovertech.autolib.views.ui.notifications.Notif
 
 
@@ -18,7 +18,7 @@ class NotificationsAdapter(val context: Context):RecyclerView.Adapter<Notificati
 {
 
     var data = mutableListOf<Notif>()
-    val tasks = mutableListOf<Tache>()
+    val tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
         return NotificationHolder(

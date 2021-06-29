@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.model.Tache
+import com.clovertech.autolib.model.Task
 
 class TaskPagerFragment: Fragment() {
 
@@ -34,7 +34,7 @@ class TaskPagerFragment: Fragment() {
         taskRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    fun updateTasks(tasks: List<Tache>) {
+    fun updateTasks(tasks: List<Task>) {
         taskAdapter.setTasks(tasks)
     }
 
