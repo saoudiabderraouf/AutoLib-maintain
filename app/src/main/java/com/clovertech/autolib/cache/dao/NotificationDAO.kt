@@ -8,7 +8,7 @@ import com.clovertech.autolib.views.ui.notifications.Notif
 interface NotificationDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertNotification(notif: Notif)
+    fun insertNotification(notification: Notif)
 
     @Query("SELECT * FROM Notifications")
     fun getAllNotifications(): LiveData<List<Notif>>

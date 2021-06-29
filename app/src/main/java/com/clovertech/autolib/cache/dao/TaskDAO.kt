@@ -5,12 +5,13 @@ import androidx.room.*
 import com.clovertech.autolib.model.Tache
 
 @Dao
-interface TacheDAO {
+interface TaskDAO {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTask(tache: Tache)
+    suspend fun addTask(task: Tache)
 
     @Update
-    suspend fun updateTask(tache: Tache)
+    suspend fun updateTask(task: Tache)
 
     @Query("SELECT * FROM Tasks")
     fun getAllTasks(): LiveData<List<Tache>>

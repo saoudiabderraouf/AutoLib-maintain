@@ -8,7 +8,6 @@ import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.Tache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.junit.After
 import org.junit.Assert
@@ -20,7 +19,7 @@ import java.util.*
 @RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
 class TaskRoomTest {
-    lateinit var mDataBase:AutolibDatabase
+    private lateinit var mDataBase:AutolibDatabase
     @Before
     fun initDB() {
         mDataBase =
@@ -28,17 +27,17 @@ class TaskRoomTest {
     }
     @Test
     fun testInsertAndGetUser() {
-        var task: Tache =
+        val task =
             Tache(0, 0, "", "", 0, Date(), Date(),
                 mutableListOf(), mutableListOf(), "")
         CoroutineScope(Dispatchers.IO).launch {
-            mDataBase?.tacheDao().addTask(task)
-            val list = mDataBase?.tacheDao().getAllTasks()
+            mDataBase.taskDao().addTask(task)
+            val list = mDataBase.taskDao().getAllTasks()
             Assert.assertEquals(task, list.value?.get(0))}
 
     }
     @After
     fun closeDb(){
-        mDataBase?.close()
+        mDataBase.close()
     }
 }

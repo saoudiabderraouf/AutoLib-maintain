@@ -9,9 +9,10 @@ import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.model.TacheModel
 
 @Dao
-interface TacheModelDAO {
+interface TaskModelDAO {
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTaskModel(tacheModel: TacheModel)
+    suspend fun addTaskModel(taskModel: TacheModel)
 
     @Query("SELECT * FROM taskModel")
     fun getAllTasks(): LiveData<List<TacheModel>>

@@ -11,28 +11,22 @@ import com.clovertech.autolib.model.*
 import com.clovertech.autolib.views.ui.notifications.Notif
 
 @Database(
-    entities = arrayOf(
-        Auth_utilisateur::class,
-        Agent::class, Step::class,
-        Tache::class,
-        TacheModel::class,
-        Materiel::class,
-        Panne::class,
-        Notif::class
-    ),
+    entities = [Auth_utilisateur::class, Agent::class
+        , Step::class, Tache::class, TacheModel::class
+        , Materiel::class, Panne::class, Notif::class],
     version = 1,
-    exportSchema = false
-)
+    exportSchema = false)
+
 @TypeConverters(Converters::class)
 abstract class AutolibDatabase : RoomDatabase() {
     abstract fun authDao(): AuthDAO
-    abstract fun tacheDao(): TacheDAO
-    abstract fun profilsDao(): ProfilDAO
-    abstract fun etatDao(): EtatDAO
+    abstract fun taskDao(): TaskDAO
+    abstract fun profileDao(): ProfileDAO
     abstract fun stepDao(): StepDAO
-    abstract fun taskModelDao(): TacheModelDAO
+    abstract fun taskModelDao(): TaskModelDAO
     abstract fun notificationDao(): NotificationDAO
     abstract fun panneDao(): PanneDAO
+
 
 
     companion object {

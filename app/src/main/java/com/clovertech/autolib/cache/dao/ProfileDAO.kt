@@ -7,11 +7,14 @@ import androidx.room.Update
 import com.clovertech.autolib.model.Agent
 
 @Dao
-interface ProfilDAO {
+interface ProfileDAO {
+
     @Query("SELECT * FROM agent WHERE idUtilisateur LIKE :idAgent")
-    fun getThisProfil(idAgent: Int): Agent
+    fun getThisProfile(idAgent: Int): Agent
+
     @Update
-    fun updateProfil(agent: Agent)
+    fun updateProfile(agent: Agent)
+
     @Delete
-    fun deleteProfil(agent: Agent)
+    fun deleteProfile(agent: Agent)
 }

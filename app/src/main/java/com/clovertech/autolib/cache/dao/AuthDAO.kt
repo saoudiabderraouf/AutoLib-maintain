@@ -6,6 +6,7 @@ import com.clovertech.autolib.model.Auth_utilisateur
 
 @Dao
 interface AuthDAO {
+
     @Query("SELECT * FROM auth_users")
-    fun loadAll(): List<Auth_utilisateur>
+    fun loadAllAuthUsers(): List<Auth_utilisateur>
 }
