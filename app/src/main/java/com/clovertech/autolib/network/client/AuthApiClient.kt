@@ -15,7 +15,7 @@ object AuthApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://54.37.87.85:7000/auth/")
+            .baseUrl("http://192.168.43.201:8005/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

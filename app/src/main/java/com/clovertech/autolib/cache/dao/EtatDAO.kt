@@ -1,8 +1,6 @@
 package com.clovertech.autolib.cache.dao
 
 import androidx.room.Dao
-import androidx.room.Query
-import com.clovertech.autolib.model.EtatTache
 
 @Dao
 interface EtatDAO {

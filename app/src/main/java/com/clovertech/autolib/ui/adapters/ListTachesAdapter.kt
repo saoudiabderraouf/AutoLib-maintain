@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Tache
 import com.clovertech.autolib.ui.home.HomeFragment
-import com.clovertech.autolib.ui.home.HomeViewModel
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.TacheViewModel
 
 class ListTachesAdapter(val context: Context, val vm: TacheViewModel, frag: HomeFragment) :

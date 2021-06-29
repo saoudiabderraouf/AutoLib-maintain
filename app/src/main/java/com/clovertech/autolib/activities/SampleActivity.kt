@@ -13,7 +13,6 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -26,8 +25,6 @@ import com.clovertech.autolib.ui.menu.DrawerAdapter
 import com.clovertech.autolib.ui.menu.DrawerItem
 import com.clovertech.autolib.ui.menu.SimpleItem
 import com.clovertech.autolib.ui.menu.SpaceItem
-import com.clovertech.autolib.ui.panne.PanneFragment
-import com.clovertech.autolib.ui.settings.SettingsFragment
 import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp

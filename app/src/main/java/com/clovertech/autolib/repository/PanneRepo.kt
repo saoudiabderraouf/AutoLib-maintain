@@ -24,15 +24,7 @@ class PanneRepo {
             return AutolibDatabase.getDatabaseClient(context)
         }
 
-        fun insertPanne(context: Context, panne: Panne) {
 
-            PanneRepo.appDb = PanneRepo.initializeDB(context)
-
-            CoroutineScope(Dispatchers.IO).launch {
-                PanneRepo.appDb!!.panneDao().addPanne(panne)
-            }
-
-        }
 
         fun getAllPannes(context: Context): LiveData<List<Panne>>? {
 
