@@ -32,7 +32,7 @@ class UserProfilFragment : Fragment() {
        // id = 3
         if (id != 0) {
             viewModel.getThisProfile(id)
-            viewModel.responseProfil.observe(viewLifecycleOwner, Observer {
+            viewModel.responseProfile.observe(viewLifecycleOwner, Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(requireContext(), it.code().toString(), Toast.LENGTH_SHORT)
                         .show()

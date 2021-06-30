@@ -42,9 +42,9 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/detailTache"
-        android:name="com.clovertech.autolib.views.ui.home.DetailTache"
+        android:name="com.clovertech.autolib.views.ui.home.TaskDetailFragment"
         android:label="Détail"
-        tools:layout="@layout/fragment_detail_tache" >
+        tools:layout="@layout/fragment_detail_task" >
         <action
             android:id="@+id/action_detailTache_to_ajouterMateriel"
             app:destination="@id/ajouterMateriel"
@@ -62,9 +62,9 @@
     </fragment>
     <fragment
         android:id="@+id/ajouterMateriel"
-        android:name="com.clovertech.autolib.views.ui.home.AjouterMateriel"
+        android:name="com.clovertech.autolib.views.ui.home.AddMaterialFragment"
         android:label="Ajouter un Materiel"
-        tools:layout="@layout/fragment_ajouter_materiel" >
+        tools:layout="@layout/fragment_add_material" >
         <action
             android:id="@+id/action_ajouterMateriel_to_detailTache"
             app:destination="@id/detailTache"

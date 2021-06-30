@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/roundedimage" />
 
         <TextView
-            android:id="@+id/nbTaches3"
+            android:id="@+id/title_task2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

@@ -39,7 +39,7 @@ class AjouterPanneFragment : Fragment() {
         if (Panne!= null){
             panneModel.addPanne(Panne)
 
-            panneModel.ResponsePanne.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            panneModel.responsePanne.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 if (it.isSuccessful) {
                     Toast.makeText(requireContext(), "ekhrodj", Toast.LENGTH_SHORT).show()
                 }

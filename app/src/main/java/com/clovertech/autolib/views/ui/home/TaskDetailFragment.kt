@@ -14,18 +14,17 @@ import com.clovertech.autolib.R
 import com.clovertech.autolib.adapters.MaterialAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
 import com.clovertech.autolib.viewmodel.TaskViewModel
-import kotlinx.android.synthetic.main.fragment_detail_tache.*
+import kotlinx.android.synthetic.main.fragment_detail_task.*
 
 
-class DetailTache : Fragment() {
+class TaskDetailFragment : Fragment() {
     lateinit var adapterSteps: TaskStepsAdapter
     lateinit var adapterMateriels: MaterialAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_tache, container, false)
+        return inflater.inflate(R.layout.fragment_detail_task, container, false)
 
     }
 
@@ -37,10 +36,10 @@ class DetailTache : Fragment() {
         titreTask.text = viewModel.task.taskTitle
         descriptTask.text = viewModel.task.description
         idVoiture.text = viewModel.task.idVehicule.toString()
-        adapterSteps = TaskStepsAdapter(requireActivity(), viewModel)
-        tasksRecyclerView.layoutManager =
+        adapterSteps = TaskStepsAdapter(viewModel)
+        task_steps_recycler.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        tasksRecyclerView.adapter = adapterSteps
+        task_steps_recycler.adapter = adapterSteps
         viewModel.task.steps?.let { adapterSteps.setListSteps(it) }
 
         adapterMateriels = MaterialAdapter(requireActivity(), viewModel)

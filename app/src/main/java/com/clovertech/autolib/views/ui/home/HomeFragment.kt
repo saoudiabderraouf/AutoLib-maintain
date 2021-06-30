@@ -7,116 +7,91 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.clovertech.autolib.R
 import com.clovertech.autolib.model.AgentToken
-import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
+import com.clovertech.autolib.databinding.FragmentHomeBinding
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.NotificationViewModel
 import com.clovertech.autolib.viewmodel.TaskViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.math.abs
 
 
 class HomeFragment : Fragment() {
 
-    val TAG = "LOG TAG"
+    private val TAG = "LOG TAG"
+    private val taskViewModel: TaskViewModel by activityViewModels()
+    private val notificationViewModel: NotificationViewModel by activityViewModels()
+    private lateinit var adapterSteps: TaskStepsAdapter
+    private lateinit var binding: FragmentHomeBinding
 
-    lateinit var taskViewModel: TaskViewModel
-    lateinit var notificationViewModel: NotificationViewModel
-    lateinit var adapterSteps: TaskStepsAdapter
-    lateinit var taskPrem: Task
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+    override fun onCreateView(inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentHomeBinding
+            .inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        textView4.text = "Salut! "+PrefUtils.with(requireContext()).getString(PrefUtils.Keys.AGENT_NAME, "Hamid Reda")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        taskViewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
-        notificationViewModel =
-            ViewModelProvider(requireActivity()).get(NotificationViewModel::class.java)
-        var adapter = ListTasksAdapter(requireActivity(), taskViewModel, this)
-        pagerTasksHome.adapter = adapter
-        pagerTasksHome.clipToPadding = false
-        pagerTasksHome.clipChildren = false
-        pagerTasksHome.offscreenPageLimit = 4
+        val name = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.AGENT_NAME, "...")
+        val adapter = ListTasksAdapter(findNavController())
+        val tasksPager = binding.pagerTasksHome
+        val taskStepRecycler = binding.taskStepsRecycler
+
+        binding.userGreeting.text = "Hello! $name"
+
+        tasksPager.adapter = adapter
+        tasksPager.clipToPadding = false
+        tasksPager.clipChildren = false
+        tasksPager.offscreenPageLimit = 4
+
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(32))
-        //transformer.addTransformer { page, position ->
-        //    val r = 1 - Math.abs(position)
-        //    page.scaleY = 0.85f + r * 0.15f
-        //}
-        pagerTasksHome.setPageTransformer(transformer)
-        pagerTasksHome.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            }
 
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.85f + r * 0.15f
+        }
+
+        tasksPager.setPageTransformer(transformer)
+        tasksPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 taskViewModel.task = adapter.data[position]
                 adapterSteps.setListSteps(adapter.data[position].steps!!)
             }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
         })
-        adapterSteps = TaskStepsAdapter(requireActivity(), taskViewModel)
-        tasksRecyclerView.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        tasksRecyclerView.isNestedScrollingEnabled = false
-        tasksRecyclerView.adapter = adapterSteps
 
-        taskViewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
-        var id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
-        id = 3
+        adapterSteps = TaskStepsAdapter(taskViewModel)
+        taskStepRecycler.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        taskStepRecycler.isNestedScrollingEnabled = false
+        taskStepRecycler.adapter = adapterSteps
+
+        val id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
 
         if (id != 0) {
-            /* Toast.makeText(requireContext(), "Test is working", Toast.LENGTH_SHORT)
-                 .show()*/
-            taskViewModel.getTasksByIdAgent(requireContext(), 100)
-            // tacheViewModel.getTacheAllModel(requireContext())
-            taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
-                var listFiltered =
-                    it.filter { tache -> ((tache.idTaskState == 1) || (tache.idTaskState == 2)) }
-                adapter.setListTache(listFiltered)
-                nbTaches2.text = listFiltered.size.toString()
-                pagerTasksHome.requestTransform()
+            taskViewModel.getTasksByIdAgent(requireContext(), id)
+            taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner,{
+                val listFiltered = it.filter { task -> ((task.idTaskState == 1) || (task.idTaskState == 2)) }
+                adapter.setTaskList(listFiltered)
+                binding.tasksNumber.text = listFiltered.size.toString()
+                tasksPager.requestTransform()
             })
-
         }
 
-        details.setOnClickListener() {
-            //var viewModel = ViewModelProvider(this).get(TacheViewModel::class.java)
-
-            it.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
-        }
-
-        taskViewModel.getTasksByIdAgent(requireContext(), 100)
-
+        taskViewModel.getTasksByIdAgent(requireContext(), id)
     }
 
     override fun onResume() {
@@ -124,13 +99,9 @@ class HomeFragment : Fragment() {
         sendFCMToken()
     }
 
-    fun update(task: Task) {
-        var viewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
-        task.steps?.let { adapterSteps.setListSteps(it) }
-        viewModel.task = task
-    }
-
     private fun sendFCMToken() {
+        val idAgent = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
+
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w(TAG, "Fetching FCM registration token failed", task.exception)
@@ -144,17 +115,16 @@ class HomeFragment : Fragment() {
             }
 
             // Post token
-            notificationViewModel.postFCMToken(requireContext(), AgentToken(3, token))
+            if(idAgent == 0){
+                notificationViewModel.postFCMToken(requireContext(), AgentToken(idAgent, token))
+            }
 
             // Log
-            Log.d(TAG, "FCM token : " + token)
+            Log.d(TAG, "FCM token : $token")
 
         })
     }
 
-    fun goToTaskDetails(task: Task) {
-        view?.findNavController()?.navigate(R.id.action_navigation_home_to_detailTache)
-    }
 }
 
 

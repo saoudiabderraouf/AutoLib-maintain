@@ -51,7 +51,6 @@
         <activity android:name="com.clovertech.autolib.views.activities.OnBoardingActivity" />
         <activity android:name="com.clovertech.autolib.views.activities.LoginActivity" />
 
-
         <service
             android:name="com.clovertech.autolib.network.service.FCMService"
             android:exported="false">

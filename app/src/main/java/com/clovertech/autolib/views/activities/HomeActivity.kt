@@ -1,13 +1,9 @@
 package com.clovertech.autolib.views.activities
 
-
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
-import android.widget.SearchView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.yarolegovich.slidingrootnav.SlidingRootNav
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 
 
@@ -42,15 +38,19 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
     private lateinit var navView: BottomNavigationView
     private var slidingRootNav: SlidingRootNav? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
+
         val token = PrefUtils.with(this).getString(PrefUtils.Keys.TOKEN, "")
-        if (token == "") {
+
+        if (token.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        } else {
+            finish()
 
+        } else {
             initFirebase()
             initBottomBar()
 
@@ -62,17 +62,18 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
 
             screenIcons = this.loadScreenIcons()
             screenTitles = loadScreenTitles()
+
             menuItems = arrayOf(
                 R.id.navigation_home,
                 R.id.navigation_notifications,
                 R.id.navigation_calendar,
                 -1,
                 -1,
-                R.id.navigation_userProfil
-            )
+                R.id.navigation_userProfil)
+
             adapter = DrawerAdapter(
                 listOf(
-                    createItemFor(POS_ACCUEIL).setChecked(true),
+                    createItemFor(POS_ACCUEIL),
                     createItemFor(POS_NOTIF),
                     createItemFor(POS_CALENDAR),
                     createItemFor(POS_PANNE),
@@ -83,7 +84,7 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
                 ) as List<DrawerItem<DrawerAdapter.ViewHolder>>?
             )
 
-            navView.setSelectedItemId(R.id.navigation_home)
+            navView.selectedItemId = R.id.navigation_home
 
 
             val navController = findNavController(R.id.nav_host_fragment)
@@ -120,7 +121,7 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
             list.adapter = adapter
             adapter.setSelected(POS_ACCUEIL)
 
-            nomUser.setText(PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda"))
+            nomUser.text = PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda")
         }
     }
 
@@ -131,12 +132,6 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_nav_menu, menu)
-
-        // Associate searchable configuration with the SearchView
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        }
         return true
     }
 
@@ -180,10 +175,10 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
     }
 
     private fun navigateTo(id: Int, position: Int, isAtBottom: Boolean) {
-        if (isAtBottom) {
-            navView.setSelectedItemId(menuItems[position])
-        }
         val navController = findNavController(R.id.nav_host_fragment)
+        if (isAtBottom) {
+            navView.selectedItemId = menuItems[position]
+        }
         navController.navigate(id)
     }
 

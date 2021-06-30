@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class ProfileViewModel : ViewModel() {
 
-    private val responseProfile: MutableLiveData<Response<User>> = MutableLiveData()
+    val responseProfile: MutableLiveData<Response<User>> = MutableLiveData()
 
 
     fun getThisProfile(id: Int) {

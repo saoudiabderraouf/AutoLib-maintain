@@ -34,10 +34,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/today" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_task3" />
 
                 <TextView
-                    android:id="@+id/etapes"
+                    android:id="@+id/steps_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -50,34 +50,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/pagerTasksHome" />
 
                 <TextView
-                    android:id="@+id/details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="@font/montserrat"
-                    android:text="Details"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/etapes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/etapes" />
-
-                <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/user_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="26dp"
                     android:fontFamily="@font/montserrat"
                     android:text="Salut! "
                     android:textColor="?attr/colorOnPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.042"
-                    app:layout_constraintStart_toEndOf="@+id/roundedimag"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/user_image"
+                    app:layout_constraintTop_toTopOf="@+id/user_image" />
 
                 <TextView
-                    android:id="@+id/nbTaches"
+                    android:id="@+id/title_task1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -85,11 +73,11 @@
                     android:text="Vous avez"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="28sp"
-                    app:layout_constraintStart_toStartOf="@+id/roundedimag"
-                    app:layout_constraintTop_toBottomOf="@+id/roundedimag" />
+                    app:layout_constraintStart_toStartOf="@+id/user_image"
+                    app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
                 <TextView
-                    android:id="@+id/nbTaches3"
+                    android:id="@+id/title_task2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -97,12 +85,12 @@
                     android:text="tâches"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="28sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/nbTaches"
-                    app:layout_constraintStart_toEndOf="@+id/nbTaches2"
-                    app:layout_constraintTop_toTopOf="@+id/nbTaches" />
+                    app:layout_constraintBottom_toBottomOf="@+id/title_task1"
+                    app:layout_constraintStart_toEndOf="@+id/tasks_number"
+                    app:layout_constraintTop_toTopOf="@+id/title_task1" />
 
                 <TextView
-                    android:id="@+id/nbTaches2"
+                    android:id="@+id/tasks_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -110,12 +98,12 @@
                     android:text="0"
                     android:textColor="@color/colorAccent"
                     android:textSize="28sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/nbTaches"
-                    app:layout_constraintStart_toEndOf="@+id/nbTaches"
-                    app:layout_constraintTop_toTopOf="@+id/nbTaches" />
+                    app:layout_constraintBottom_toBottomOf="@+id/title_task1"
+                    app:layout_constraintStart_toEndOf="@+id/title_task1"
+                    app:layout_constraintTop_toTopOf="@+id/title_task1" />
 
                 <TextView
-                    android:id="@+id/today"
+                    android:id="@+id/title_task3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -123,13 +111,13 @@
                     android:text="Aujourd'hui"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="28sp"
-                    app:layout_constraintStart_toStartOf="@+id/nbTaches"
-                    app:layout_constraintTop_toBottomOf="@+id/nbTaches" />
+                    app:layout_constraintStart_toStartOf="@+id/title_task1"
+                    app:layout_constraintTop_toBottomOf="@+id/title_task1" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/roundedimag"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:id="@+id/user_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:scaleType="centerCrop"
@@ -139,15 +127,15 @@
                     app:srcCompat="@drawable/user_pic" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/tasksRecyclerView"
+                    android:id="@+id/task_steps_recycler"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etapes" />
+                    app:layout_constraintTop_toBottomOf="@+id/steps_title" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

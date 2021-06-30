@@ -17,10 +17,10 @@ import com.clovertech.autolib.model.NewEquipment
 import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.EquipmentViewModel
 import com.clovertech.autolib.viewmodel.TaskViewModel
-import kotlinx.android.synthetic.main.fragment_ajouter_materiel.*
+import kotlinx.android.synthetic.main.fragment_add_material.*
 
 
-class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
+class AddMaterialFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var equipmentViewModel: EquipmentViewModel
     var equipements = mutableListOf("huile", "gaz", "peinture")
 
@@ -30,7 +30,7 @@ class AjouterMateriel : Fragment(), AdapterView.OnItemSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ajouter_materiel, container, false)
+        return inflater.inflate(R.layout.fragment_add_material, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

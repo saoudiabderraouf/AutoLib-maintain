@@ -1,45 +1,42 @@
 package com.clovertech.autolib.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.CardViewLayoutBinding
 import com.clovertech.autolib.model.Task
-import com.clovertech.autolib.views.ui.home.HomeFragment
-import com.clovertech.autolib.viewmodel.TaskViewModel
 
-class ListTasksAdapter(val context: Context, val vm: TaskViewModel, frag: HomeFragment) :
+
+class ListTasksAdapter(private val navController: NavController) :
     RecyclerView.Adapter<ListTasksAdapter.MyViewHolder>() {
 
-    var fragment = frag
     var data = listOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
-            LayoutInflater.from(context)
-                .inflate(R.layout.card_view_layout, parent, false))
-
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CardViewLayoutBinding.inflate(inflater,parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
+        var progress = 0
         holder.description.text = data[position].description
         holder.idVehicle.text = data[position].idVehicule.toString()
         holder.taskTitle.text = data[position].taskTitle
-
-        holder.itemView.setOnClickListener{
-            fragment.goToTaskDetails(data[position])
-        }
-
         holder.progressBar.max = data[position].steps?.size ?: 0
         holder.progressBar.progress = data[position].steps?.filter { it.completed }?.size ?: 0
-        var progress =0
+
+        holder.itemView.setOnClickListener{
+            navController.navigate(R.id.action_navigation_home_to_detailTache)
+        }
+
         if (holder.progressBar.max != 0) {
             progress = holder.progressBar.progress * 100 / holder.progressBar.max
         }
@@ -47,17 +44,17 @@ class ListTasksAdapter(val context: Context, val vm: TaskViewModel, frag: HomeFr
         holder.progress.text = "$progress %"
     }
 
-    fun setListTache(list: List<Task>) {
+    fun setTaskList(list: List<Task>) {
         data = list
         notifyDataSetChanged()
     }
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val taskTitle: TextView = view.findViewById(R.id.Titre)
-        val description: TextView = view.findViewById(R.id.description)
-        val idVehicle: TextView = view.findViewById(R.id.idVoiture)
-        val progress: TextView = view.findViewById(R.id.avancement)
-        val progressBar: ProgressBar = view.findViewById(R.id.progressTaskHome)
+    inner class MyViewHolder(binding :CardViewLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        val taskTitle: TextView = binding.Titre
+        val description: TextView = binding.description
+        val idVehicle: TextView = binding.idVoiture
+        val progress: TextView = binding.avancement
+        val progressBar: ProgressBar = binding.progressTaskHome
     }
 
 }
