@@ -27,9 +27,9 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_userProfil"
-        android:name="com.clovertech.autolib.views.ui.userProfil.UserProfilFragment"
+        android:name="com.clovertech.autolib.views.ui.userProfil.UserProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profil" />
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.clovertech.autolib.views.ui.notifications.NotificationsFragment"

@@ -15,7 +15,7 @@ object AuthApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://7e5aa88886bc.ngrok.io")
+            .baseUrl("http://e799c16b0b82.ngrok.io")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
