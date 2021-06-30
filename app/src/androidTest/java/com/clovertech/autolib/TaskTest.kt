@@ -49,7 +49,7 @@ class TaskTest {
         onView(withId(R.id.pagerTasksHome))
             .perform(actionOnItemAtPosition<MyViewHolder>(1, click()))
         onView(withId(R.id.details)).perform(click())
-        onView(withId(R.id.titreTask)).check(matches(withText("This is the task Title")))
+        onView(withId(R.id.task_detail_title)).check(matches(withText("This is the task Title")))
         pressBack()
         onView(withId(R.id.pagerTasksHome)).check(matches(isDisplayed()))
     }

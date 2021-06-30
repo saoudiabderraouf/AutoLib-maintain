@@ -7,62 +7,59 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.R
 import com.clovertech.autolib.adapters.MaterialAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
+import com.clovertech.autolib.databinding.FragmentDetailTaskBinding
 import com.clovertech.autolib.viewmodel.TaskViewModel
-import kotlinx.android.synthetic.main.fragment_detail_task.*
 
 
 class TaskDetailFragment : Fragment() {
-    lateinit var adapterSteps: TaskStepsAdapter
-    lateinit var adapterMateriels: MaterialAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_task, container, false)
 
+    private lateinit var adapterSteps: TaskStepsAdapter
+    private lateinit var adapterMateriels: MaterialAdapter
+    private lateinit var binding: FragmentDetailTaskBinding
+    private val taskViewModel: TaskViewModel by activityViewModels()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
+        binding = FragmentDetailTaskBinding.inflate(inflater,container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        var viewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
+        val taskStepsRecycler = binding.taskStepsRecycler
+        val materialRecycler = binding.materialsRecycler
 
-        titreTask.text = viewModel.task.taskTitle
-        descriptTask.text = viewModel.task.description
-        idVoiture.text = viewModel.task.idVehicule.toString()
-        adapterSteps = TaskStepsAdapter(viewModel)
-        task_steps_recycler.layoutManager =
+        binding.taskDetailTitle.text = taskViewModel.task.taskTitle
+        binding.taskDescriptionDetail.text = taskViewModel.task.description
+        binding.vehicleId.text = taskViewModel.task.idVehicule.toString()
+
+        adapterSteps = TaskStepsAdapter(taskViewModel)
+        taskStepsRecycler.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        task_steps_recycler.adapter = adapterSteps
-        viewModel.task.steps?.let { adapterSteps.setListSteps(it) }
+        taskStepsRecycler.adapter = adapterSteps
+        taskViewModel.task.steps?.let { adapterSteps.setListSteps(it) }
 
-        adapterMateriels = MaterialAdapter(requireActivity(), viewModel)
-        matrialRecyclerView.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        matrialRecyclerView.adapter = adapterMateriels
+        adapterMateriels = MaterialAdapter(requireActivity(), taskViewModel)
+        materialRecycler.layoutManager = LinearLayoutManager(requireActivity()
+            , LinearLayoutManager.VERTICAL, false)
+        materialRecycler.adapter = adapterMateriels
 
-        if (viewModel.task.usedEquipements !=null){
-            Toast.makeText(requireContext(), viewModel.task.usedEquipements!!.size.toString(), Toast.LENGTH_SHORT).show()
-            if (viewModel.task.usedEquipements!!.size !=0){
-                ajouterMaterialText.isVisible=false
-            }
-            else{
-                ajouterMaterialText.isVisible=true
-            }
-            viewModel.task.usedEquipements?.let { adapterMateriels.setListMaterial(it) }
+        if (taskViewModel.task.usedEquipements !=null){
+            Toast.makeText(requireContext(), taskViewModel.task.usedEquipements!!.size.toString(), Toast.LENGTH_SHORT).show()
+            binding.addMaterialText.isVisible = taskViewModel.task.usedEquipements!!.isEmpty()
+            taskViewModel.task.usedEquipements?.let { adapterMateriels.setListMaterial(it) }
         }
 
-
-        addMaterial.setOnClickListener() {
-            it.findNavController()?.navigate(R.id.action_detailTache_to_ajouterMateriel)
+        binding.addMaterialButton.setOnClickListener{
+            findNavController().navigate(R.id.action_detailTache_to_ajouterMateriel)
         }
-
     }
 
 
