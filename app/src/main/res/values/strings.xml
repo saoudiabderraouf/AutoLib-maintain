@@ -20,6 +20,10 @@
     <string name="notif_title">Vous avez une nouvelle tache</string>
     <string name="action_get_started">Get Started</string>
     <string name="action_next">Next</string>
+    <string name="add_material">Add material</string>
+    <string name="quantity">Quantity</string>
+    <string name="description">Description</string>
+    <string name="material_name">Material name</string>
 
 
 </resources>

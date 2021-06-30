@@ -52,7 +52,7 @@ class ListTasksAdapter(private val navController: NavController) :
     inner class MyViewHolder(binding :CardViewLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         val taskTitle: TextView = binding.Titre
         val description: TextView = binding.description
-        val idVehicle: TextView = binding.idVoiture
+        val idVehicle: TextView = binding.vehicleId
         val progress: TextView = binding.avancement
         val progressBar: ProgressBar = binding.progressTaskHome
     }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.clovertech.autolib.R
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
@@ -92,6 +93,9 @@ class HomeFragment : Fragment() {
         }
 
         taskViewModel.getTasksByIdAgent(requireContext(), id)
+        binding.stepsTitle.setOnClickListener {
+            findNavController().navigate(R.id.detailTache)
+        }
     }
 
     override fun onResume() {
