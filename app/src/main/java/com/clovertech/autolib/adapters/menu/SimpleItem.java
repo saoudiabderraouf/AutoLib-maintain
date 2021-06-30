@@ -1,4 +1,4 @@
-package com.clovertech.autolib.views.ui.menu;
+package com.clovertech.autolib.adapters.menu;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;

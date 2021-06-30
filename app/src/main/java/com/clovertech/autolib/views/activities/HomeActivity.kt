@@ -16,10 +16,10 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.views.ui.menu.DrawerAdapter
-import com.clovertech.autolib.views.ui.menu.DrawerItem
-import com.clovertech.autolib.views.ui.menu.SimpleItem
-import com.clovertech.autolib.views.ui.menu.SpaceItem
+import com.clovertech.autolib.adapters.menu.DrawerAdapter
+import com.clovertech.autolib.adapters.menu.DrawerItem
+import com.clovertech.autolib.adapters.menu.SimpleItem
+import com.clovertech.autolib.adapters.menu.SpaceItem
 import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp

@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity(){
 
     private fun performLogin() {
 
-        val userEmail: String = numChasis.text.toString()
+        val userEmail: String = chasis_number.text.toString()
         val userPassword: String = password.text.toString()
         loginViewModel.onLoginButtonClick(Login(userEmail, userPassword))
 

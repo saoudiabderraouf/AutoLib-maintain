@@ -9,7 +9,7 @@
     tools:viewBindingIgnore="true">
 
     <EditText
-        android:id="@+id/numChasis"
+        android:id="@+id/chasis_number"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="16dp"
@@ -40,7 +40,7 @@
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numChasis" />
+        app:layout_constraintTop_toBottomOf="@+id/chasis_number" />
 
     <Button
         android:id="@+id/login_button"

@@ -94,9 +94,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_panne"
-        android:name="com.clovertech.autolib.views.ui.panne.AjouterPanneFragment"
+        android:name="com.clovertech.autolib.views.ui.panne.PanneAddFragment"
         android:label="Signaler Panne"
-        tools:layout="@layout/fragment_ajouter_panne" />
+        tools:layout="@layout/fragment_add_panne" />
     <fragment
         android:id="@+id/nav_vehicule_detail"
         android:name="com.clovertech.autolib.views.ui.vehiculedetail.VehiculeFragment"

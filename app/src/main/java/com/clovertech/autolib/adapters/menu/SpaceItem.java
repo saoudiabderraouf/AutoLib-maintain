@@ -1,4 +1,4 @@
-package com.clovertech.autolib.views.ui.menu;
+package com.clovertech.autolib.adapters.menu;
 
 import android.content.Context;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.clovertech.autolib.views.ui.menu;
+package com.clovertech.autolib.adapters.menu;
 
 import android.util.SparseArray;
 import android.view.View;

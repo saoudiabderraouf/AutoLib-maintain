@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorBackground"
-    tools:context=".views.ui.panne.AjouterPanneFragment">
+    tools:context=".views.ui.panne.PanneAddFragment">
 
     <EditText
-        android:id="@+id/numChasis"
+        android:id="@+id/chasis_number"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/panneDescript"
+        android:id="@+id/panne_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -43,10 +43,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/severite" />
+        app:layout_constraintTop_toBottomOf="@+id/panne_severity" />
 
     <AutoCompleteTextView
-        android:id="@+id/severite"
+        android:id="@+id/panne_severity"
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
@@ -59,10 +59,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numChasis" />
+        app:layout_constraintTop_toBottomOf="@+id/chasis_number" />
 
     <Button
-        android:id="@+id/envoyer_signalement"
+        android:id="@+id/send_signal_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panneDescript" />
+        app:layout_constraintTop_toBottomOf="@+id/panne_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
