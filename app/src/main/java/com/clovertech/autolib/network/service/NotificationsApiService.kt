@@ -1,7 +1,7 @@
 package com.clovertech.autolib.network.service
 
 import com.clovertech.autolib.model.AgentToken
-import com.clovertech.autolib.views.ui.notifications.Notif
+import com.clovertech.autolib.model.Notification
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,5 +14,5 @@ interface NotificationsApiService {
 
 
     @GET("taskNotif")
-    suspend fun getAllNotifications(): Response<List<Notif>>
+    suspend fun getAllNotifications(): Response<List<Notification>>
 }

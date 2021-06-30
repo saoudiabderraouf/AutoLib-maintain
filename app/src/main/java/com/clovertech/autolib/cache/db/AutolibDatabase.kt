@@ -8,12 +8,12 @@ import androidx.room.TypeConverters
 import com.clovertech.autolib.cache.converter.Converters
 import com.clovertech.autolib.cache.dao.*
 import com.clovertech.autolib.model.*
-import com.clovertech.autolib.views.ui.notifications.Notif
+import com.clovertech.autolib.model.Notification
 
 @Database(
     entities = [AuthUser::class, Agent::class
         , Step::class, Task::class, TaskModel::class
-        , Materiel::class, Panne::class, Notif::class],
+        , Materiel::class, Panne::class, Notification::class],
     version = 1,
     exportSchema = false)
 

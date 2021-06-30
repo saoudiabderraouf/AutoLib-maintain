@@ -11,13 +11,13 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Task
-import  com.clovertech.autolib.views.ui.notifications.Notif
+import  com.clovertech.autolib.model.Notification
 
 
 class NotificationsAdapter(val context: Context):RecyclerView.Adapter<NotificationsAdapter.NotificationHolder>()
 {
 
-    var data = mutableListOf<Notif>()
+    var data = mutableListOf<Notification>()
     val tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
@@ -41,7 +41,7 @@ class NotificationsAdapter(val context: Context):RecyclerView.Adapter<Notificati
 
     }
 
-    fun setNotificationList(list: List<Notif>){
+    fun setNotificationList(list: List<Notification>){
         data.clear()
         data.addAll(list)
         notifyDataSetChanged()

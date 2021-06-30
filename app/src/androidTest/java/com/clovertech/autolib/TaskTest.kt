@@ -39,7 +39,7 @@ class TaskTest {
             .perform(actionOnItemAtPosition<MyViewHolder>(1, click()))
         //Vérification
         onView(withId(R.id.Titre)).check(matches(withText("This is the task Title")))
-        onView(withId(R.id.recyclerView))
+        onView(withId(R.id.notifications_recycler))
             .perform(actionOnItemAtPosition<MyViewHolder>(1, click()))
 
     }

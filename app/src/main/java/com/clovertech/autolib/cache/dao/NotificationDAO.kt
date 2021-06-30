@@ -2,16 +2,16 @@ package com.clovertech.autolib.cache.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.clovertech.autolib.views.ui.notifications.Notif
+import com.clovertech.autolib.model.Notification
 
 @Dao
 interface NotificationDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertNotification(notification: Notif)
+    fun insertNotification(notification: Notification)
 
     @Query("SELECT * FROM Notifications")
-    fun getAllNotifications(): LiveData<List<Notif>>
+    fun getAllNotifications(): List<Notification>
 
 
 }

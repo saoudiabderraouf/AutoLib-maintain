@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/roundedimage"
+        android:id="@+id/user_image"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -33,8 +33,8 @@
         android:textColor="?attr/colorOnPrimary"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/roundedimage"
-        app:layout_constraintTop_toBottomOf="@+id/roundedimage" />
+        app:layout_constraintStart_toStartOf="@+id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
     <TextView
         android:id="@+id/contenu"
@@ -46,11 +46,11 @@
         android:text="TextView"
         android:textColor="?attr/colorOnPrimary"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/roundedimage"
+        app:layout_constraintBottom_toBottomOf="@+id/user_image"
         app:layout_constraintEnd_toStartOf="@+id/lu"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/roundedimage"
-        app:layout_constraintTop_toTopOf="@+id/roundedimage" />
+        app:layout_constraintStart_toEndOf="@+id/user_image"
+        app:layout_constraintTop_toTopOf="@+id/user_image" />
 
     <ImageView
         android:id="@+id/lu"

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -52,7 +51,6 @@ class TaskDetailFragment : Fragment() {
         materialRecycler.adapter = adapterMateriels
 
         if (taskViewModel.task.usedEquipements !=null){
-            Toast.makeText(requireContext(), taskViewModel.task.usedEquipements!!.size.toString(), Toast.LENGTH_SHORT).show()
             binding.addMaterialText.isVisible = taskViewModel.task.usedEquipements!!.isEmpty()
             taskViewModel.task.usedEquipements?.let { adapterMateriels.setListMaterial(it) }
         }

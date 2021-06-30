@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import com.clovertech.autolib.cache.db.AutolibDatabase
 import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.network.client.NotificationsApiClient
-import com.clovertech.autolib.views.ui.notifications.Notif
+import com.clovertech.autolib.model.Notification
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ object NotificationRepo {
 
     }
 
-    fun getAllNotifications(context: Context): LiveData<List<Notif>> {
+    fun getAllNotifications(context: Context): List<Notification> {
         appDb = initializeDB(context)
         return appDb!!.notificationDao().getAllNotifications()
     }

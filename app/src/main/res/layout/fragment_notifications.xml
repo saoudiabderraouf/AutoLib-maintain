@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/notifications_recycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -38,11 +38,11 @@
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/roundedimage"
+            app:layout_constraintStart_toEndOf="@+id/user_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/uHave"
+            android:id="@+id/notif_title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -50,8 +50,8 @@
             android:text="Vous avez"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/roundedimage"
-            app:layout_constraintTop_toBottomOf="@+id/roundedimage" />
+            app:layout_constraintStart_toStartOf="@+id/user_image"
+            app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
         <TextView
             android:id="@+id/title_task2"
@@ -63,11 +63,11 @@
             android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/nonLu"
-            app:layout_constraintStart_toEndOf="@+id/notifs"
-            app:layout_constraintTop_toTopOf="@+id/uHave" />
+            app:layout_constraintStart_toEndOf="@+id/notification_number"
+            app:layout_constraintTop_toTopOf="@+id/notif_title1" />
 
         <TextView
-            android:id="@+id/notifs"
+            android:id="@+id/notification_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -76,8 +76,8 @@
             android:textColor="@color/colorAccent"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/nonLu"
-            app:layout_constraintStart_toEndOf="@+id/uHave"
-            app:layout_constraintTop_toTopOf="@+id/uHave" />
+            app:layout_constraintStart_toEndOf="@+id/notif_title1"
+            app:layout_constraintTop_toTopOf="@+id/notif_title1" />
 
         <TextView
             android:id="@+id/nonLu"
@@ -88,11 +88,11 @@
             android:text="non lues"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/uHave"
-            app:layout_constraintTop_toBottomOf="@+id/uHave" />
+            app:layout_constraintStart_toStartOf="@+id/notif_title1"
+            app:layout_constraintTop_toBottomOf="@+id/notif_title1" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/roundedimage"
+            android:id="@+id/user_image"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginStart="16dp"
