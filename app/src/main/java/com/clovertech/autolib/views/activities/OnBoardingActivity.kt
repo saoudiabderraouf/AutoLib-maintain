@@ -22,7 +22,6 @@ class OnBoardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_Agent_APP)
 
         if (restorePrefData()) {
             val mainActivity = Intent(applicationContext, HomeActivity::class.java)

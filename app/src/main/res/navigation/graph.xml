@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/navigation_userProfil"
         android:name="com.clovertech.autolib.views.ui.userProfil.UserProfileFragment"
-        android:label="Profile"
+        android:label= "Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/navigation_notifications"
@@ -83,15 +83,11 @@
             android:id="@+id/action_nav_settings_to_themeFragment"
             app:destination="@id/themeFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/themeFragment"
         android:name="com.clovertech.autolib.views.ui.settings.ThemeFragment"
         android:label="Theme"
-        tools:layout="@layout/fragment_theme" >
-        <action
-            android:id="@+id/action_themeFragment_to_nav_settings"
-            app:destination="@id/nav_settings" />
-    </fragment>
+        tools:layout="@layout/fragment_theme" />
     <fragment
         android:id="@+id/nav_panne"
         android:name="com.clovertech.autolib.views.ui.panne.PanneAddFragment"

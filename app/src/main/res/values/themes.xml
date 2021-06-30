@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Agent_APP" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimary</item>
@@ -12,7 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
 
-        <item name="android:windowBackground">@color/white</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.TheX.small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.TheX.medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.TheX.large</item>
     </style>
 
     <style name="Divider">
@@ -37,7 +39,7 @@
         <item name="android:colorForeground">#888888</item>
     </style>
 
-    <style name="Theme.Agent_APP.NoActionBar">
+    <style name="Theme.main.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

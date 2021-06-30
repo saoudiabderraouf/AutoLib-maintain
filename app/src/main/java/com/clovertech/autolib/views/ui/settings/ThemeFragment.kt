@@ -5,64 +5,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
-import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.FragmentThemeBinding
 import com.clovertech.autolib.utils.PrefUtils
-import kotlinx.android.synthetic.main.fragment_theme.*
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class ThemeFragment : Fragment() {
+class ThemeFragment : BottomSheetDialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var binding: FragmentThemeBinding
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
+        binding = FragmentThemeBinding.inflate(layoutInflater,container, false)
+        return binding.root
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_theme, container, false)
-    }
-
-
-    fun NightModeON(view: View?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    }
-
-    fun NightModeOFF(view: View?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-
-    fun SystemMode(view: View?){
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
-            darkButton.isActivated=true
+            binding.darkButton.isActivated=true
         }else{
             if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
-                lightButton.isActivated=true
+                binding.lightButton.isActivated=true
             }
             else{
-                systemButton.isActivated=true
+                binding.systemButton.isActivated=true
             }
         }
-        systemButton.setOnClickListener(){
+        binding.systemButton.setOnClickListener{
             PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"system")
-            SystemMode(it)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
-        lightButton.setOnClickListener(){
+        binding.lightButton.setOnClickListener{
             PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"dark")
-            NightModeOFF(it)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        darkButton.setOnClickListener(){
+        binding.darkButton.setOnClickListener{
             PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"light")
-            NightModeON(it)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 
