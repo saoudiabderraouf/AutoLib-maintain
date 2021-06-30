@@ -1,4 +1,4 @@
-package com.clovertech.autolib.views.ui.dashboard
+package com.clovertech.autolib.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +24,7 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
         holder.description.text = task.description
         holder.title.text = task.taskTitle
         val progress = task.steps!!.filter { it.completed }.size * 100 / task.steps!!.size
-        holder.progress.text = progress.toString() + "%"
+        holder.progress.text = "$progress%"
     }
 
     override fun getItemCount(): Int {

@@ -34,7 +34,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="26dp"
             android:fontFamily="@font/montserrat"
-            android:text="Salut! Hamid Reda !"
+            android:text="..."
             android:textColor="?attr/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

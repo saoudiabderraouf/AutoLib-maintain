@@ -1,19 +1,20 @@
 package com.clovertech.autolib.views.ui.dashboard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.FragmentDashboardBinding
 import com.clovertech.autolib.model.Task
 import com.clovertech.autolib.viewmodel.TaskViewModel
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
 import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
@@ -21,59 +22,40 @@ import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
 import com.michalsvec.singlerowcalendar.utils.DateUtils
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class DashboardFragment : Fragment() {
 
+    private val taskViewModel: TaskViewModel by activityViewModels()
+    private lateinit var binding: FragmentDashboardBinding
+
     private var currentMonth = 0
     private val calendar = Calendar.getInstance()
     private val allTasks = mutableListOf<Task>()
-
-    private lateinit var taskViewModel: TaskViewModel
     private lateinit var pagerAdapter: TaskFragmentAdapter
     private lateinit var viewPager: ViewPager2
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        taskViewModel =
-            ViewModelProvider(this).get(TaskViewModel::class.java)
-        return inflater.inflate(
-            R.layout.fragment_dashboard,
-            container, false
-        )
+    override fun onCreateView(inflater: LayoutInflater,
+        container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initPager(view)
+        initPager()
         initCalendar(view)
         attachObservers()
     }
 
-    private fun attachObservers() {
-        /*taskViewModel.getAllTaches(requireContext())?.observe(viewLifecycleOwner,
-            {
-                pagerAdapter.updateTasksUI(it)
-            })*/
-        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
-            allTasks.clear()
-            allTasks.addAll(it)
-        })
+    private fun initPager() {
+        viewPager = binding.calendarPager
+        val tabLayout = binding.calendarTabs
 
-    }
-
-    private fun initPager(view: View) {
         pagerAdapter = TaskFragmentAdapter(this)
-        viewPager = view.findViewById(R.id.pagerDashboard)
         viewPager.adapter = pagerAdapter
         viewPager.offscreenPageLimit = 2
-
-        val tabLayout = view.findViewById<TabLayout>(R.id.tabDashboard)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position){
                 0 -> tab.text = "Terminée"
@@ -84,6 +66,7 @@ class DashboardFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initCalendar(view: View) {
 
         calendar.time = Date()
@@ -91,11 +74,8 @@ class DashboardFragment : Fragment() {
 
         // Init view manager
         val myCalendarViewManager = object : CalendarViewManager {
-            override fun setCalendarViewResourceId(
-                position: Int,
-                date: Date,
-                isSelected: Boolean
-            ): Int {
+            override fun setCalendarViewResourceId(position: Int, date: Date, isSelected: Boolean): Int {
+
                 // return item layout files, which you have created
                 return if (!isSelected) {
                     R.layout.calendar_item_layout
@@ -104,12 +84,9 @@ class DashboardFragment : Fragment() {
                 }
             }
 
-            override fun bindDataToCalendarView(
-                holder: SingleRowCalendarAdapter.CalendarViewHolder,
-                date: Date,
-                position: Int,
-                isSelected: Boolean
-            ) {
+            override fun bindDataToCalendarView(holder: SingleRowCalendarAdapter.CalendarViewHolder,
+                date: Date, position: Int, isSelected: Boolean) {
+
                 // bind data to calendar item views
                 val dayNumber = holder.itemView.findViewById<TextView>(R.id.textCalendarDayNumber)
                 val dayName3 = holder.itemView.findViewById<TextView>(R.id.textCalendarDayName3)
@@ -138,7 +115,7 @@ class DashboardFragment : Fragment() {
         val calendarView:SingleRowCalendar = view.findViewById(R.id.calendarView)
         val day = calendar[Calendar.DAY_OF_WEEK_IN_MONTH]
 
-        val cal = calendarView.apply {
+        val singleRowCalendar = calendarView.apply {
             calendarViewManager = myCalendarViewManager
             calendarChangesObserver = myCalendarChangesObserver
             calendarSelectionManager = mySelectionManager
@@ -148,22 +125,30 @@ class DashboardFragment : Fragment() {
             init()
         }
 
-        cal.select(day)
+        singleRowCalendar.select(day)
 
-        buttonPreviousMonthDashboard.setOnClickListener {
-            cal.setDates(getDatesOfPreviousMonth())
-            textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
-                    "${DateUtils.getYear(calendar.time)}"
+        binding.buttonPreviousMonthDashboard.setOnClickListener {
+            singleRowCalendar.setDates(getDatesOfPreviousMonth())
+            binding.textMonthDashboard.text=
+                "${DateUtils.getMonthName(calendar.time)}, ${DateUtils.getYear(calendar.time)}"
         }
 
-        buttonNextMonthDashboard.setOnClickListener {
-            cal.setDates(getDatesOfNextMonth())
-            textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
-                    "${DateUtils.getYear(calendar.time)}"
+        binding.buttonNextMonthDashboard.setOnClickListener {
+            singleRowCalendar.setDates(getDatesOfNextMonth())
+            binding.textMonthDashboard.text =
+                "${DateUtils.getMonthName(calendar.time)}, ${DateUtils.getYear(calendar.time)}"
         }
 
-        textMonthDashboard.text = "${DateUtils.getMonthName(calendar.time)}, " +
-                "${DateUtils.getYear(calendar.time)}"
+        binding.textMonthDashboard.text =
+            "${DateUtils.getMonthName(calendar.time)}, ${DateUtils.getYear(calendar.time)}"
+    }
+
+    private fun attachObservers() {
+        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
+            allTasks.clear()
+            allTasks.addAll(it)
+        })
+
     }
 
     private fun getTasksByDate(date: Date): List<Task>{
@@ -200,23 +185,18 @@ class DashboardFragment : Fragment() {
         return getDates(mutableListOf())
     }
 
-    private fun getFutureDatesOfCurrentMonth(): List<Date> {
-        // get all next dates of current month
-        currentMonth = calendar[Calendar.MONTH]
-        return getDates(mutableListOf())
-    }
-
-
     private fun getDates(list: MutableList<Date>): List<Date> {
         // load dates of whole month
         calendar.set(Calendar.MONTH, currentMonth)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         list.add(calendar.time)
+
         while (currentMonth == calendar[Calendar.MONTH]) {
             calendar.add(Calendar.DATE, +1)
             if (calendar[Calendar.MONTH] == currentMonth)
                 list.add(calendar.time)
         }
+
         calendar.add(Calendar.DATE, -1)
         return list
     }
