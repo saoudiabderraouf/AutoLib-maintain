@@ -14,7 +14,6 @@ import com.clovertech.autolib.databinding.FragmentAddMaterialBinding
 import com.clovertech.autolib.model.Equipment
 import com.clovertech.autolib.model.Materiel
 import com.clovertech.autolib.model.NewEquipment
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.EquipmentViewModel
 import com.clovertech.autolib.viewmodel.TaskViewModel
 
@@ -55,45 +54,36 @@ class AddMaterialFragment : Fragment(){
 
         binding.materialName.setOnItemClickListener { _, _, position, _ ->
             selectedEquipment = equipments[position]
-            Toast.makeText(requireContext(), selectedEquipment?.equipmentName, Toast.LENGTH_SHORT).show()
         }
 
         binding.addMaterial.setOnClickListener {
-            val token = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.TASK_UUID, "")
-            val newEquipment = token?.let { _ ->
-                NewEquipment(
+            val newEquipment = NewEquipment(
                     binding.materialDescription.text.toString(),
                     binding.materialQuantity.text.toString().toInt(),
-                    selectedEquipment?.uuid ?: "282d4458-aaeb-4e92-a674-12320b1de46a",
-                    taskViewModel.task.uuid
-                )
-
-            }
+                    selectedEquipment?.uuid ?: "",
+                    taskViewModel.task.uuid)
 
             val material = Materiel(binding.materialDescription.text.toString()
                 , binding.materialQuantity.text.toString())
 
-            if (newEquipment != null) {
-                equipmentViewModel.addMateriel(newEquipment)
+            equipmentViewModel.addMateriel(newEquipment)
 
-                equipmentViewModel.response.observe(viewLifecycleOwner,{
-                    if (it.code() == 200) {
-                        val listEquipment: MutableList<Materiel>? =
-                            taskViewModel.task.usedEquipements as MutableList<Materiel>?
-                        listEquipment?.add(material)
-                        taskViewModel.task.usedEquipements = listEquipment
-                        taskViewModel.updateTask(requireContext(), taskViewModel.task)
-                        Toast.makeText(requireContext(), "Added material successfully", Toast.LENGTH_SHORT)
-                            .show()
-                        findNavController().popBackStack()
+            equipmentViewModel.response.observe(viewLifecycleOwner,{
+                if (it.code() == 200) {
+                    val listEquipment: MutableList<Materiel>? =
+                        taskViewModel.task.usedEquipements as MutableList<Materiel>?
+                    listEquipment?.add(material)
+                    taskViewModel.task.usedEquipements = listEquipment
+                    taskViewModel.updateTask(requireContext(), taskViewModel.task)
+                    Toast.makeText(requireContext(), "Added material successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().popBackStack()
 
-                    } else {
-                        Toast.makeText(requireContext(), it.message(), Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                } else {
+                    Toast.makeText(requireContext(), it.message(), Toast.LENGTH_SHORT).show()
+                }
 
-                })
-            }
+            })
         }
     }
 

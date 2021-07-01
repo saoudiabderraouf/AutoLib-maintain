@@ -6,9 +6,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.clovertech.autolib.R
 import com.clovertech.autolib.model.Login
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.*
 
@@ -35,13 +35,13 @@ class LoginActivity : AppCompatActivity(){
         loginViewModel.onLoginButtonClick(Login(userEmail, userPassword))
 
         if (userEmail.isEmpty()) {
-            Toast.makeText(this, "Votre Email est invalid", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Your email is invalid", Toast.LENGTH_SHORT).show()
         } else {
             if (userPassword.isEmpty()) {
-                Toast.makeText(this, "Entrer le mot de passe", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please provide a password", Toast.LENGTH_SHORT).show()
             } else {
                 if (userPassword.length < MIN_PASSWD_LENGTH) {
-                    Toast.makeText(this, "Mot de passe incorrect", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Your password is incorrect", Toast.LENGTH_SHORT).show()
                 } else {
 
                     loginViewModel.loginResponse.observe(this,{ response ->
@@ -63,8 +63,9 @@ class LoginActivity : AppCompatActivity(){
 
     private fun saveToken(token: String, idUser: Int) {
 
-        PrefUtils.with(this).save(PrefUtils.Keys.TOKEN, token)
-        PrefUtils.with(this).save(PrefUtils.Keys.ID, idUser)
+        val prefs = getSharedPreferences("AUTOLIB_MAINTAIN", MODE_PRIVATE)
+        prefs.edit{putString("AGENT_TOKEN",token)}
+        prefs.edit{putInt("AGENT_ID",idUser)}
 
         if (idUser != 0) {
             loginViewModel.getThisProfile(idUser)
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity(){
                     val profile = it.body()
                     if (profile != null) {
                         val name = "${profile.firstName} ${profile.lastName}"
-                        PrefUtils.with(this).save(PrefUtils.Keys.AGENT_NAME, name)
+                        prefs.edit { putString("AGENT_NAME", name) }
                         Toast.makeText(this, "Welcome $name", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, HomeActivity::class.java))
                         finish()

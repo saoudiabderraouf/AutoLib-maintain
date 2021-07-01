@@ -1,5 +1,6 @@
 package com.clovertech.autolib.views.ui.settings
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.clovertech.autolib.R
 import com.clovertech.autolib.databinding.FragmentSettingsBinding
-import com.clovertech.autolib.utils.PrefUtils
 
 class SettingsFragment : Fragment() {
 
@@ -22,15 +22,16 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val prefs = requireContext().getSharedPreferences("AUTOLIB_MAINTAIN", MODE_PRIVATE)
 
-        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
-            binding.nightModeStateText.text = "Noir"
+        if (prefs.getString("THEME_MODE","SYSTEM") =="DARK"){
+            binding.nightModeStateText.text = "Dark theme"
         }else{
-            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
-                binding.nightModeStateText.text = "Clair"
+            if(prefs.getString("THEME_MODE","SYSTEM") =="LIGHT"){
+                binding.nightModeStateText.text = "Light theme"
             }
             else{
-                binding.nightModeStateText.text = "Système"
+                binding.nightModeStateText.text = "Follow system"
             }
         }
         binding.modeNuitLayout.setOnClickListener{

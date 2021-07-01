@@ -11,9 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.clovertech.autolib.databinding.FragmentAddPanneBinding
 import com.clovertech.autolib.model.Panne
 import com.clovertech.autolib.viewmodel.PanneViewModel
-import kotlinx.android.synthetic.main.activity_login_agent.chasis_number
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime.now
 import java.util.*
 
 
@@ -34,14 +32,14 @@ class PanneAddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sdf = SimpleDateFormat("yyyy-mm-dd")
-        val currentDate= sdf.format(Calendar.getInstance().timeInMillis)
+        val currentDate= sdf.format(Date())
 
         binding.sendSignalButton.setOnClickListener{
 
         val panne = Panne(currentDate
             , null
             , "ready"
-            , chasis_number.text.toString().toInt()
+            , binding.chasisNumber.text.toString().toInt()
             , binding.panneDescription.text.toString()
             , null)
 

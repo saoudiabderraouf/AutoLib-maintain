@@ -1,11 +1,13 @@
 package com.clovertech.autolib.views.ui.home
 
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -18,7 +20,6 @@ import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
 import com.clovertech.autolib.databinding.FragmentHomeBinding
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.NotificationViewModel
 import com.clovertech.autolib.viewmodel.TaskViewModel
 import com.google.android.gms.tasks.OnCompleteListener
@@ -33,6 +34,7 @@ class HomeFragment : Fragment() {
     private val notificationViewModel: NotificationViewModel by activityViewModels()
     private lateinit var adapterSteps: TaskStepsAdapter
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var prefs: SharedPreferences
 
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -45,12 +47,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val name = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.AGENT_NAME, "...")
+        prefs = requireContext().getSharedPreferences("AUTOLIB_MAINTAIN", AppCompatActivity.MODE_PRIVATE)
         val adapter = ListTasksAdapter(findNavController())
         val tasksPager = binding.pagerTasksHome
         val taskStepRecycler = binding.taskStepsRecycler
-
-        binding.userGreeting.text = "Hello! $name"
 
         tasksPager.adapter = adapter
         tasksPager.clipToPadding = false
@@ -80,7 +80,7 @@ class HomeFragment : Fragment() {
         taskStepRecycler.isNestedScrollingEnabled = false
         taskStepRecycler.adapter = adapterSteps
 
-        val id = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
+        val id = prefs.getInt("AGENT_ID",0)
 
         if (id != 0) {
             taskViewModel.getTasksByIdAgent(requireContext(), id)
@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun sendFCMToken() {
-        val idAgent = PrefUtils.with(requireContext()).getInt(PrefUtils.Keys.ID, 0)
+        val idAgent = prefs.getInt("AGENT_ID",0)
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {

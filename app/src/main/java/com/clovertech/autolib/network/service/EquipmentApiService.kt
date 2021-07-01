@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface EquipmentApiService {
 
-    @GET("/equipment")
+    @GET("service-materiel/equipment")
     suspend fun getAllEquipment(): Response<List<Equipment>>
 
     @POST("service-materiel/usedEquipment")

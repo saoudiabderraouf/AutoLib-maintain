@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.clovertech.autolib.R
@@ -75,7 +74,6 @@ class DashboardFragment : Fragment() {
         // Init view manager
         val myCalendarViewManager = object : CalendarViewManager {
             override fun setCalendarViewResourceId(position: Int, date: Date, isSelected: Boolean): Int {
-
                 // return item layout files, which you have created
                 return if (!isSelected) {
                     R.layout.calendar_item_layout
@@ -112,7 +110,7 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        val calendarView:SingleRowCalendar = view.findViewById(R.id.calendarView)
+        val calendarView:SingleRowCalendar = binding.calendarView
         val day = calendar[Calendar.DAY_OF_WEEK_IN_MONTH]
 
         val singleRowCalendar = calendarView.apply {
@@ -130,13 +128,13 @@ class DashboardFragment : Fragment() {
         binding.buttonPreviousMonthDashboard.setOnClickListener {
             singleRowCalendar.setDates(getDatesOfPreviousMonth())
             binding.textMonthDashboard.text=
-                "${DateUtils.getMonthName(calendar.time)}, ${DateUtils.getYear(calendar.time)}"
+                "${DateUtils.getMonthName(calendar.time)},  ${DateUtils.getYear(calendar.time)}"
         }
 
         binding.buttonNextMonthDashboard.setOnClickListener {
             singleRowCalendar.setDates(getDatesOfNextMonth())
             binding.textMonthDashboard.text =
-                "${DateUtils.getMonthName(calendar.time)}, ${DateUtils.getYear(calendar.time)}"
+                "${DateUtils.getMonthName(calendar.time)},  ${DateUtils.getYear(calendar.time)}"
         }
 
         binding.textMonthDashboard.text =
@@ -144,7 +142,11 @@ class DashboardFragment : Fragment() {
     }
 
     private fun attachObservers() {
-        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, Observer {
+        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner,
+            {
+                pagerAdapter.updateTasksUI(it)
+            })
+        taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner, {
             allTasks.clear()
             allTasks.addAll(it)
         })

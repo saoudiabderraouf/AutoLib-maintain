@@ -143,14 +143,14 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun restorePrefData(): Boolean {
-        val pref = applicationContext.getSharedPreferences("myPrefs", MODE_PRIVATE)
-        return pref.getBoolean("isOpnend", false)
+        val pref = applicationContext.getSharedPreferences("AUTOLIB_MAINTAIN", MODE_PRIVATE)
+        return pref.getBoolean("IS_OPENED", false)
     }
 
     private fun savePrefsData() {
-        val pref = applicationContext.getSharedPreferences("myPrefs", MODE_PRIVATE)
+        val pref = applicationContext.getSharedPreferences("AUTOLIB_MAINTAIN", MODE_PRIVATE)
         pref.edit {
-            putBoolean("isOpnend", true)
+            putBoolean("IS_OPENED", true)
             apply()
         }
     }

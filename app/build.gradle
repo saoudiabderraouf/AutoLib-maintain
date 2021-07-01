@@ -65,8 +65,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation "androidx.activity:activity-ktx:1.2.3"
 
-    api 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
-
     // Espresso
     def androidx_test_espresso = "3.1.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso"
@@ -98,12 +96,8 @@ dependencies {
     def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-
-    // Room
-    implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
 
 
     //Retrofit
@@ -116,9 +110,6 @@ dependencies {
 
     // SingleRowCalendar
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
-
-    // Sliding Root Nav
-    implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:28.1.0')

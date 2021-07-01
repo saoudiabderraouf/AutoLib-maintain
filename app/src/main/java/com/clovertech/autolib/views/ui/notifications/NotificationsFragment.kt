@@ -9,11 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.clovertech.autolib.adapters.NotificationsAdapter
 import com.clovertech.autolib.databinding.FragmentNotificationsBinding
-import com.clovertech.autolib.utils.PrefUtils
 import com.clovertech.autolib.viewmodel.NotificationViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class NotificationsFragment : Fragment() {
@@ -34,8 +30,6 @@ class NotificationsFragment : Fragment() {
         binding.notificationsRecycler.layoutManager = LinearLayoutManager(requireActivity())
         binding.notificationsRecycler.adapter = adapter
 
-        val name = PrefUtils.with(requireContext()).getString(PrefUtils.Keys.AGENT_NAME, "...")
-        binding.salutations.text = "Hello $name"
         notificationsViewModel.fetchAllNotifications(requireContext())
         notificationsViewModel.getAllNotifications(requireContext())
         notificationsViewModel.notificationList.observe(viewLifecycleOwner, {

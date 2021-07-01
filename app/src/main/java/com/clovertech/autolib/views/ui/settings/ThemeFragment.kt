@@ -1,12 +1,13 @@
 package com.clovertech.autolib.views.ui.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import com.clovertech.autolib.databinding.FragmentThemeBinding
-import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
@@ -22,11 +23,11 @@ class ThemeFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="dark"){
+        val prefs = requireContext().getSharedPreferences("AUTOLIB_MAINTAIN", Context.MODE_PRIVATE)
+        if (prefs.getString("THEME_MODE","SYSTEM") =="DARK"){
             binding.darkButton.isActivated=true
         }else{
-            if(PrefUtils.with(requireContext()).getString(PrefUtils.Keys.DARK_MODE,"")=="light"){
+            if(prefs.getString("THEME_MODE","SYSTEM") =="LIGHT"){
                 binding.lightButton.isActivated=true
             }
             else{
@@ -34,15 +35,15 @@ class ThemeFragment : BottomSheetDialogFragment() {
             }
         }
         binding.systemButton.setOnClickListener{
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"system")
+            prefs.edit{putString("THEME_MODE","SYSTEM")}
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
         binding.lightButton.setOnClickListener{
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"dark")
+            prefs.edit{putString("THEME_MODE","DARK")}
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
         binding.darkButton.setOnClickListener{
-            PrefUtils.with(requireActivity()).save(PrefUtils.Keys.DARK_MODE,"light")
+            prefs.edit{putString("THEME_MODE","LIGHT")}
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
