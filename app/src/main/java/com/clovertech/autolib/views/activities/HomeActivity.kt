@@ -20,6 +20,7 @@ import com.clovertech.autolib.adapters.menu.DrawerAdapter
 import com.clovertech.autolib.adapters.menu.DrawerItem
 import com.clovertech.autolib.adapters.menu.SimpleItem
 import com.clovertech.autolib.adapters.menu.SpaceItem
+import com.clovertech.autolib.databinding.ActivityHomeBinding
 import com.clovertech.autolib.utils.PrefUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
@@ -28,8 +29,9 @@ import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_left_drawer.*
 
-
 class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
+
+    private lateinit var binding: ActivityHomeBinding
 
     private lateinit var screenTitles: Array<String>
     private lateinit var screenIcons: Array<Drawable?>
@@ -41,38 +43,32 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val token = PrefUtils.with(this).getString(PrefUtils.Keys.TOKEN, "")
-
         if (token.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-
         } else {
+            nomUser.text = PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda")
             initFirebase()
             initBottomBar()
-
             val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
             this.setSupportActionBar(toolbar)
             toolbar.title = ""
-
             navView = findViewById(R.id.nav_view)
-
             screenIcons = this.loadScreenIcons()
             screenTitles = loadScreenTitles()
-
             menuItems = arrayOf(
-                R.id.navigation_home,
-                R.id.navigation_notifications,
-                R.id.navigation_calendar,
+                R.id.nav_home,
+                R.id.nav_notifications,
+                R.id.nav_calendar,
                 -1,
                 -1,
-                R.id.navigation_userProfil)
-
-            adapter = DrawerAdapter(
-                listOf(
+                R.id.nav_profile)
+            adapter = DrawerAdapter(listOf(
                     createItemFor(POS_ACCUEIL),
                     createItemFor(POS_NOTIF),
                     createItemFor(POS_CALENDAR),
@@ -81,29 +77,22 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
                     createItemFor(POS_PROFIL),
                     SpaceItem(48),
                     createItemFor(POS_LOGOUT)
-                ) as List<DrawerItem<DrawerAdapter.ViewHolder>>?
-            )
-
-            navView.selectedItemId = R.id.navigation_home
-
-
+                ) as List<DrawerItem<DrawerAdapter.ViewHolder>>?)
+            navView.selectedItemId = R.id.nav_home
             val navController = findNavController(R.id.nav_host_fragment)
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.navigation_home,
-                    R.id.navigation_notifications,
-                    R.id.navigation_calendar,
-                    R.id.navigation_userProfil,
+                    R.id.nav_home,
+                    R.id.nav_notifications,
+                    R.id.nav_calendar,
+                    R.id.nav_profile,
                     R.id.nav_panne,
                     R.id.nav_settings,
-                    R.id.detailTache,
-                    R.id.ajouterMateriel
-                )
-            )
-
+                    R.id.nav_task_detail,
+                    R.id.nav_add_material
+                ))
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
-
             slidingRootNav = SlidingRootNavBuilder(this)
                 .withToolbarMenuToggle(toolbar)
                 .withMenuOpened(false)
@@ -111,17 +100,12 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
                 .withSavedState(savedInstanceState)
                 .withMenuLayout(R.layout.menu_left_drawer)
                 .inject()
-
-
-
             adapter.setListener(this)
             val list = findViewById<RecyclerView>(R.id.list)
             list.isNestedScrollingEnabled = false
             list.layoutManager = LinearLayoutManager(this)
             list.adapter = adapter
             adapter.setSelected(POS_ACCUEIL)
-
-            nomUser.text = PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda")
         }
     }
 
@@ -142,15 +126,15 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
         var isAtBottom = false
         when (position) {
             POS_ACCUEIL -> {
-                id = R.id.navigation_home
+                id = R.id.nav_home
                 isAtBottom = true
             }
             POS_NOTIF -> {
-                id = R.id.navigation_notifications
+                id = R.id.nav_notifications
                 isAtBottom = true
             }
             POS_CALENDAR -> {
-                id = R.id.navigation_calendar
+                id = R.id.nav_calendar
                 isAtBottom = true
             }
             POS_PANNE -> {
@@ -160,7 +144,7 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
                 id = R.id.nav_settings
             }
             POS_PROFIL -> {
-                id = R.id.navigation_userProfil
+                id = R.id.nav_profile
                 isAtBottom = true
             }
             POS_LOGOUT -> {

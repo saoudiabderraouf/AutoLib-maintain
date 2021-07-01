@@ -35,7 +35,7 @@
     </style>
 
     <style name="MyIOSSwitch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@color/green</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
         <item name="android:colorForeground">#888888</item>
     </style>
 
@@ -45,7 +45,7 @@
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" >
-        <item name="android:shadowColor" >@color/white</item>
+        <item name="android:shadowColor" >@color/white </item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />

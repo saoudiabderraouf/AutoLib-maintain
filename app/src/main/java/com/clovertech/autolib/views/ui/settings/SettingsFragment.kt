@@ -34,7 +34,7 @@ class SettingsFragment : Fragment() {
             }
         }
         binding.modeNuitLayout.setOnClickListener{
-            findNavController().navigate(R.id.action_nav_settings_to_themeFragment)
+            findNavController().navigate(R.id.nav_to_themes)
 
         }
 

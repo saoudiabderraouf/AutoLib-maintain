@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
 
         taskViewModel.getTasksByIdAgent(requireContext(), id)
         binding.stepsTitle.setOnClickListener {
-            findNavController().navigate(R.id.detailTache)
+            findNavController().navigate(R.id.nav_task_detail)
         }
     }
 

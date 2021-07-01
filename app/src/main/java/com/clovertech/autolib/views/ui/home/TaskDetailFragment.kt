@@ -56,7 +56,7 @@ class TaskDetailFragment : Fragment() {
         }
 
         binding.addMaterialButton.setOnClickListener{
-            findNavController().navigate(R.id.action_detailTache_to_ajouterMateriel)
+            findNavController().navigate(R.id.nav_to_addmaterial)
         }
     }
 

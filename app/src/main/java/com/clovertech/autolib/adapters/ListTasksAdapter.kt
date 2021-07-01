@@ -34,7 +34,7 @@ class ListTasksAdapter(private val navController: NavController) :
         holder.progressBar.progress = data[position].steps?.filter { it.completed }?.size ?: 0
 
         holder.itemView.setOnClickListener{
-            navController.navigate(R.id.action_navigation_home_to_detailTache)
+            navController.navigate(R.id.nav_to_taskdetail)
         }
 
         if (holder.progressBar.max != 0) {

@@ -3,71 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/graph"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_home"
         android:name="com.clovertech.autolib.views.ui.home.HomeFragment"
-        android:label="Accueil"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_detailTache"
-            app:destination="@id/detailTache"
+            android:id="@+id/nav_to_taskdetail"
+            app:destination="@id/nav_task_detail"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_navigation_home_to_nav_vehicule_detail"
-            app:destination="@id/nav_vehicule_detail"
+            app:destination="@id/nav_vehicle_detail"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_userProfil"
+        android:id="@+id/nav_profile"
         android:name="com.clovertech.autolib.views.ui.userProfil.UserProfileFragment"
         android:label= "Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/nav_notifications"
         android:name="com.clovertech.autolib.views.ui.notifications.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/navigation_calendar"
+        android:id="@+id/nav_calendar"
         android:name="com.clovertech.autolib.views.ui.dashboard.DashboardFragment"
-        android:label="Calendrier"
+        android:label="Calendar"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
-        android:id="@+id/detailTache"
+        android:id="@+id/nav_task_detail"
         android:name="com.clovertech.autolib.views.ui.home.TaskDetailFragment"
-        android:label="Détail"
+        android:label="Task detail"
         tools:layout="@layout/fragment_detail_task" >
         <action
-            android:id="@+id/action_detailTache_to_ajouterMateriel"
-            app:destination="@id/ajouterMateriel"
+            android:id="@+id/nav_to_addmaterial"
+            app:destination="@id/nav_add_material"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_detailTache_to_vehiculeFragment"
-            app:destination="@id/nav_vehicule_detail"
+            app:destination="@id/nav_vehicle_detail"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/ajouterMateriel"
+        android:id="@+id/nav_add_material"
         android:name="com.clovertech.autolib.views.ui.home.AddMaterialFragment"
-        android:label="Ajouter un Materiel"
+        android:label="Add a material"
         tools:layout="@layout/fragment_add_material" >
         <action
-            android:id="@+id/action_ajouterMateriel_to_detailTache"
-            app:destination="@id/detailTache"
+            android:id="@+id/nav_to_taskdetail_material"
+            app:destination="@id/nav_task_detail"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -77,26 +77,26 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.clovertech.autolib.views.ui.settings.SettingsFragment"
-        android:label="Paramètres"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/action_nav_settings_to_themeFragment"
-            app:destination="@id/themeFragment" />
+            android:id="@+id/nav_to_themes"
+            app:destination="@id/nav_themes" />
     </fragment>
     <dialog
-        android:id="@+id/themeFragment"
+        android:id="@+id/nav_themes"
         android:name="com.clovertech.autolib.views.ui.settings.ThemeFragment"
-        android:label="Theme"
+        android:label="Select theme"
         tools:layout="@layout/fragment_theme" />
     <fragment
         android:id="@+id/nav_panne"
         android:name="com.clovertech.autolib.views.ui.panne.PanneAddFragment"
-        android:label="Signaler Panne"
+        android:label="Report a panne"
         tools:layout="@layout/fragment_add_panne" />
     <fragment
-        android:id="@+id/nav_vehicule_detail"
+        android:id="@+id/nav_vehicle_detail"
         android:name="com.clovertech.autolib.views.ui.vehiculedetail.VehiculeFragment"
-        android:label="Vehicule details"
+        android:label="Vehicle details"
         tools:layout="@layout/fragment_vehicule" >
         <argument
             android:name="idVehicule"

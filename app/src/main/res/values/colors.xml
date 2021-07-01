@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
+
     <color name="colorPrimary">#F9C31A</color>
     <color name="royalBlack">#333</color>
     <color name="colorInput">#3CC9DAF4</color>
@@ -23,8 +24,6 @@
     <color name="blue">#4086F4</color>
     <color name="gris">#e5e5e5</color>
     <color name="noir">#333333</color>
-    <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#a8a8a8</color>
-    <color name="grey">#949494</color>
 
 </resources>
