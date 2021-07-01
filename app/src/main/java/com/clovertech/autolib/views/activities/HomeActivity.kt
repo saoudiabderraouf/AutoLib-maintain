@@ -1,44 +1,26 @@
 package com.clovertech.autolib.views.activities
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.Menu
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
-import com.clovertech.autolib.adapters.menu.DrawerAdapter
-import com.clovertech.autolib.adapters.menu.DrawerItem
-import com.clovertech.autolib.adapters.menu.SimpleItem
-import com.clovertech.autolib.adapters.menu.SpaceItem
 import com.clovertech.autolib.databinding.ActivityHomeBinding
 import com.clovertech.autolib.utils.PrefUtils
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
-import com.yarolegovich.slidingrootnav.SlidingRootNav
-import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.menu_left_drawer.*
 
-class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
+class HomeActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityHomeBinding
 
-    private lateinit var screenTitles: Array<String>
-    private lateinit var screenIcons: Array<Drawable?>
-    private lateinit var menuItems: Array<Int>
-    private lateinit var adapter: DrawerAdapter
-    private lateinit var navView: BottomNavigationView
-    private var slidingRootNav: SlidingRootNav? = null
+    private lateinit var navigationView: NavigationView
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,169 +33,45 @@ class HomeActivity : AppCompatActivity(), DrawerAdapter.OnItemSelectedListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        } else {
-            nomUser.text = PrefUtils.with(this).getString(PrefUtils.Keys.AGENT_NAME,"Hamid Reda")
-            initFirebase()
-            initBottomBar()
-            val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-            this.setSupportActionBar(toolbar)
-            toolbar.title = ""
-            navView = findViewById(R.id.nav_view)
-            screenIcons = this.loadScreenIcons()
-            screenTitles = loadScreenTitles()
-            menuItems = arrayOf(
-                R.id.nav_home,
-                R.id.nav_notifications,
-                R.id.nav_calendar,
-                -1,
-                -1,
-                R.id.nav_profile)
-            adapter = DrawerAdapter(listOf(
-                    createItemFor(POS_ACCUEIL),
-                    createItemFor(POS_NOTIF),
-                    createItemFor(POS_CALENDAR),
-                    createItemFor(POS_PANNE),
-                    createItemFor(POS_SETTINGS),
-                    createItemFor(POS_PROFIL),
-                    SpaceItem(48),
-                    createItemFor(POS_LOGOUT)
-                ) as List<DrawerItem<DrawerAdapter.ViewHolder>>?)
-            navView.selectedItemId = R.id.nav_home
-            val navController = findNavController(R.id.nav_host_fragment)
-            val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.nav_home,
-                    R.id.nav_notifications,
-                    R.id.nav_calendar,
-                    R.id.nav_profile,
-                    R.id.nav_panne,
-                    R.id.nav_settings,
-                    R.id.nav_task_detail,
-                    R.id.nav_add_material
-                ))
-            setupActionBarWithNavController(navController, appBarConfiguration)
-            navView.setupWithNavController(navController)
-            slidingRootNav = SlidingRootNavBuilder(this)
-                .withToolbarMenuToggle(toolbar)
-                .withMenuOpened(false)
-                .withContentClickableWhenMenuOpened(false)
-                .withSavedState(savedInstanceState)
-                .withMenuLayout(R.layout.menu_left_drawer)
-                .inject()
-            adapter.setListener(this)
-            val list = findViewById<RecyclerView>(R.id.list)
-            list.isNestedScrollingEnabled = false
-            list.layoutManager = LinearLayoutManager(this)
-            list.adapter = adapter
-            adapter.setSelected(POS_ACCUEIL)
         }
-    }
 
-    private fun initFirebase() {
         FirebaseApp.initializeApp(this)
-    }
 
+        //setting up the toolbar is like this
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+        this.setSupportActionBar(toolbar)
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.top_nav_menu, menu)
-        return true
-    }
+        //set up the navView
+        navigationView = binding.navView
 
+        val drawer = binding.drawerLayout
+        val navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.nav_home,
+            R.id.nav_notifications,
+            R.id.nav_calendar,
+            R.id.nav_panne,
+            R.id.nav_settings,
+            R.id.nav_profile),drawer)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navigationView.setupWithNavController(navController)
 
-    override fun onItemSelected(position: Int) {
-        slidingRootNav!!.closeMenu()
-        var id = 0
-        var isAtBottom = false
-        when (position) {
-            POS_ACCUEIL -> {
-                id = R.id.nav_home
-                isAtBottom = true
-            }
-            POS_NOTIF -> {
-                id = R.id.nav_notifications
-                isAtBottom = true
-            }
-            POS_CALENDAR -> {
-                id = R.id.nav_calendar
-                isAtBottom = true
-            }
-            POS_PANNE -> {
-                id = R.id.nav_panne
-            }
-            POS_SETTINGS -> {
-                id = R.id.nav_settings
-            }
-            POS_PROFIL -> {
-                id = R.id.nav_profile
-                isAtBottom = true
-            }
-            POS_LOGOUT -> {
+        /*navigationView.setNavigationItemSelectedListener {
+            if(it.itemId == R.id.nav_logout){
                 PrefUtils.with(this).save(PrefUtils.Keys.TOKEN, "")
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-        }
-        navigateTo(id, position, isAtBottom)
-
+            return@setNavigationItemSelectedListener true
+        }*/
     }
 
-    private fun navigateTo(id: Int, position: Int, isAtBottom: Boolean) {
-        val navController = findNavController(R.id.nav_host_fragment)
-        if (isAtBottom) {
-            navView.selectedItemId = menuItems[position]
-        }
-        navController.navigate(id)
-    }
-
-    private fun createItemFor(position: Int): SimpleItem {
-
-        return SimpleItem(screenIcons[position], screenTitles[position])
-            .withIconTint(color(R.color.textColorSecondary))
-            .withTextTint(color(R.color.textColorSecondary))
-            .withSelectedIconTint(color(R.color.textColorSecondary))
-            .withSelectedTextTint(color(R.color.textColorSecondary))
-        //.withSelectedIconTint(color(R.color.colorAccent))
-        //.withSelectedTextTint(color(R.color.colorAccent))
-    }
-
-    private fun loadScreenTitles(): Array<String> {
-
-        return resources.getStringArray(R.array.ld_activityScreenTitles)
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.nav_host_fragment)
+            .navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
 
-    private fun loadScreenIcons(): Array<Drawable?> {
-        val ta = resources.obtainTypedArray(R.array.ld_activityScreenIcons)
-        val icons = arrayOfNulls<Drawable>(ta.length())
-        for (i in 0 until ta.length()) {
-            val id = ta.getResourceId(i, 0)
-            if (id != 0) {
-                icons[i] = ContextCompat.getDrawable(this, id)
-            }
-        }
-        ta.recycle()
-        return icons
-    }
-
-    @ColorInt
-    private fun color(@ColorRes res: Int): Int {
-        return ContextCompat.getColor(this, res)
-    }
-
-    companion object {
-        private const val POS_ACCUEIL = 0
-        private const val POS_NOTIF = 1
-        private const val POS_CALENDAR = 2
-        private const val POS_PANNE = 3
-        private const val POS_SETTINGS = 4
-        private const val POS_PROFIL = 5
-        private const val POS_LOGOUT = 7
-    }
-
-    private fun initBottomBar() {
-        nav_view.enableItemShiftingMode(false)
-        nav_view.enableAnimation(true)
-    }
 
 }

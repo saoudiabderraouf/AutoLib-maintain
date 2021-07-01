@@ -14,6 +14,7 @@ import com.clovertech.autolib.viewmodel.PanneViewModel
 import kotlinx.android.synthetic.main.activity_login_agent.chasis_number
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime.now
+import java.util.*
 
 
 class PanneAddFragment : Fragment() {
@@ -33,7 +34,7 @@ class PanneAddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sdf = SimpleDateFormat("yyyy-mm-dd")
-        val currentDate= sdf.format(now())
+        val currentDate= sdf.format(Calendar.getInstance().timeInMillis)
 
         binding.sendSignalButton.setOnClickListener{
 
