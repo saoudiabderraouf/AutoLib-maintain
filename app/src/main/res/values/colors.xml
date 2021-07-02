@@ -6,7 +6,8 @@
     <color name="colorPrimary">#F9C31A</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#F9C31A</color>
-    <color name="colorTeal">#73F9C31A</color>
+    <color name="colorTeal">#40FFC40D</color>
+    <color name="colorTealTrans">#1AFFC100</color>
     <color name="royalBlack">#333</color>
     <color name="colorInput">#3CC9DAF4</color>
     <color name="greyTrans">#617C7C7C</color>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/rounded_corners">
+    android:background="@drawable/task_card_background">
 
 
     <TextView
@@ -87,10 +87,10 @@
 
     <TextView
         android:id="@+id/vehicle_id"
-        android:layout_width="119dp"
+        android:layout_width="0dp"
         android:layout_height="25dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_textview"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
@@ -99,10 +99,9 @@
         android:text="Avancement"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
-        android:textColorHighlight="@color/colorTeal"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressTaskHome"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/progressTaskHome"
         app:layout_constraintTop_toBottomOf="@+id/progressTaskHome" />

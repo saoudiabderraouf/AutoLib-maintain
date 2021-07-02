@@ -60,10 +60,10 @@ class HomeFragment : Fragment() {
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(32))
 
-        transformer.addTransformer { page, position ->
+        /*transformer.addTransformer { page, position ->
             val r = 1 - abs(position)
             page.scaleY = 0.85f + r * 0.15f
-        }
+        }*/
 
         tasksPager.setPageTransformer(transformer)
         tasksPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
