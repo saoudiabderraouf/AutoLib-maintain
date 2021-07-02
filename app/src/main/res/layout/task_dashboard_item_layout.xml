@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/rounded_corners">
+    android:background="@drawable/task_card_background">
 
 
     <TextView
@@ -49,11 +49,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners_textview"
+        android:drawableStart="@drawable/ic_car_repair"
+        android:drawablePadding="8dp"
+        android:drawableTint="@color/colorPrimary"
         android:fontFamily="@font/montserrat"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="4dp"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="4dp"
         android:text="Polo 1234"
-        android:textColor="#FFB34B"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTaskDashboardDescruption" />

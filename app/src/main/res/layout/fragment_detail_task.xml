@@ -50,6 +50,9 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_corners_textview"
+            android:drawableStart="@drawable/ic_car_repair"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/colorPrimary"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center"
             android:minWidth="190dp"
@@ -68,11 +71,9 @@
         <View
             android:id="@+id/view"
             style="@style/Divider"
-            android:layout_marginStart="22dp"
-            android:layout_marginLeft="22dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="22dp"
-            android:layout_marginRight="22dp"
+            android:layout_marginEnd="24dp"
             android:background="#DBD9F3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -82,7 +83,10 @@
         <View
             android:id="@+id/view2"
             style="@style/Divider"
+            android:layout_width="0dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:background="#DBD9F3"
             app:layout_constraintEnd_toEndOf="@+id/materials_recycler"
             app:layout_constraintHorizontal_bias="1.0"
@@ -97,31 +101,20 @@
             android:fontFamily="@font/montserrat"
             android:text="Materiels"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <TextView
-            android:id="@+id/add_material_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat"
-            android:text="Ajouter un materiel"
-            android:textColor="?attr/colorOnPrimary"
-            app:layout_constraintStart_toStartOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/add_material_button" />
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/montserrat"
             android:text="Etapes de la tache"
             android:textColor="?attr/colorOnPrimary"
-            android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="@+id/add_material_text"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <Button
@@ -159,12 +152,12 @@
             android:id="@+id/materials_recycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_material_text" />
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

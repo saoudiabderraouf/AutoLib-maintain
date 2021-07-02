@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@color/transparent"
         android:elevation="0dp"
+        android:textAlignment="center"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -17,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?android:attr/colorBackground"
-            app:titleTextColor="?attr/colorOnPrimary"
-            app:titleTextAppearance="@font/montserrat"
-            android:elevation="0dp" />
+            android:elevation="0dp"
+            app:titleTextAppearance="@style/TextAppearance.TheX.title"
+            app:titleTextColor="?attr/colorOnPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

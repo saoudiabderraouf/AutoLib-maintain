@@ -37,6 +37,7 @@ class AddMaterialFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         var selectedEquipment: Equipment? = null
+        val dropDownArray = ArrayAdapter(requireContext(), R.layout.drop_down_item,equipmentNames)
         equipmentViewModel.getAllEquipment()
         equipmentViewModel.responseEquipment.observe(viewLifecycleOwner, {
             if(it.isSuccessful){
@@ -44,12 +45,12 @@ class AddMaterialFragment : Fragment(){
                 for (equipment in it.body()!!){
                     equipments.add(equipment)
                     equipmentNames.add(equipment.equipmentName)
+                    dropDownArray.notifyDataSetChanged()
                 }
                 selectedEquipment = equipments[0]
             }
         })
 
-        val dropDownArray = ArrayAdapter(requireContext(), R.layout.drop_down_item,equipmentNames)
         binding.materialName.setAdapter(dropDownArray)
 
         binding.materialName.setOnItemClickListener { _, _, position, _ ->

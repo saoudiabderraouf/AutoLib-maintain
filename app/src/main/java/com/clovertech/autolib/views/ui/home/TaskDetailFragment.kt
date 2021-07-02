@@ -51,7 +51,6 @@ class TaskDetailFragment : Fragment() {
         materialRecycler.adapter = adapterMateriels
 
         if (taskViewModel.task.usedEquipements !=null){
-            binding.addMaterialText.isVisible = taskViewModel.task.usedEquipements!!.isEmpty()
             taskViewModel.task.usedEquipements?.let { adapterMateriels.setListMaterial(it) }
         }
 

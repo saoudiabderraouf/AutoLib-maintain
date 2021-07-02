@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolib.databinding.TaskLayoutBinding
+import com.clovertech.autolib.databinding.StepLayoutBinding
 import com.clovertech.autolib.model.Step
 import com.clovertech.autolib.viewmodel.TaskViewModel
 
@@ -16,7 +16,7 @@ class TaskStepsAdapter(val viewModel: TaskViewModel) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTask {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = TaskLayoutBinding.inflate(inflater,parent, false)
+        val binding = StepLayoutBinding.inflate(inflater,parent, false)
         return ViewHolderTask(binding)
 
     }
@@ -42,7 +42,7 @@ class TaskStepsAdapter(val viewModel: TaskViewModel) :
         notifyDataSetChanged()
     }
 
-    inner class ViewHolderTask(binding:TaskLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolderTask(binding:StepLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         val stepTitle: CheckBox = binding.todoCheckBox
         val taskTitle: TextView = binding.taskTitle
     }

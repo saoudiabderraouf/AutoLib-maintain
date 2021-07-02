@@ -25,6 +25,7 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
         holder.title.text = task.taskTitle
         val progress = task.steps!!.filter { it.completed }.size * 100 / task.steps!!.size
         holder.progress.text = "$progress%"
+        holder.vehicle.text = task.idVehicule.toString()
     }
 
     override fun getItemCount(): Int {
