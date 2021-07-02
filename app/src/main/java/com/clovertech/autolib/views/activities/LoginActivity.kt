@@ -2,25 +2,26 @@ package com.clovertech.autolib.views.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.ActivityLoginBinding
 import com.clovertech.autolib.model.Login
 import com.clovertech.autolib.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.activity_login_agent.*
 
 class LoginActivity : AppCompatActivity(){
 
     private val MIN_PASSWD_LENGTH: Int = 3
     private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_agent)
-        val loginButton = findViewById<Button>(R.id.login_button)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val loginButton = binding.loginButton
 
         loginButton.setOnClickListener {
             performLogin()
@@ -30,8 +31,8 @@ class LoginActivity : AppCompatActivity(){
 
     private fun performLogin() {
 
-        val userEmail: String = chasis_number.text.toString()
-        val userPassword: String = password.text.toString()
+        val userEmail: String = binding.userEmail.text.toString()
+        val userPassword: String = binding.password.text.toString()
         loginViewModel.onLoginButtonClick(Login(userEmail, userPassword))
 
         if (userEmail.isEmpty()) {

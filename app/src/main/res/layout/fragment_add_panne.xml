@@ -8,7 +8,7 @@
     tools:context=".views.ui.panne.PanneAddFragment">
 
     <EditText
-        android:id="@+id/chasis_number"
+        android:id="@+id/user_email"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chasis_number" />
+        app:layout_constraintTop_toBottomOf="@+id/user_email" />
 
     <Button
         android:id="@+id/send_signal_button"

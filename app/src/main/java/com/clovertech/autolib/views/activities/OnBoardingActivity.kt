@@ -3,22 +3,22 @@ package com.clovertech.autolib.views.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.clovertech.autolib.R
 import com.clovertech.autolib.adapters.OnBoardingAdapter
+import com.clovertech.autolib.databinding.ActivityOnBoardingScreensBinding
 import com.clovertech.autolib.model.OnBoardingItem
 
 
 class OnBoardingActivity : AppCompatActivity() {
 
     private var onBoardingAdapter: OnBoardingAdapter? = null
+    private lateinit var binding: ActivityOnBoardingScreensBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +28,13 @@ class OnBoardingActivity : AppCompatActivity() {
             startActivity(mainActivity)
             finish()
         }
+        binding = ActivityOnBoardingScreensBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_on_boarding_screens)
-
-        val buttonOnbBoardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
-        val skipButton = findViewById<Button>(R.id.skip_button)
-        val backButton = findViewById<Button>(R.id.backward_button)
-        val onBoardingViewPager = findViewById<ViewPager2>(R.id.onboardingViewPager)
+        val buttonOnbBoardingAction = binding.buttonOnBoardingAction
+        val skipButton = binding.skipButton
+        val backButton = binding.backwardButton
+        val onBoardingViewPager = binding.onboardingViewPager
 
         setOnBoardingItems()
         onBoardingViewPager.adapter = onBoardingAdapter
@@ -97,8 +97,8 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun setCurrentOnBoardingIndicator(index: Int) {
 
-        val layoutOnBoardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
-        val buttonOnBoardingAction = findViewById<Button>(R.id.buttonOnBoardingAction)
+        val layoutOnBoardingIndicator = binding.layoutOnboardingIndicators
+        val buttonOnBoardingAction = binding.buttonOnBoardingAction
         val childCount: Int = layoutOnBoardingIndicator.childCount
 
 
@@ -123,7 +123,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     private fun setOnBoardingIndicator() {
 
-        val layoutOnBoardingIndicator = findViewById<LinearLayout>(R.id.layoutOnboardingIndicators)
+        val layoutOnBoardingIndicator = binding.layoutOnboardingIndicators
         val indicators: Array<ImageView?> = arrayOfNulls(onBoardingAdapter!!.itemCount)
         val layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
             , ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -138,7 +138,7 @@ class OnBoardingActivity : AppCompatActivity() {
                 )
             )
             indicators[i]?.layoutParams = layoutParams
-            layoutOnBoardingIndicator!!.addView(indicators[i])
+            layoutOnBoardingIndicator.addView(indicators[i])
         }
     }
 
