@@ -1,17 +1,16 @@
-
 package com.clovertech.autolib.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.NotificationLayoutBinding
 import com.clovertech.autolib.model.Task
-import  com.clovertech.autolib.model.Notification
+import com.clovertech.autolib.model.Notification
 
 
 class NotificationsAdapter(val context: Context):RecyclerView.Adapter<NotificationsAdapter.NotificationHolder>()
@@ -21,10 +20,9 @@ class NotificationsAdapter(val context: Context):RecyclerView.Adapter<Notificati
     val tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
-        return NotificationHolder(
-            LayoutInflater.from(context)
-                .inflate(R.layout.notification_layout, parent, false)
-        )
+        val inflater = LayoutInflater.from(context)
+        val binding = NotificationLayoutBinding.inflate(inflater,parent, false)
+        return NotificationHolder(binding)
 
     }
 
@@ -47,11 +45,12 @@ class NotificationsAdapter(val context: Context):RecyclerView.Adapter<Notificati
         notifyDataSetChanged()
     }
 
-    inner class NotificationHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titre: TextView = view.findViewById(R.id.contenu)
-        val date: TextView = view.findViewById(R.id.date)
+    inner class NotificationHolder(binding: NotificationLayoutBinding)
+        :RecyclerView.ViewHolder(binding.root) {
+        val titre: TextView = binding.contenu
+        val date: TextView = binding.date
         //val image: ImageView = view.findViewById(R.id.roundedimage)
-        val lu: ImageView = view.findViewById(R.id.lu)
+        val lu: ImageView = binding.lu
     }
 
 

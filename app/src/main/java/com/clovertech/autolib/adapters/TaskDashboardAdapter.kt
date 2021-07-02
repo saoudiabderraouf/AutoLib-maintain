@@ -1,11 +1,11 @@
 package com.clovertech.autolib.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.TaskDashboardItemLayoutBinding
 import com.clovertech.autolib.model.Task
 
 class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHolder>() {
@@ -13,12 +13,12 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
     private val tasks = mutableListOf<Task>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.task_dashboard_item_layout,
-            parent, false)
-        return TaskViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding= TaskDashboardItemLayoutBinding.inflate(inflater,parent, false)
+        return TaskViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasks[position]
         holder.description.text = task.description
@@ -38,12 +38,12 @@ class TaskDashboardAdapter: RecyclerView.Adapter<TaskDashboardAdapter.TaskViewHo
         notifyDataSetChanged()
     }
 
-    class TaskViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class TaskViewHolder(binding: TaskDashboardItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
 
-        val title: TextView = view.findViewById(R.id.textTaskDashboardTitle)
-        val description: TextView = view.findViewById(R.id.textTaskDashboardDescruption)
-        val vehicle: TextView = view.findViewById(R.id.textTaskDashboardVehicule)
-        val progress: TextView = view.findViewById(R.id.textTaskDashboardProgress)
+        val title: TextView = binding.textTaskDashboardTitle
+        val description: TextView = binding.textTaskDashboardDescruption
+        val vehicle: TextView = binding.textTaskDashboardVehicule
+        val progress: TextView = binding.textTaskDashboardProgress
 
     }
 }

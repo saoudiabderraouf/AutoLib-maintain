@@ -2,12 +2,11 @@ package com.clovertech.autolib.adapters
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.ItemLayoutBinding
 import com.clovertech.autolib.model.OnBoardingItem
 
 class OnBoardingAdapter(private val onBoardingItems: List<OnBoardingItem>) :
@@ -15,11 +14,9 @@ class OnBoardingAdapter(private val onBoardingItems: List<OnBoardingItem>) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewHolder {
-        return OnBoardingViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_layout, parent, false
-            )
-        )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemLayoutBinding.inflate(inflater,parent, false)
+        return OnBoardingViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: OnBoardingViewHolder, position: Int) {
@@ -30,11 +27,11 @@ class OnBoardingAdapter(private val onBoardingItems: List<OnBoardingItem>) :
         return onBoardingItems.size
     }
 
-    inner class OnBoardingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class OnBoardingViewHolder(binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
-        private val textDescription: TextView = itemView.findViewById(R.id.textDescription)
-        private val imageOnBoarding: ImageView = itemView.findViewById(R.id.imageOnboarding)
+        private val textTitle: TextView = binding.textTitle
+        private val textDescription: TextView = binding.textDescription
+        private val imageOnBoarding: ImageView = binding.imageOnboarding
 
         fun setOnBoardingData(onBoardingItem: OnBoardingItem) {
             textTitle.text = onBoardingItem.title

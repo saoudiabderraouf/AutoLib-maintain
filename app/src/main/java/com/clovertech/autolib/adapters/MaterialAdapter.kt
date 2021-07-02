@@ -2,11 +2,10 @@ package com.clovertech.autolib.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.clovertech.autolib.R
+import com.clovertech.autolib.databinding.MaterialLayoutBinding
 import com.clovertech.autolib.model.Materiel
 import com.clovertech.autolib.viewmodel.TaskViewModel
 
@@ -16,10 +15,9 @@ class MaterialAdapter(val context: Context, val vm: TaskViewModel) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialViewHolder {
-        return MaterialViewHolder(
-            LayoutInflater.from(context)
-                .inflate(R.layout.material_layout, parent, false)
-        )
+        val inflater = LayoutInflater.from(context)
+        val binding = MaterialLayoutBinding.inflate(inflater,parent, false)
+        return MaterialViewHolder(binding)
 
     }
 
@@ -29,9 +27,6 @@ class MaterialAdapter(val context: Context, val vm: TaskViewModel) :
 
         holder.materialName.text = data[position].description
         holder.quantity.text = data[position].quantity
-        holder.itemView.setOnClickListener{
-            //fragment.update(data[position].taskModel.id, data[position])
-        }
 
     }
 
@@ -40,9 +35,9 @@ class MaterialAdapter(val context: Context, val vm: TaskViewModel) :
         notifyDataSetChanged()
     }
 
-    inner class MaterialViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val materialName: TextView = view.findViewById(R.id.nomMateriel)
-        val quantity: TextView = view.findViewById(R.id.quantitéMateriel)
+    inner class MaterialViewHolder(binding: MaterialLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        val materialName: TextView = binding.nomMateriel
+        val quantity: TextView = binding.quantitMateriel
     }
 
 }
