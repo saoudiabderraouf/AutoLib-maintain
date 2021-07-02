@@ -14,7 +14,6 @@ class TaskViewModel : ViewModel() {
     var task: Task = Task(0, 0, "", "", 0, Date(), Date(),
             mutableListOf(), mutableListOf(), "")
 
-
     fun updateTask(context: Context, task: Task) {
         TaskRepo.updateTask(context, task)
     }
@@ -29,7 +28,5 @@ class TaskViewModel : ViewModel() {
             TaskRepo.getTaskByIdAgent(context, id)
         }
     }
-
-
 
 }

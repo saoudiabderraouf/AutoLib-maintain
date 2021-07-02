@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,6 +22,7 @@ import com.clovertech.autolib.model.AgentToken
 import com.clovertech.autolib.adapters.ListTasksAdapter
 import com.clovertech.autolib.adapters.TaskStepsAdapter
 import com.clovertech.autolib.databinding.FragmentHomeBinding
+import com.clovertech.autolib.model.Vehicle
 import com.clovertech.autolib.viewmodel.NotificationViewModel
 import com.clovertech.autolib.viewmodel.TaskViewModel
 import com.google.android.gms.tasks.OnCompleteListener
