@@ -36,10 +36,10 @@ class VehicleFragment : Fragment(),OnMapReadyCallback {
         var vehicle = Vehicle(0,"",""
             ,"","","","","",""
             ,"",0,"",0F,0F,"")
-        if (idVehicle != 0){
+        /*if (idVehicle != 0){
             viewModel.getVehicleById(idVehicle)
             vehicle = viewModel.vehicle
-        }
+        }*/
 
         mapView = binding.vehicleMap
         mapView.onCreate(savedInstanceState)
