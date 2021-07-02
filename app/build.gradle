@@ -65,6 +65,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation "androidx.activity:activity-ktx:1.2.3"
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     // Espresso
     def androidx_test_espresso = "3.1.0"

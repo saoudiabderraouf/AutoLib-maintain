@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -56,6 +55,10 @@ class TaskDetailFragment : Fragment() {
 
         binding.addMaterialButton.setOnClickListener{
             findNavController().navigate(R.id.nav_to_addmaterial)
+        }
+
+        binding.vehicleId.setOnClickListener {
+            findNavController().navigate(R.id.nav_detail_to_vehicle)
         }
     }
 
