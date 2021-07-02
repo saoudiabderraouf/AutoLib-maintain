@@ -26,8 +26,9 @@ class NotificationsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = NotificationsAdapter(requireActivity())
-        binding.notificationsRecycler.layoutManager = LinearLayoutManager(requireActivity())
+        val adapter = NotificationsAdapter(requireContext())
+        binding.notificationsRecycler.layoutManager = LinearLayoutManager(requireContext()
+            , LinearLayoutManager.VERTICAL, false)
         binding.notificationsRecycler.adapter = adapter
 
         notificationsViewModel.fetchAllNotifications(requireContext())

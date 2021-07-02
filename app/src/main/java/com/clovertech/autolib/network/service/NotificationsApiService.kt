@@ -9,10 +9,10 @@ import retrofit2.http.POST
 
 interface NotificationsApiService {
 
-    @POST("ATNotif")
+    @POST("service-taskNotif/ATNotif")
     suspend fun postToken(@Body agentToken: AgentToken): Response<Object>
 
 
-    @GET("taskNotif")
+    @GET("service-taskNotif/taskNotif")
     suspend fun getAllNotifications(): Response<List<Notification>>
 }

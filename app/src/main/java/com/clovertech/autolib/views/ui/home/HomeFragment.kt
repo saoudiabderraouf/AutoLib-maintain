@@ -76,12 +76,11 @@ class HomeFragment : Fragment() {
 
         adapterSteps = TaskStepsAdapter(taskViewModel)
         taskStepRecycler.layoutManager =
-            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         taskStepRecycler.isNestedScrollingEnabled = false
         taskStepRecycler.adapter = adapterSteps
 
         val id = prefs.getInt("AGENT_ID",0)
-
         if (id != 0) {
             taskViewModel.getTasksByIdAgent(requireContext(), id)
             taskViewModel.getAllTasks(requireContext())?.observe(viewLifecycleOwner,{
@@ -93,9 +92,6 @@ class HomeFragment : Fragment() {
         }
 
         taskViewModel.getTasksByIdAgent(requireContext(), id)
-        binding.stepsTitle.setOnClickListener {
-            findNavController().navigate(R.id.nav_task_detail)
-        }
     }
 
     override fun onResume() {

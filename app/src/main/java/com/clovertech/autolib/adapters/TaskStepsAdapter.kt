@@ -27,7 +27,7 @@ class TaskStepsAdapter(val viewModel: TaskViewModel) :
         val context = holder.itemView.context
         holder.taskTitle.text = data[position].step
         holder.stepTitle.isChecked = data[position].completed
-        holder.stepTitle.setOnClickListener{
+        holder.itemView.setOnClickListener{
             data[position].completed = !data[position].completed
             holder.stepTitle.isChecked = data[position].completed
             viewModel.task.steps?.get(position)?.completed = data[position].completed
@@ -37,6 +37,7 @@ class TaskStepsAdapter(val viewModel: TaskViewModel) :
     }
 
     fun setListSteps(list: List<Step>) {
+
         data = list
         notifyDataSetChanged()
     }
