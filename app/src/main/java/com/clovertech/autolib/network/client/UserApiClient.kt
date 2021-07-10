@@ -16,7 +16,7 @@ object UserApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://54.37.87.85:7000/users/")
+            .baseUrl("https://project2cs2021.herokuapp.com/user/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

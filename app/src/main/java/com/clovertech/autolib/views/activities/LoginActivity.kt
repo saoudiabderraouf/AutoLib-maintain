@@ -61,17 +61,20 @@ class LoginActivity : AppCompatActivity(){
     }
 
     private fun saveToken(token: String, idUser: Int) {
-
         val prefs = getSharedPreferences("AUTOLIB_MAINTAIN", MODE_PRIVATE)
         prefs.edit{putString("AGENT_TOKEN",token)}
-        prefs.edit{putInt("AGENT_ID",idUser)}
+        loginViewModel.getAgent(idUser)
+        loginViewModel.responseAgent.observe(this,{
+            if(it.isSuccessful){
+                prefs.edit{putInt("AGENT_ID",it.body()?.idAgent!!)}
+                prefs.edit{putInt("USER_ID",idUser)}
+            }
+        })
 
         if (idUser != 0) {
             loginViewModel.getThisProfile(idUser)
             loginViewModel.responseProfile.observe(this,{
-
                 if (it.isSuccessful) {
-
                     val profile = it.body()
                     if (profile != null) {
                         val name = "${profile.firstName} ${profile.lastName}"

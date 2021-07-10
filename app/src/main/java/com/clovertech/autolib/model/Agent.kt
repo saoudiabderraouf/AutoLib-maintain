@@ -13,3 +13,8 @@ data class Agent(
 ){
     @PrimaryKey(autoGenerate = true) var idUtilisateur: Int = 0
 }
+
+data class ResponseAgent(
+    var refPermis: String = "",
+    var idAgent: Int
+)

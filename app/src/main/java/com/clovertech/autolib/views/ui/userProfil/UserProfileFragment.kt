@@ -26,8 +26,7 @@ class UserProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPreferences = requireContext().getSharedPreferences("AUTOLIB_MAINTAIN",MODE_PRIVATE)
-        val id = sharedPreferences.getInt("AGENT_ID",0)
-
+        val id = sharedPreferences.getInt("USER_ID",0)
         if (id != 0) {
             profileViewModel.getThisProfile(id)
             profileViewModel.responseProfile.observe(viewLifecycleOwner, {
@@ -39,6 +38,7 @@ class UserProfileFragment : Fragment() {
                         binding.profileAdress.text = profile.address
                         binding.profileRole.text = profile.userType
                         binding.profilePhoneNum .text = profile.phoneNumber
+                        binding.certificateRef.text = "Ref N=2938394903"
                     }
                 } else {
                     Toast.makeText(requireContext(), "Error loading the profile please try again", Toast.LENGTH_SHORT)
