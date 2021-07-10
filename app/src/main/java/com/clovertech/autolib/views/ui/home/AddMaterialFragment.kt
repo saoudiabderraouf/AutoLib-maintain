@@ -42,6 +42,7 @@ class AddMaterialFragment : Fragment(){
         equipmentViewModel.responseEquipment.observe(viewLifecycleOwner, {
             if(it.isSuccessful){
                 equipments = mutableListOf()
+                equipmentNames.clear()
                 for (equipment in it.body()!!){
                     equipments.add(equipment)
                     equipmentNames.add(equipment.equipmentName)

@@ -44,9 +44,7 @@ class LoginActivity : AppCompatActivity(){
                 if (userPassword.length < MIN_PASSWD_LENGTH) {
                     Toast.makeText(this, "Your password is incorrect", Toast.LENGTH_SHORT).show()
                 } else {
-
                     loginViewModel.loginResponse.observe(this,{ response ->
-
                         if (response.isSuccessful) {
                             Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show()
                             val content = response.body()
@@ -54,7 +52,7 @@ class LoginActivity : AppCompatActivity(){
                                 saveToken(content.token, content.id)
                             }
                         } else {
-                            Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, response.message(), Toast.LENGTH_SHORT).show()
                         }
                     })
                 }
