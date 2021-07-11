@@ -5,14 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.clovertech.autolib.databinding.FragmentVehiculeBinding
 import com.clovertech.autolib.model.Vehicle
 import com.clovertech.autolib.viewmodel.VehicleViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class VehicleFragment : Fragment(),OnMapReadyCallback {
 
@@ -33,17 +39,28 @@ class VehicleFragment : Fragment(),OnMapReadyCallback {
 
         val args: VehicleFragmentArgs by navArgs()
         val idVehicle = args.idVehicule
-        var vehicle = Vehicle(0,"",""
-            ,"","","","","",""
-            ,"",0,"",0F,0F,"")
-        /*if (idVehicle != 0){
-            viewModel.getVehicleById(idVehicle)
-            vehicle = viewModel.vehicle
-        }*/
 
         mapView = binding.vehicleMap
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        viewModel.getVehicleById(idVehicle)
+        if(viewModel.vehicleResponse != null) {
+            if (viewModel.vehicleResponse?.isSuccessful!!) {
+                val vehicle = viewModel.vehicleResponse?.body()!!
+                Toast.makeText(requireContext(), vehicle.vehiclebrand, LENGTH_SHORT).show()
+                binding.carModelName.text = vehicle.vehiclemodel
+                binding.carChasisNumber.text = vehicle.chassisNumber
+                binding.carName.text = vehicle.vehiclebrand
+
+                val lating = LatLng(vehicle.latitude
+                    ,vehicle.longitude)
+
+                vehicleMap?.addMarker(MarkerOptions()
+                    .position(lating)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+            }
+        }
 
     }
 

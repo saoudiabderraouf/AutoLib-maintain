@@ -58,7 +58,7 @@ class TaskDetailFragment : Fragment() {
         }
 
         binding.vehicleId.setOnClickListener {
-            findNavController().navigate(R.id.nav_detail_to_vehicle)
+            findNavController().navigate(TaskDetailFragmentDirections.navDetailToVehicle(taskViewModel.task.idVehicule))
         }
     }
 

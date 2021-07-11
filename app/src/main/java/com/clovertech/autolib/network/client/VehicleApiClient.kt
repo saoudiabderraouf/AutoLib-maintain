@@ -14,18 +14,13 @@ object VehicleApiClient {
         GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
     }
     private val retrofit by lazy {
-        val client = OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .build()
 
         Retrofit.Builder()
-            .baseUrl("https://642408bf2a8e.ngrok.io")
+            .baseUrl("http://54.37.87.85:7000/")
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client)
             .build()
     }
+
     val vehicleService: VehicleApiService by lazy {
         retrofit.create(VehicleApiService::class.java)
     }

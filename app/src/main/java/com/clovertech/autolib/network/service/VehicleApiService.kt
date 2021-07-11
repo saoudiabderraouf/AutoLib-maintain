@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface VehicleApiService {
 
-    @GET("/vehicle/{id}")
-    fun getVehicles(@Path("id")id: Int): Response<Vehicle>
+    @GET("bornes/vehicules/{id}")
+    suspend fun getVehicle(@Path("id") id: Int): Response<Vehicle>
 
 }
