@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
 
     private fun sendFCMToken() {
         val idAgent = prefs.getInt("AGENT_ID",0)
-
+        Log.d(TAG, "FCM token : $idAgent")
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w(TAG, "Fetching FCM registration token failed", task.exception)
@@ -118,7 +118,7 @@ class HomeFragment : Fragment() {
             }
 
             // Post token
-            if(idAgent == 0){
+            if(idAgent != 0){
                 notificationViewModel.postFCMToken(requireContext(), AgentToken(idAgent, token))
             }
 
